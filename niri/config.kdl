@@ -58,6 +58,9 @@ animations {
 environment {
     DISPLAY ":0"
 }
+hotkey-overlay {
+    skip-at-startup
+}
 screenshot-path "~/Pictures/screenshot_%Y%m%d_%H%M%Spng"
 spawn-at-startup "~/.config/iam/scripts/exec-once-wayland.sh"
 spawn-at-startup "xwayland-satellite"
