@@ -19,6 +19,7 @@ return {
       kdl = { "kdlfmt" },
       lua = { "stylua" },
       nix = { "nixfmt" },
+      python = { "ruff_format" },
       eruby = { "erb_format" },
       ruby = { "rubocop" },
       rust = { "rustfmt" },
