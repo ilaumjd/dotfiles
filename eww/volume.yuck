@@ -1,7 +1,7 @@
 (defwidget w_volume []
   (eventbox :onhover "eww update _volume_reveal=true"
     (box :space-evenly false
-      (button :onclick "pamixer --toggle-mute"
+      (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         (label :class "volume_button_label"
                :text {_muted ? "󰝟" : "${_volume < 20 ? "󰕿" : "${_volume < 60 ? "󰖀" : "󰕾"}"}"}))
       (revealer :transition "slideright"
@@ -16,11 +16,11 @@
            :min 0
            :max 101
            :value {_volume}
-           :onchange "pamixer --unmute && pamixer --set-volume {}")))
+           :onchange "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%")))
 
 (defpoll _volume :interval "1s"
-  "pamixer --get-volume")
+  "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'")
 
 (defpoll _muted :interval "1s"
-  "pamixer --get-mute")
+  "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED && echo true || echo false")
 
