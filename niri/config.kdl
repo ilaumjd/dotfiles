@@ -19,7 +19,7 @@ output "HDMI-A-1" {
 }
 layout {
     gaps 16
-    center-focused-column "always"
+    center-focused-column "never"
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
@@ -56,6 +56,10 @@ window-rule {
 animations {
     slowdown 1.5
 }
+cursor {
+    xcursor-size 24
+    xcursor-theme "redglass"
+}
 environment {
     DISPLAY ":0"
     // QT
@@ -77,9 +81,14 @@ environment {
 hotkey-overlay {
     skip-at-startup
 }
-screenshot-path "~/Pictures/screenshot_%Y%m%d_%H%M%Spng"
+screenshot-path "~/Pictures/screenshot_%Y%m%d_%H%M%S.png"
 spawn-at-startup "~/.config/iam/scripts/exec-once-wayland.sh"
 spawn-at-startup "xwayland-satellite"
+// void
+spawn-at-startup "/usr/bin/pipewire"
+spawn-at-startup "xdg-user-dirs-gtk-update"
+spawn-at-startup "xdg-user-dirs-update"
+// void
 binds {
     // Custom
     Mod+Return {
