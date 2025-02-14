@@ -1,0 +1,128 @@
+set $mod Mod4
+
+font pango:MesloLGL Nerd Font 14
+
+# Wallpaper
+exec --no-startup-id ~/.config/iam/scripts/exec-once-wayland.sh
+
+# Style
+for_window [class="^.*"] border pixel 3
+gaps inner 10px
+gaps outer 0px
+
+# Mouse
+floating_modifier $mod
+
+# Custom
+bindsym $mod+Return exec --no-startup-id ghostty
+bindsym $mod+space exec --no-startup-id ~/.config/iam/scripts/rofi.sh launcher
+bindsym $mod+Escape exec --no-startup-id ~/.config/iam/scripts/rofi.sh power
+bindsym $mod+Shift+6 exec --no-startup-id ~/.config/iam/scripts/wf-recorder.sh full
+bindsym $mod+Shift+7 exec --no-startup-id ~/.config/iam/scripts/wf-recorder.sh select
+bindsym $mod+Shift+8 exec --no-startup-id ~/.config/iam/scripts/wf-recorder.sh kill
+
+# i3 system
+bindsym $mod+q kill
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Focus Window
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move Window
+bindsym $mod+Ctrl+h move left
+bindsym $mod+Ctrl+j move down
+bindsym $mod+Ctrl+k move up
+bindsym $mod+Ctrl+l move right
+bindsym $mod+Ctrl+Left move left
+bindsym $mod+Ctrl+Down move down
+bindsym $mod+Ctrl+Up move up
+bindsym $mod+Ctrl+Right move right
+
+# Split Window
+bindsym $mod+0x5c split h
+bindsym $mod+0x2d split v
+
+# Layouts
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+z floating toggle
+bindsym $mod+Shift+z focus mode_toggle
+
+# Resize Window
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch Workspace
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move to Workspace
+bindsym $mod+Ctrl+1 move container to workspace number $ws1
+bindsym $mod+Ctrl+2 move container to workspace number $ws2
+bindsym $mod+Ctrl+3 move container to workspace number $ws3
+bindsym $mod+Ctrl+4 move container to workspace number $ws4
+bindsym $mod+Ctrl+5 move container to workspace number $ws5
+bindsym $mod+Ctrl+6 move container to workspace number $ws6
+bindsym $mod+Ctrl+7 move container to workspace number $ws7
+bindsym $mod+Ctrl+8 move container to workspace number $ws8
+bindsym $mod+Ctrl+9 move container to workspace number $ws9
+bindsym $mod+Ctrl+0 move container to workspace number $ws10
+
+# PulseAudio
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+# class                 border  bground text    indicator child_border
+client.focused          #c4a7e7 #c4a7e7 #191724 #ebbcba   #c4a7e7
+client.focused_inactive #6e6a86 #26233a #e0def4 #26233a   #26233a
+client.unfocused        #26233a #191724 #6e6a86 #191724   #191724
+client.urgent           #eb6f92 #eb6f92 #191724 #eb6f92   #eb6f92
+client.placeholder      #191724 #191724 #6e6a86 #191724   #191724
+client.background       #191724

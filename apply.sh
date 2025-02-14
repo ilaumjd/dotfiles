@@ -17,6 +17,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # wayland
   ln -s "$DOTFILES_DIR/hypr" ~/.config/hypr
   ln -s "$DOTFILES_DIR/niri" ~/.config/niri
+  ln -s "$DOTFILES_DIR/sway" ~/.config/sway
 
   # scripts
   ln -s "$DOTFILES_DIR/iam" ~/.config/iam

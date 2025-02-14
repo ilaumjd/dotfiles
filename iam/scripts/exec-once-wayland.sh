@@ -1,7 +1,9 @@
 #!/bin/bash
 
-swww-daemon &
-swww img "$(find ~/.config/iam/wallpapers -type f | shuf -n 1)" --transition-type none &
+swaybg -i "$(find ~/.config/iam/wallpapers -type f \( -name "*.jpg" -o -name "*.png" \) | shuf -n 1)" -m fill &
 eww open bar &
 dunst &
 hypridle &
+
+# void
+pipewire &
