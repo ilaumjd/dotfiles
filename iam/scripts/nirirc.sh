@@ -1,3 +1,3 @@
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  dbus-run-session niri --session
+  exec dbus-run-session niri --session
 fi
