@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<labwc_config>
+
+  <theme>
+    <name></name>
+    <cornerRadius>8</cornerRadius>
+    <font name="sans" size="10" />
+  </theme>
+
+  <keyboard>
+    <default />
+    <keybind key="W-Return">
+      <action name="Execute" command="ghostty" />
+    </keybind>
+    <keybind key="W-Space">
+      <action name="Execute" command="~/.config/iam/scripts/rofi.sh launcher" />
+    </keybind>
+    <keybind key="W-Escape">
+      <action name="Execute" command="~/.config/iam/scripts/rofi.sh power" />
+    </keybind>
+    <keybind key="W-Q">
+     <action name="Close" />
+    </keybind>
+    <keybind key="W-S-R">
+     <action name="Reconfigure" />
+    </keybind>
+    <keybind key="W-S-E">
+     <action name="Exit" />
+    </keybind>
+    <keybind key="W-Tab">
+     <action name="NextWindow" />
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <default />
+    <context name="Root">
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu" menu="some-custom-menu" />
+      </mousebind>
+    </context>
+  </mouse>
+
+</labwc_config>
