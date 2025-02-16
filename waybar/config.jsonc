@@ -1,0 +1,113 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": "100",
+  "spacing": "1",
+  "mode": "dock",
+  "exclusive": true,
+  "passthrough": true,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "custom/spacer",
+    "niri/workspaces",
+    "custom/spacer",
+    "niri/window",
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "group/volume",
+    "custom/spacer",
+    "bluetooth",
+    "custom/spacer",
+    "network",
+    "custom/spacer",
+    "clock",
+    "custom/spacer",
+    "custom/power",
+    "custom/spacer",
+  ],
+
+  "niri/workspaces": {
+    "format": "{icon} ",
+    "format-icons": {
+      "default": "",
+      "active": "",
+    },
+  },
+
+  "niri/window": {
+    "tooltip": false,
+  },
+
+  "group/volume": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-to-left": true,
+    },
+    "modules": ["pulseaudio", "pulseaudio/slider"],
+  },
+
+  "pulseaudio": {
+    "format": "{icon} ",
+    "rotate": 0,
+    "format-muted": "󰝟 ",
+    "tooltip-format": "{icon} {desc} // {volume}%",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "default": ["󰕿", "󰖀", "󰕾"],
+    },
+  },
+
+  "bluetooth": {
+    "format-on": " ",
+    "format-off": "󰂲 ",
+    "format-disabled": "󰂲 ",
+    "format-connected": "󰂱 ",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "blueberry",
+  },
+
+  "network": {
+    "tooltip": true,
+    "format-wifi": "{icon} ",
+    "format-icons": ["󰤟", "󰤢", "󰤥"],
+    "format-ethernet": "󰈀 ",
+    "format-disconnected": " ",
+    "tooltip-format": "Network\t\t{essid}\nSignal\t\t{signaldBm}dBm({signalStrength}%)\nFrequency\t{frequency}MHz\nInterface\t{ifname}\nIP\t\t\t{ipaddr}/{cidr}\nGateway\t{gwaddr}\nNetmask\t{netmask}",
+  },
+
+  "memory": {
+    "interval": 1,
+    "rotate": 270,
+    "format": "{icon}",
+    "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+  },
+
+  "cpu": {
+    "interval": 1,
+    "format": "{icon}",
+    "rotate": 270,
+    "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+  },
+
+  "clock": {
+    "format": "{:%H:%M:%S} ",
+    "tooltip": false,
+    "interval": 1,
+  },
+
+  "custom/power": {
+    "format": "⏻ ",
+    "on-click": "~/.config/iam/scripts/rofi.sh power",
+  },
+
+  "custom/spacer": {
+    "format": "  ",
+    "interval": "once",
+    "tooltip": false,
+  },
+}

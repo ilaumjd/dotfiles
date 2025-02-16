@@ -1,0 +1,61 @@
+* {
+  all: unset;
+  font-family: "Inter";
+  font-weight: bold;
+  font-size: 16px;
+  background: #191724;
+}
+
+#window {
+  min-height: 40px;
+  color: #9ccfd8;
+}
+
+#workspaces button {
+  color: #f6c177;
+}
+
+#workspaces button:hover {
+  border-color: transparent;
+}
+
+#pulseaudio {
+  font-size: 24px;
+  color: #eb6f92;
+}
+
+#pulseaudio-slider trough {
+  background: #6e6a86;
+  border-radius: 7px;
+  min-height: 14px;
+  min-width: 130px;
+}
+
+#pulseaudio-slider highlight {
+  background: #eb6f92;
+  border-radius: 7px;
+}
+
+#bluetooth {
+  font-size: 18px;
+  color: #f6c177;
+}
+
+#bluetooth.connected {
+  font-size: 18px;
+  color: #9ccfd8;
+}
+
+#network {
+  font-size: 18px;
+  color: #eb6f92;
+}
+
+#clock {
+  color: #f6c177;
+}
+
+#custom-power {
+  font-size: 18px;
+  color: #eb6f92;
+}
