@@ -10,7 +10,7 @@ rofi_launch() {
     ;;
   "power")
     rofi -show menu \
-      -modi "menu:rofi-power-menu --choices=suspend/shutdown/reboot/lockscreen/logout/hibernate"
+      -modi "menu:~/.config/rofi/rofi-power-menu --choices=suspend/shutdown/reboot/lockscreen/logout/hibernate"
     ;;
   esac
 }
