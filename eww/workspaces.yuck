@@ -1,17 +1,17 @@
 ;; WORKSPACES
-(defwidget w_workspaces []
-  (box :class "workspaces"
-       :space-evenly false
-    (for i in "${_workspaces.workspaces}"
-      (button :class "${"${_workspaces.active_workspace}" == i ? 'current' : ''}"
-              :onclick "~/.config/iam/scripts/eww-hyprland.sh select ${i}" 
-        i))))
-
-(defpoll active_workspace :interval "0.1s"
-  "~/.config/iam/scripts/eww-hyprland.sh active")
-
-(defpoll workspaces :interval "0.1s"
-  "~/.config/iam/scripts/eww-hyprland.sh list")
+;;(defwidget w_workspaces []
+;;  (box :class "workspaces"
+;;       :space-evenly false
+;;    (for i in "${_workspaces.workspaces}"
+;;      (button :class "${"${_workspaces.active_workspace}" == i ? 'current' : ''}"
+;;              :onclick "~/.config/iam/scripts/eww-hyprland.sh select ${i}" 
+;;        i))))
+;;
+;;(defpoll active_workspace :interval "0.1s"
+;;  "~/.config/iam/scripts/eww-hyprland.sh active")
+;;
+;;(defpoll workspaces :interval "0.1s"
+;;  "~/.config/iam/scripts/eww-hyprland.sh list")
 
 (defpoll _workspaces :interval "0.1s"
   "~/.config/iam/scripts/eww-niri.sh get")

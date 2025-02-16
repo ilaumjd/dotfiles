@@ -34,6 +34,12 @@ case "$1" in
       }' <<<'{}'
   ;;
 
+"active-window")
+  raw_windows="$(niri msg -j windows)"
+  active_window="$(echo "$raw_windows" | jq '.[] | select(.is_focused == true) | .title')"
+  echo $active_window
+  ;;
+
 *)
   exit 1
   ;;
