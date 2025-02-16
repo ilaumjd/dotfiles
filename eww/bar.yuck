@@ -3,7 +3,7 @@
   :geometry (geometry :x "0%"
                       :y "0%"
                       :width "187.5%"
-                      :height "46px"
+                      :height "40px"
                       :anchor "top center")
   :stacking "fg"
   ;; x11
