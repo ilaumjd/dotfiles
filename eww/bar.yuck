@@ -34,10 +34,7 @@
 ;; TIME
 (defwidget w_time []
   (label :class "time"
-         :text time))
-
-(defpoll time :interval "1s"
-  "date '+%H:%M:%S'")
+         :text "${formattime(EWW_TIME, "%H:%M:%S")}"))
 
 ;; POWER
 (defwidget w_power []
