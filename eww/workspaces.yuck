@@ -19,7 +19,8 @@
 ;; SEPARATOR
 (defwidget w_logo []
   (box :class "logo"
-    "󱄅"))
+    ""))
+    ;;"󱄅"))
 
 ;; TITLE
 (defwidget w_title []
