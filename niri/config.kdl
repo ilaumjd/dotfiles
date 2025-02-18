@@ -12,6 +12,8 @@ input {
     mouse {
 
     }
+    disable-power-key-handling
+    focus-follows-mouse
 }
 output "HDMI-A-1" {
     mode "2560x1440@74.968"
