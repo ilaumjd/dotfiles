@@ -1,5 +1,5 @@
 (defwidget w_bluetooth[]
-    (eventbox :onclick "blueberry &"
+    (eventbox :onclick "ghostty -e bluetuith --no-warning"
               :onhover "${EWW_CMD} update _bluetooth_reveal=true"
       (box :space-evenly false
         (label :class "bluetooth_button_label"
