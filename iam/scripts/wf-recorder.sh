@@ -5,6 +5,10 @@ output_file="recording_$(date +%Y%m%d_%H%M%S).mp4"
 framerate=60
 pid_file="/tmp/recording.pid"
 
+status() {
+  [ -f "$pid_file" ] && echo "true" || echo "false"
+}
+
 stop_recording() {
   if [ -f "$pid_file" ]; then
     pid=$(cat "$pid_file")
@@ -58,6 +62,10 @@ while [[ $# -gt 0 ]]; do
     shift
     ;;
   m | mic) shift ;;
+  status)
+    status
+    shift
+    ;;
   *) exit 1 ;;
   esac
 done

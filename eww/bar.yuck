@@ -24,6 +24,7 @@
     (box :halign "end"
          :space-evenly false
          :hexpand true
+      (w_recording)
       (w_volume)
       (w_bluetooth)
       (w_time)

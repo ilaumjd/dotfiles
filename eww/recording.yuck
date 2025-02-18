@@ -1,0 +1,8 @@
+(defwidget w_recording []
+  (eventbox :onclick "~/.config/iam/scripts/wf-recorder.sh kill"
+        (box :class "recording_indicator" 
+             :visible _recording_status
+          {"${EWW_TIME}" % 2 == 0 ? "" : ""})))
+
+(defpoll _recording_status :interval "1s"
+  "~/.config/iam/scripts/wf-recorder.sh status")
