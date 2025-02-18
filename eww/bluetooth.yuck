@@ -5,7 +5,7 @@
         (label :class "bluetooth_button_label"
                :text {"${_bluetooth_status.status}" == "yes" ? "󰂱" : "󰂯"})
         (revealer :transition "slideright"
-                  :reveal _bluetooth_reveal
+                  :reveal {_bluetooth_reveal && "${_bluetooth_status.status}" == "yes"}
           (label :class "bluetooth_connected_label"
                  :text "${_bluetooth_status.device}")))))
 
