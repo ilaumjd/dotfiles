@@ -1,6 +1,6 @@
 (defwidget w_bluetooth[]
     (eventbox :onclick "blueberry &"
-              :onhover "eww update _bluetooth_reveal=true"
+              :onhover "${EWW_CMD} update _bluetooth_reveal=true"
       (box :space-evenly false
         (label :class "bluetooth_button_label"
                :text {"${_bluetooth_status.status}" == "yes" ? "󰂱" : "󰂯"})

@@ -1,5 +1,5 @@
 (defwidget w_volume []
-  (eventbox :onhover "eww update _volume_reveal=true"
+  (eventbox :onhover "${EWW_CMD} update _volume_reveal=true"
     (box :space-evenly false
       (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         (label :class "volume_button_label"

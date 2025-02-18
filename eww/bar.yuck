@@ -15,7 +15,7 @@
   (w_bar))
 
 (defwidget w_bar []
-  (eventbox :onhoverlost "eww update _volume_reveal=false _bluetooth_reveal=false"
+  (eventbox :onhoverlost "${EWW_CMD} update _volume_reveal=false _bluetooth_reveal=false"
   (box :class "bar"
        :space-evenly false
       ;;(w_workspaces)
