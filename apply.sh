@@ -7,7 +7,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   ln -s "$DOTFILES_DIR/nvim" ~/.config/nvim
   ln -s "$DOTFILES_DIR/bluetuith" ~/.config/bluetuith
-  ln -s "$DOTFILES_DIR/dunst" ~/.config/dunst
   ln -s "$DOTFILES_DIR/eww" ~/.config/eww
   ln -s "$DOTFILES_DIR/rofi" ~/.config/rofi
 
