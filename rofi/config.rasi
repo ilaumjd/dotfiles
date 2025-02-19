@@ -26,7 +26,7 @@ configuration {
     disable-history:            false;
     sidebar-mode:               false;
     combi-modes:                [window,drun];
-    terminal:                   "ghostty";
+    terminal:                   "foot";
     
     kb-row-up:                  "Up,Control+k";
     kb-row-down:                "Down,Control+j";
