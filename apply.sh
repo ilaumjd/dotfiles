@@ -22,6 +22,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
   ln -s "$DOTFILES_DIR/kanshi" ~/.config/kanshi
   ln -s "$DOTFILES_DIR/waybar" ~/.config/waybar
+  ln -s "$DOTFILES_DIR/wayfire/wayfire.ini" ~/.config/wayfire.ini
   ln -s "$DOTFILES_DIR/xdg-desktop-portal" ~/.config/xdg-desktop-portal
 
   # scripts
