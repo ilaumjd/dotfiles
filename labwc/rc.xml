@@ -5,7 +5,7 @@
   <theme>
     <name></name>
     <cornerRadius>8</cornerRadius>
-    <font name="sans" size="10" />
+    <font name="Inter" size="12" />
   </theme>
 
   <keyboard>
@@ -36,8 +36,11 @@
   <mouse>
     <default />
     <context name="Root">
+      <mousebind button="Left" action="Press">
+        <action name="ShowMenu" menu="context-menu" />
+      </mousebind>
       <mousebind button="Right" action="Press">
-        <action name="ShowMenu" menu="some-custom-menu" />
+        <action name="ShowMenu" menu="context-menu" />
       </mousebind>
     </context>
   </mouse>
