@@ -20,6 +20,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   ln -s "$DOTFILES_DIR/niri" ~/.config/niri
   ln -s "$DOTFILES_DIR/sway" ~/.config/sway
   ln -s "$DOTFILES_DIR/waybar" ~/.config/waybar
+  ln -s "$DOTFILES_DIR/xdg-desktop-portal" ~/.config/xdg-desktop-portal
 
   # scripts
   ln -s "$DOTFILES_DIR/iam" ~/.config/iam
