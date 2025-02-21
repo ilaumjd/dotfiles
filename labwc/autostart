@@ -1,1 +1,2 @@
+kanshi >/dev/null 2>&1 &
 ~/.config/iam/scripts/exec-once-wayland.sh >/dev/null 2>&1 &
