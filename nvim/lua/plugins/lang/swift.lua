@@ -1,22 +1,22 @@
 return {
 
-  {
-    "neovim/nvim-lspconfig",
-    opts = function(_, opts)
-      opts.servers = opts.servers or {}
-      opts.servers.sourcekit = {
-        root_dir = function(filename, _)
-          local util = require("lspconfig.util")
-          return util.root_pattern("buildServer.json")(filename)
-            or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
-            or util.find_git_ancestor(filename)
-            or util.root_pattern("Package.swift")(filename)
-        end,
-      }
-      require("lspconfig").sourcekit.setup(opts.servers.sourcekit)
-      return opts
-    end,
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = function(_, opts)
+  --     opts.servers = opts.servers or {}
+  --     opts.servers.sourcekit = {
+  --       root_dir = function(filename, _)
+  --         local util = require("lspconfig.util")
+  --         return util.root_pattern("buildServer.json")(filename)
+  --           or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
+  --           or util.find_git_ancestor(filename)
+  --           or util.root_pattern("Package.swift")(filename)
+  --       end,
+  --     }
+  --     require("lspconfig").sourcekit.setup(opts.servers.sourcekit)
+  --     return opts
+  --   end,
+  -- },
 
   {
     "stevearc/conform.nvim",
