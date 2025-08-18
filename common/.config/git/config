@@ -1,0 +1,29 @@
+[commit]
+	gpgSign = true
+
+[core]
+	pager = "delta"
+
+[filter "lfs"]
+	clean = "git-lfs clean -- %f"
+	process = "git-lfs filter-process"
+	required = true
+	smudge = "git-lfs smudge -- %f"
+
+[gpg]
+	format = "ssh"
+
+[gpg "ssh"]
+	allowedSignersFile = "~/.ssh/allowed_signers"
+	program = "ssh-keygen"
+
+[interactive]
+	diffFilter = "delta --color-only"
+
+[tag]
+	gpgSign = true
+
+[user]
+	email = "ilaumjd@gmail.com"
+	name = "ilaumjd"
+	signingKey = "~/.ssh/id_ed25519.pub"

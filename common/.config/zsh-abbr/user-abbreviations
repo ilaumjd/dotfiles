@@ -1,0 +1,14 @@
+abbr cat=bat
+abbr cd=z
+abbr drs='darwin-rebuild switch --flake ./darwin'
+abbr ga='git add'
+abbr gcm='git commit -m'
+abbr gco='git checkout'
+abbr gd='git diff'
+abbr glo='git log --oneline --graph'
+abbr gp='git pull'
+abbr gs='scmpuff status'
+abbr hms='home-manager switch --flake ./linux'
+abbr lg=lazygit
+abbr man=batman
+abbr rm=trash
