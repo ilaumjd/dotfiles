@@ -37,7 +37,7 @@ source $HOME/.shrc
 export PATH=$PATH:$HOME/bin
 
 # android
-export JAVA_HOME=/Applications/Android Studio.app/Contents/jbr/Contents/Home
+export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
 export PATH=$PATH:$JAVA_HOME/bin
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
