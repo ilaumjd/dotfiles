@@ -52,12 +52,6 @@ export PATH=$PATH:$HOME/.cargo/bin
 
 # ====================================== 3rd party ======================================
 
-
-# atuin
-if [[ $options[zle] = on ]]; then
-  eval "$(atuin init zsh --disable-up-arrow)"
-fi
-
 # eza
 alias -- eza='eza --git'
 alias -- la='eza -a'
@@ -65,12 +59,6 @@ alias -- ll='eza -l'
 alias -- lla='eza -la'
 alias -- ls=eza
 alias -- lt='eza --tree'
-
-# fzf
-if [[ $options[zle] = on ]]; then
-  eval "$(fzf --zsh)"
-  export FZF_DEFAULT_OPTS='--height ~10 --border double'
-fi
 
 # granted
 function assume() {
@@ -91,7 +79,6 @@ eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
 # scmpuff
 export SCMPUFF_GIT_CMD='/usr/bin/git'
 eval "$(scmpuff init --shell=zsh --aliases=false)"
-
 
 # tmux
 function th() {
@@ -117,3 +104,15 @@ function yy() {
 # zoxide
 eval "$(zoxide init zsh)"
 alias -- cd='z'
+
+# fzf
+if [[ $options[zle] = on ]]; then
+  eval "$(fzf --zsh)"
+  export FZF_DEFAULT_OPTS='--height ~10 --border double'
+fi
+
+# atuin
+if [[ $options[zle] = on ]]; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
+
