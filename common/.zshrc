@@ -92,6 +92,18 @@ eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
 export SCMPUFF_GIT_CMD='/usr/bin/git'
 eval "$(scmpuff init --shell=zsh --aliases=false)"
 
+
+# tmux
+function th() {
+  session_name=$(basename "$PWD")
+
+  if tmux has-session -t "$session_name" 2>/dev/null; then
+    tmux attach-session -t "$session_name"
+  else
+    tmux new-session -s "$session_name"
+  fi
+}
+
 # yazi
 function yy() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
