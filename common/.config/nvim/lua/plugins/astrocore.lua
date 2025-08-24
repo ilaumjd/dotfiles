@@ -76,7 +76,22 @@ return {
         ["<Leader>C"] = false,
 
         ["x"] = { '"_x', desc = "Delete character without copying to register" },
+
+        ["<leader>uq"] = {
+          function()
+            vim.g._macro_enabled = not vim.g._macro_enabled
+            if vim.g._macro_enabled then
+              vim.cmd "unmap q"
+              vim.notify "Macro recording enabled"
+            else
+              vim.cmd "map q <Nop>"
+              vim.notify "Macro recording disabled"
+            end
+          end,
+          desc = "Toggle macro recording",
+        },
       },
+
       x = {
         ["H"] = { "<gv", desc = "Decrease indent tab" },
         ["J"] = { ":move '>+1<CR>gv-gv", desc = "Move selected text down" },
