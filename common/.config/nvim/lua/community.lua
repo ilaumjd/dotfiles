@@ -7,6 +7,8 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.file-explorer.oil-nvim" },
 
+  { import = "astrocommunity.motion.mini-surround" },
+
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.ruby" },
 }
