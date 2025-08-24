@@ -43,6 +43,24 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        clipboard = "unnamedplus", -- Sync with system clipboard
+        completeopt = "menu,menuone,noselect",
+        expandtab = true, -- Use spaces instead of tabs
+        mouse = "a", -- Enable mouse mode
+        shiftwidth = 2, -- Size of an indent
+        ignorecase = true, -- Ignore case
+        smartcase = true, -- Don't ignore case with capitals
+        smartindent = true, -- Insert indents automatically
+        splitbelow = true, -- Put new windows below current
+        splitright = true, -- Put new windows right of current
+        tabstop = 2, -- Number of spaces tabs count for
+        termguicolors = true, -- True color support
+        timeoutlen = 300, -- For which-key plugin
+        undofile = true,
+        cursorline = true,
+        linebreak = true,
+        scrolloff = 5,
+        sidescrolloff = 8,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
