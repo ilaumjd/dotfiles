@@ -52,13 +52,26 @@ export PATH=$PATH:$HOME/.cargo/bin
 
 # ====================================== 3rd party ======================================
 
+# bat
+alias -- cat='bat'
+alias -- man='batman'
+alias -- diff='batdiff'
+
 # eza
 alias -- eza='eza --git'
 alias -- la='eza -a'
 alias -- ll='eza -l'
 alias -- lla='eza -la'
-alias -- ls=eza
+alias -- ls='eza'
 alias -- lt='eza --tree'
+
+# git
+alias ga="git add"
+alias gco="git checkout"
+alias gcm="git commit -m"
+alias gd="git diff"
+alias glo="git log --oneline --graph"
+alias gp="git pull"
 
 # granted
 function assume() {
@@ -73,12 +86,16 @@ alias -- lg='lazygit'
 # mise
 eval "$(mise activate zsh)"
 
+# nix
+alias -- drs='sudo darwin-rebuild switch --flake .'
+
 # oh-my-posh
 eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
 
 # scmpuff
 export SCMPUFF_GIT_CMD='/usr/bin/git'
 eval "$(scmpuff init --shell=zsh --aliases=false)"
+alias gs="scmpuff status"
 
 # tmux
 function th() {
@@ -90,6 +107,10 @@ function th() {
     tmux new-session -s "$session_name"
   fi
 }
+alias -- tls='tmux list-sessions'
+
+# trash
+alias -- rm='trash'
 
 # yazi
 function yy() {
