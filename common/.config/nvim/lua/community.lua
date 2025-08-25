@@ -7,6 +7,7 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.completion.avante-nvim" },
   { import = "astrocommunity.file-explorer.oil-nvim" },
+  { import = "astrocommunity.lsp.lspsaga-nvim" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.ruby" },
