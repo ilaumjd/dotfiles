@@ -11,7 +11,7 @@ config.font = wezterm.font("IntoneMono Nerd Font")
 config.font_size = 15.0
 config.hide_tab_bar_if_only_one_tab = true
 config.line_height = 1.2
-config.window_background_opacity = 0.8
+config.window_background_opacity = 1.0
 
 config.window_padding = {
 	left = 0,
@@ -20,9 +20,9 @@ config.window_padding = {
 	bottom = 0,
 }
 
-local scheme = wezterm.get_builtin_color_schemes()["Rosé Pine (base16)"]
-scheme.cursor_fg = "#373837"
-scheme.cursor_bg = "#ededed"
+local scheme = wezterm.get_builtin_color_schemes()["Astrodark (Gogh)"]
+-- scheme.cursor_fg = "#373837"
+-- scheme.cursor_bg = "#ededed"
 config.color_schemes = {
 	["scheme"] = scheme,
 }
