@@ -16,11 +16,11 @@ return {
     opts = function(_, opts)
       local maps = opts.mappings
       -- normal mode mappings
-      maps.n["<leader>cc"] = {
+      maps.n["<Leader>cc"] = {
         function() require("curl").create_global_collection() end,
         desc = "Create curl collection",
       }
-      maps.n["<leader>cf"] = {
+      maps.n["<Leader>cf"] = {
         function() require("curl").pick_global_collection() end,
         desc = "Find curl collection",
       }

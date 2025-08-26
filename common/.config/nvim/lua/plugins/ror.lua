@@ -29,7 +29,7 @@ return {
       -- Example of binding the list_commands helper to <leader>rc
       vim.keymap.set(
         "n",
-        "<Leader>rc",
+        "<Leader>ur",
         function() require("ror.commands").list_commands() end,
         { silent = true, desc = "RoR Menu (ror.nvim)" }
       )
