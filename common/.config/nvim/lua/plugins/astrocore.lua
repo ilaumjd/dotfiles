@@ -75,27 +75,19 @@ return {
       n = {
         -- second key is the lefthand side of the map
 
-        -- navigate buffer tabs
-        ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
-        ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
-
-        -- mappings seen under group name "Buffer"
-        ["<Leader>bd"] = {
-          function()
-            require("astroui.status.heirline").buffer_picker(
-              function(bufnr) require("astrocore.buffer").close(bufnr) end
-            )
-          end,
-          desc = "Close buffer from tabline",
-        },
-
-        -- setting a mapping to false will disable it
         ["<Leader>c"] = false,
         ["<Leader>C"] = false,
+        ["[b"] = false,
+        ["]b"] = false,
+
+        -- navigate buffer tabs
+        ["J"] = { function() require("snacks").picker.buffers() end, desc = "Find buffers" },
+        ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
 
         ["x"] = { '"_x', desc = "Delete character without copying to register" },
 
-        ["<leader>uq"] = {
+        ["<Leader>uq"] = {
           function()
             vim.g._macro_enabled = not vim.g._macro_enabled
             if vim.g._macro_enabled then
