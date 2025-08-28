@@ -1,3 +1,9 @@
+# ====================================== plugins ======================================
+
+source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# ====================================== options ======================================
+
 typeset -U path cdpath fpath manpath
 
 # History options should be set in .zshrc and after oh-my-zsh sourcing.
