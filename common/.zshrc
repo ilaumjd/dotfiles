@@ -1,6 +1,8 @@
 # ====================================== plugins ======================================
+export FORGIT_NO_ALIASES=true 
 
 source ~/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source ~/.config/zsh/forgit/forgit.plugin.zsh
 source ~/.config/zsh/zsh-abbr/zsh-abbr.plugin.zsh
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 

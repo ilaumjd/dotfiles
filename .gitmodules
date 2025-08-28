@@ -7,3 +7,6 @@
 [submodule "common/.config/zsh/zsh-abbr"]
 	path = common/.config/zsh/zsh-abbr
 	url = https://github.com/olets/zsh-abbr
+[submodule "common/.config/zsh/forgit"]
+	path = common/.config/zsh/forgit
+	url = https://github.com/wfxr/forgit
