@@ -1,7 +1,8 @@
 # ====================================== plugins ======================================
 
 source ~/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/zsh/zsh-abbr/zsh-abbr.plugin.zsh
+source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 # ====================================== options ======================================
 
@@ -59,11 +60,6 @@ export PATH=$PATH:$HOME/.cargo/bin
 
 # ====================================== 3rd party ======================================
 
-# bat
-alias -- cat='bat'
-alias -- man='batman'
-alias -- diff='batdiff'
-
 # eza
 alias -- eza='eza --git'
 alias -- la='eza -a'
@@ -72,14 +68,6 @@ alias -- lla='eza -la'
 alias -- ls='eza'
 alias -- lt='eza --tree'
 
-# git
-alias ga="git add"
-alias gco="git checkout"
-alias gcm="git commit -m"
-alias gd="git diff"
-alias glo="git log --oneline --graph"
-alias gp="git pull"
-
 # granted
 function assume() {
   export GRANTED_ALIAS_CONFIGURED="true"
@@ -87,14 +75,8 @@ function assume() {
   unset GRANTED_ALIAS_CONFIGURED
 }
 
-# lazygit
-alias -- lg='lazygit'
-
 # mise
 eval "$(mise activate zsh)"
-
-# nix
-alias -- drs='sudo darwin-rebuild switch --flake .'
 
 # oh-my-posh
 eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
@@ -102,7 +84,6 @@ eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
 # scmpuff
 export SCMPUFF_GIT_CMD='/usr/bin/git'
 eval "$(scmpuff init --shell=zsh --aliases=false)"
-alias gs="scmpuff status"
 
 # tmux
 function th() {
@@ -114,10 +95,6 @@ function th() {
     tmux new-session -s "$session_name"
   fi
 }
-alias -- tls='tmux list-sessions'
-
-# trash
-alias -- rm='trash'
 
 # yazi
 function yy() {
@@ -131,7 +108,6 @@ function yy() {
 
 # zoxide
 eval "$(zoxide init zsh)"
-alias -- cd='z'
 
 # fzf
 if [[ $options[zle] = on ]]; then

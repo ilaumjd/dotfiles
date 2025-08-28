@@ -1,6 +1,9 @@
 abbr cat=bat
-abbr cd=z
-abbr drs='darwin-rebuild switch --flake ./darwin'
+abbr diff=batdiff
+abbr man=batman
+
+abbr drs='sudo darwin-rebuild switch --flake .'
+
 abbr ga='git add'
 abbr gcm='git commit -m'
 abbr gco='git checkout'
@@ -8,7 +11,14 @@ abbr gd='git diff'
 abbr glo='git log --oneline --graph'
 abbr gp='git pull'
 abbr gs='scmpuff status'
-abbr hms='home-manager switch --flake ./linux'
+
+abbr ld=lazydocker
+
 abbr lg=lazygit
-abbr man=batman
+
+abbr ta='tmux attach'
+abbr tls='tmux list-sessions'
+
 abbr rm=trash
+
+abbr cd=z
