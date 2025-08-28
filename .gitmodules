@@ -1,3 +1,6 @@
 [submodule "common/.config/zsh/zsh-autosuggestions"]
 	path = common/.config/zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "common/.config/zsh/fast-syntax-highlighting"]
+	path = common/.config/zsh/fast-syntax-highlighting
+	url = https://github.com/zdharma-continuum/fast-syntax-highlighting
