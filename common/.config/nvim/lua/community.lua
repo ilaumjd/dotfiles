@@ -10,5 +10,7 @@ return {
   { import = "astrocommunity.lsp.lspsaga-nvim" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.prettier" },
   { import = "astrocommunity.pack.ruby" },
+  { import = "astrocommunity.pack.typescript" },
 }
