@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.motion.mini-ai" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.prettier" },
   { import = "astrocommunity.pack.ruby" },
   { import = "astrocommunity.pack.typescript" },
