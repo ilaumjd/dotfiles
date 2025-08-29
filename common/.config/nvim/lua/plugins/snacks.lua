@@ -33,4 +33,21 @@ return {
       }
     end,
   },
+  {
+    "AstroNvim/astrocore",
+    opts = function(_, opts)
+      local maps = opts.mappings
+      local snack_opts = require("astrocore").plugin_opts "snacks.nvim"
+
+      if vim.tbl_get(snack_opts, "picker", "enabled") ~= false then
+        local Snacks = require "snacks"
+        maps.n["gd"] = { function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" }
+        maps.n["gD"] = { function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" }
+        maps.n["grr"] = { function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" }
+        maps.n["gri"] = { function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" }
+        maps.n["grt"] = { function() Snacks.picker.lsp_type_definitions() end, desc = "Goto Type Definition" }
+        maps.n["<Leader>fy"] = { function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" }
+      end
+    end,
+  },
 }
