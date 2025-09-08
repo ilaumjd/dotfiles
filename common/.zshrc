@@ -45,6 +45,7 @@ source $HOME/.shrc
 
 # custom binary
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/personal-scripts
 
 # android
 export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
@@ -59,6 +60,9 @@ export PATH=$PATH:/opt/homebrew/opt/postgresql@16/bin
 
 # rust
 export PATH=$PATH:$HOME/.cargo/bin
+
+# claude
+export PATH=$PATH:$HOME/.local/bin
 
 # ====================================== 3rd party ======================================
 
