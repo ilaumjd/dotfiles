@@ -7,9 +7,8 @@ if wezterm.config_builder then
 end
 
 config.default_cursor_style = "BlinkingUnderline"
-config.font = wezterm.font("IntoneMono Nerd Font")
-config.font_size = 15.0
-config.hide_tab_bar_if_only_one_tab = true
+config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
+config.font_size = 14.0
 config.line_height = 1.2
 config.window_background_opacity = 1.0
 
@@ -21,13 +20,13 @@ config.window_padding = {
 }
 
 local scheme = wezterm.get_builtin_color_schemes()["Astrodark (Gogh)"]
--- scheme.cursor_fg = "#373837"
--- scheme.cursor_bg = "#ededed"
 config.color_schemes = {
 	["scheme"] = scheme,
 }
 config.color_scheme = "scheme"
 
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 local inactive = {
 	bg_color = scheme.background,
@@ -45,8 +44,57 @@ config.colors = {
 	},
 }
 
--- config.front_end = "WebGpu"
-
 config.enable_wayland = true
+
+-- Keybindings to mimic tmux
+config.keys = {
+	{
+		key = "t",
+		mods = "LEADER",
+		action = wezterm.action.SpawnTab("CurrentPaneDomain"),
+	},
+	{
+		key = "x",
+		mods = "LEADER",
+		action = wezterm.action.CloseCurrentTab({ confirm = true }),
+	},
+	{
+		key = "w",
+		mods = "LEADER",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+	},
+	{
+		key = "\\",
+		mods = "LEADER",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "-",
+		mods = "LEADER",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "h",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Left"),
+	},
+	{
+		key = "j",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Down"),
+	},
+	{
+		key = "k",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Up"),
+	},
+	{
+		key = "l",
+		mods = "LEADER",
+		action = wezterm.action.ActivatePaneDirection("Right"),
+	},
+}
+
+config.leader = { key = "s", mods = "CMD", timeout_milliseconds = 1000 }
 
 return config
