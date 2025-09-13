@@ -47,8 +47,13 @@ function M.setup(config)
 
 	-- Tab bar settings
 	config.hide_tab_bar_if_only_one_tab = true
-	config.tab_bar_at_bottom = true
+	config.tab_bar_at_bottom = false
 	config.use_fancy_tab_bar = false
+
+	config.window_content_alignment = {
+		horizontal = "Center",
+		vertical = "Center",
+	}
 end
 
 return M
