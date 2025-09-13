@@ -81,15 +81,7 @@ return {
         ["[b"] = false,
         ["]b"] = false,
 
-        -- overrides
-        ["<Leader>fO"] = { function() require("snacks").picker.recent() end, desc = "Find old files" },
-        ["<Leader>fo"] = {
-          function() require("snacks").picker.recent { filter = { cwd = true } } end,
-          desc = "Find old files (cwd)",
-        },
-
         -- navigate buffer tabs
-        ["J"] = { function() require("snacks").picker.buffers() end, desc = "Find buffers" },
         ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
         ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
 

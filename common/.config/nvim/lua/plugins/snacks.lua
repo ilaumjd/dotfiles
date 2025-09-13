@@ -41,12 +41,35 @@ return {
 
       if vim.tbl_get(snack_opts, "picker", "enabled") ~= false then
         local Snacks = require "snacks"
+        -- LSP Operations
         maps.n["gd"] = { function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" }
         maps.n["gD"] = { function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" }
         maps.n["grr"] = { function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" }
         maps.n["gri"] = { function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" }
         maps.n["grt"] = { function() Snacks.picker.lsp_type_definitions() end, desc = "Goto Type Definition" }
-        maps.n["<Leader>fy"] = { function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" }
+        -- LSP Symbols
+        maps.n["<Leader>fy"] = { function() Snacks.picker.lsp_symbols() end, desc = "Find LSP Symbols" }
+        maps.n["<Leader>fY"] =
+          { function() Snacks.picker.lsp_workspace_symbols() end, desc = "Find LSP Workspace Symbols" }
+        -- Buffers
+        maps.n["J"] = { function() Snacks.picker.buffers() end, desc = "Find buffers" }
+        -- Old files
+        maps.n["<Leader>fo"] = {
+          function() Snacks.picker.recent { filter = { cwd = true } } end,
+          desc = "Find old files (cwd)",
+        }
+        maps.n["<Leader>fO"] = { function() Snacks.picker.recent() end, desc = "Find old files" }
+        -- Diagnostics
+        maps.n["<Leader>fd"] = { function() Snacks.picker.diagnostics_buffer() end, desc = "Find diagnostics (buffer)" }
+        maps.n["<Leader>fD"] = { function() Snacks.picker.diagnostics() end, desc = "Find diagnostics" }
+        -- Quickfix List
+        maps.n["<Leader>fq"] = { function() Snacks.picker.qflist() end, desc = "Find quickfix list" }
+        maps.n["<Leader>fQ"] = { function() Snacks.picker.loclist() end, desc = "Find location list" }
+        -- Disable from AstroNvim
+        maps.n["<Leader>fm"] = false
+        maps.n["<Leader>ft"] = false
+        maps.n["<Leader>ls"] = false
+        maps.n["<Leader>lD"] = false
       end
     end,
   },
