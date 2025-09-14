@@ -1,5 +1,6 @@
 return {
   "coder/claudecode.nvim",
+  lazy = true,
   dependencies = { "folke/snacks.nvim" },
   config = true,
   keys = {

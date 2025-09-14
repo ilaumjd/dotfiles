@@ -1,5 +1,6 @@
 return {
   "NickvanDyke/opencode.nvim",
+  lazy = true,
   dependencies = {
     "folke/snacks.nvim",
   },

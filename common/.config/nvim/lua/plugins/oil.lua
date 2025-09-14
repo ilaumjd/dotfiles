@@ -1,6 +1,7 @@
 return {
   {
     "stevearc/oil.nvim",
+    lazy = true,
     opts = function(_, opts)
       return require("astrocore").extend_tbl(opts, {
         default_file_explorer = true,

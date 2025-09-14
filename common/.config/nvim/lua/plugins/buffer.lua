@@ -1,6 +1,7 @@
 return {
   {
     "j-morano/buffer_manager.nvim",
+    lazy = true,
     config = function() require("buffer_manager").setup {} end,
   },
   {
