@@ -106,6 +106,12 @@ function th() {
     tmux new-session -s "$session_name"
   fi
 }
+function tks() {
+  local sel
+  sel=$(tmux list-sessions | fzf --prompt='Kill session> ') || return
+  local session_name=$(echo "$sel" | cut -d':' -f1)
+  tmux kill-session -t "$session_name"
+}
 
 # yazi
 function yy() {
