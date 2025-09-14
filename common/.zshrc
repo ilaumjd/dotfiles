@@ -66,6 +66,11 @@ export PATH=$PATH:$HOME/.local/bin
 
 # ====================================== 3rd party ======================================
 
+# carapace
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
 # eza
 alias -- eza='eza --git'
 alias -- la='eza -a'
