@@ -14,4 +14,5 @@ return {
   { import = "astrocommunity.pack.prettier" },
   { import = "astrocommunity.pack.ruby" },
   { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.recipes.disable-tabline" },
 }
