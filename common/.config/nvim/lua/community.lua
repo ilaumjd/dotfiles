@@ -13,6 +13,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.prettier" },
+  { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.ruby" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.recipes.disable-tabline" },
