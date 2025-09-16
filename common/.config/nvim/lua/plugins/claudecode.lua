@@ -4,7 +4,7 @@ return {
   dependencies = { "folke/snacks.nvim" },
   config = true,
   keys = {
-    { "leader>c", nil, desc = "Claude Code / Curl" },
+    { "<leader>c", nil, desc = "Claude Code / Curl" },
     { "<Leader>cc", "<cmd>ClaudeCode<cr>", desc = "Claude: Toggle" },
     { "<Leader>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Claude: Focus" },
     { "<Leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Claude: Select model" },
