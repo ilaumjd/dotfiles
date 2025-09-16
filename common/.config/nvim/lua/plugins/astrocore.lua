@@ -38,11 +38,11 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
-        relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- sets vim.opt.number
-        spell = false, -- sets vim.opt.spell
-        signcolumn = "yes", -- sets vim.opt.signcolumn to yes
-        wrap = false, -- sets vim.opt.wrap
+        number = true,
+        relativenumber = false,
+        spell = false,
+        signcolumn = "yes",
+        wrap = false,
         clipboard = "unnamedplus", -- Sync with system clipboard
         completeopt = "menu,menuone,noselect",
         expandtab = true, -- Use spaces instead of tabs
