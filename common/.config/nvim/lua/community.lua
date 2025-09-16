@@ -8,6 +8,7 @@ return {
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
   { import = "astrocommunity.completion.avante-nvim" },
   { import = "astrocommunity.file-explorer.oil-nvim" },
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
   { import = "astrocommunity.motion.mini-ai" },
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.pack.bash" },
