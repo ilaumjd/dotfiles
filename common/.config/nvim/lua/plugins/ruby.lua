@@ -25,11 +25,4 @@ return {
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "solargraph" })
     end,
   },
-  {
-    "stevearc/conform.nvim",
-    opts = function(_, opts)
-      -- remove ruby formatter
-      if opts.formatters_by_ft then opts.formatters_by_ft.ruby = nil end
-    end,
-  },
 }
