@@ -1,5 +1,5 @@
 # ====================================== plugins ======================================
-export FORGIT_NO_ALIASES=true 
+export FORGIT_NO_ALIASES=true
 
 source ~/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source ~/.config/zsh/forgit/forgit.plugin.zsh
@@ -46,6 +46,9 @@ source $HOME/.shrc
 # custom binary
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/personal-scripts
+
+# mason
+export PATH=$PATH:$HOME/.local/share/nvim/mason/bin
 
 # android
 export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
@@ -136,4 +139,3 @@ fi
 if [[ $options[zle] = on ]]; then
   eval "$(atuin init zsh --disable-up-arrow)"
 fi
-
