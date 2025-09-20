@@ -21,7 +21,6 @@ return {
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.prettier" },
   { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.pack.ruby" },
   { import = "astrocommunity.pack.sql" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
