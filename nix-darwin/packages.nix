@@ -10,6 +10,7 @@ pkgs: with pkgs; [
   eza
   fastfetch
   fd
+  ffmpeg
   fzf
   git-lfs
   htop
@@ -26,6 +27,8 @@ pkgs: with pkgs; [
   tealdeer
   tmux
   trash-cli
+  uv
+  uutils-coreutils-noprefix
   wget
   yazi
   zoxide
@@ -38,6 +41,8 @@ pkgs: with pkgs; [
   nixd
   deadnix
   statix
+  xcbeautify
+  rubyPackages.xcodeproj
 
   # aws
   awscli2
