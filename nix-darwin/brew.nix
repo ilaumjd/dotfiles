@@ -21,6 +21,7 @@
       "colima"
       # ios
       "cocoapods"
+      "xcode-build-server"
       # rails
       "libpq"
       "libyaml"
