@@ -22,6 +22,7 @@ return {
   { import = "astrocommunity.pack.prettier" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.sql" },
+  { import = "astrocommunity.pack.swift" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.recipes.disable-tabline" },
