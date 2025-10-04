@@ -35,7 +35,7 @@
       "firefox"
       "ghostty"
       "iina"
-      "linearmouse"
+      "localsend"
       "postman"
       "slack"
       "visual-studio-code"
