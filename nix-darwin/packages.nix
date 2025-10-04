@@ -24,6 +24,7 @@ pkgs: with pkgs; [
   ripgrep
   scmpuff
   stow
+  tdf
   tealdeer
   tmux
   trash-cli
@@ -49,4 +50,5 @@ pkgs: with pkgs; [
   aws-sam-cli
   ssm-session-manager-plugin
   granted
+  stu
 ]
