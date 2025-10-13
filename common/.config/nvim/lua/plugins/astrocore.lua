@@ -80,6 +80,8 @@ return {
         ["<Leader>C"] = false,
         ["[b"] = false,
         ["]b"] = false,
+        ["<Leader>xq"] = false,
+        ["<Leader>xl"] = false,
 
         -- navigate buffer tabs
         ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
