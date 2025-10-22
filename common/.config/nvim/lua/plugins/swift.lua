@@ -53,7 +53,7 @@ return {
         },
       }
 
-      require("xcodebuild.integrations.dap").setup(os.getenv "HOME" .. "/bin/codelldb/extension/adapter/codelldb")
+      require("xcodebuild.integrations.dap").setup(os.getenv "HOME" .. "/.local/share/nvim/mason/bin/codelldb")
     end,
   },
   {
