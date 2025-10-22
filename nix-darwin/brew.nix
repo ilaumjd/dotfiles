@@ -33,6 +33,7 @@
       "dbeaver-community"
       "ente-auth"
       "firefox"
+      "flashspace"
       "ghostty"
       "iina"
       "localsend"
