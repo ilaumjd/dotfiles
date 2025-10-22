@@ -51,8 +51,6 @@ return {
         maps.n["<Leader>fy"] = { function() Snacks.picker.lsp_symbols() end, desc = "Find LSP Symbols" }
         maps.n["<Leader>fY"] =
           { function() Snacks.picker.lsp_workspace_symbols() end, desc = "Find LSP Workspace Symbols" }
-        -- Buffers
-        maps.n["J"] = { function() Snacks.picker.buffers() end, desc = "Find buffers" }
         -- Old files
         maps.n["<Leader>fo"] = {
           function() Snacks.picker.recent { filter = { cwd = true } } end,

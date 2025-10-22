@@ -8,7 +8,7 @@ return {
     "AstroNvim/astrocore",
     opts = function(_, opts)
       local maps = opts.mappings
-      maps.n["<Leader>bm"] = {
+      maps.n["J"] = {
         function() require("buffer_manager.ui").toggle_quick_menu() end,
         desc = "Buffer manager",
       }
