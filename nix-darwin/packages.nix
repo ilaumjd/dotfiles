@@ -26,11 +26,14 @@ pkgs: with pkgs; [
   stow
   tdf
   tealdeer
+  terraform
   tmux
   trash-cli
   uv
   uutils-coreutils-noprefix
   wget
+  xan
+  xh
   yazi
   zoxide
 
