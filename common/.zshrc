@@ -70,9 +70,9 @@ export PATH=$PATH:$HOME/.local/bin
 # ====================================== 3rd party ======================================
 
 # carapace
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-source <(carapace _carapace)
+# export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+# source <(carapace _carapace)
 
 # eza
 alias -- eza='eza --git'
@@ -93,11 +93,11 @@ function assume() {
 eval "$(mise activate zsh)"
 
 # oh-my-posh
-eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
+# eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
 
 # scmpuff
-export SCMPUFF_GIT_CMD='/usr/bin/git'
-eval "$(scmpuff init --shell=zsh --aliases=false)"
+# export SCMPUFF_GIT_CMD='/usr/bin/git'
+# eval "$(scmpuff init --shell=zsh --aliases=false)"
 
 # tmux
 function th() {
