@@ -94,6 +94,7 @@ eval "$(mise activate zsh)"
 
 # oh-my-posh
 # eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
+eval "$(oh-my-posh init zsh)"
 
 # scmpuff
 # export SCMPUFF_GIT_CMD='/usr/bin/git'
