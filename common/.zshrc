@@ -93,8 +93,7 @@ function assume() {
 eval "$(mise activate zsh)"
 
 # oh-my-posh
-# eval "$(oh-my-posh init zsh --config /Users/iam/.config/oh-my-posh/config.json)"
-eval "$(oh-my-posh init zsh)"
+eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/config.json)"
 
 # scmpuff
 # export SCMPUFF_GIT_CMD='/usr/bin/git'
