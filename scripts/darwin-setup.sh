@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Keyboard
-/usr/bin/hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000029}]}'
-
 # NSGlobalDomain
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
