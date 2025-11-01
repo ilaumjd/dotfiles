@@ -66,4 +66,3 @@ killall Finder 2>/dev/null || true
 # Misc
 mkdir -p ~/bin
 touch ~/.shrc
-launchctl load -w ~/Library/LaunchAgents/iam.plist
