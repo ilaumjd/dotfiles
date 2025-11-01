@@ -1,8 +1,8 @@
 # ====================================== plugins ======================================
 
-source ~/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source ~/.config/zsh/zsh-abbr/zsh-abbr.plugin.zsh
-source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source "$HOME/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$HOME/.config/zsh/zsh-abbr/zsh-abbr.plugin.zsh"
+source "$HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
 
 # ====================================== options ======================================
 
@@ -37,7 +37,7 @@ bindkey '^[[1;2C' end-of-line
 export EDITOR=nvim
 
 # custom rc
-source $HOME/.shrc
+source "$HOME/.shrc"
 
 # ====================================== paths ======================================
 
@@ -99,6 +99,7 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 
 # tmux
 function th() {
+  local session_name
   session_name=$(basename "$PWD")
 
   if tmux has-session -t "$session_name" 2>/dev/null; then
@@ -109,17 +110,20 @@ function th() {
 }
 function tks() {
   local sel
+  local session_name
   sel=$(tmux list-sessions | fzf --prompt='Kill session> ') || return
-  local session_name=$(echo "$sel" | cut -d':' -f1)
+  session_name=$(echo "$sel" | cut -d':' -f1)
   tmux kill-session -t "$session_name"
 }
 
 # yazi
 function yy() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+  local tmp
+  tmp="$(mktemp -t "yazi-cwd.XXXXX")"
   yazi "$@" --cwd-file="$tmp"
+  local cwd
   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd"
+    builtin cd -- "$cwd" || return
   fi
   rm -f -- "$tmp"
 }
@@ -128,12 +132,11 @@ function yy() {
 eval "$(zoxide init zsh)"
 
 # fzf
-if [[ $options[zle] = on ]]; then
-  eval "$(fzf --zsh)"
+if [[ -o zle ]]; then
   export FZF_DEFAULT_OPTS='--height ~10 --border double'
 fi
 
 # atuin
-if [[ $options[zle] = on ]]; then
+if [[ -o zle ]]; then
   eval "$(atuin init zsh --disable-up-arrow)"
 fi
