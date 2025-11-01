@@ -8,6 +8,9 @@ source "$HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
 
 typeset -U path cdpath fpath manpath
 
+autoload -Uz compinit
+compinit
+
 # History options should be set in .zshrc and after oh-my-zsh sourcing.
 HISTSIZE="10000"
 SAVEHIST="10000"
@@ -68,9 +71,9 @@ export PATH=$PATH:$HOME/.local/bin
 # ====================================== 3rd party ======================================
 
 # carapace
-# export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-# source <(carapace _carapace)
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
 
 # eza
 alias -- eza='eza --git'
