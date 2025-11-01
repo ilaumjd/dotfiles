@@ -64,5 +64,7 @@ killall Dock 2>/dev/null || true
 killall Finder 2>/dev/null || true
 
 # Misc
-mkdir -p ~/bin
 touch ~/.shrc
+mkdir -p ~/bin
+mkdir -p ~/.local/share
+mkdir -p ~/Library/LaunchAgents
