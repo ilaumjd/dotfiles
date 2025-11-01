@@ -8,7 +8,6 @@ brew "libpq"
 brew "libyaml"
 brew "postgresql@16"
 
-tap "homebrew/cask"
 cask "bruno"
 cask "dbeaver-community"
 cask "ente-auth"
