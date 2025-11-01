@@ -1,8 +1,6 @@
 # ====================================== plugins ======================================
-export FORGIT_NO_ALIASES=true
 
 source ~/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source ~/.config/zsh/forgit/forgit.plugin.zsh
 source ~/.config/zsh/zsh-abbr/zsh-abbr.plugin.zsh
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
@@ -93,7 +91,7 @@ function assume() {
 eval "$(mise activate zsh)"
 
 # oh-my-posh
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/config.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 
 # scmpuff
 # export SCMPUFF_GIT_CMD='/usr/bin/git'
