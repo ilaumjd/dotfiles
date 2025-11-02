@@ -1,3 +1,11 @@
+########################### TERMINAL ###########################
+
+# Terminal App
+cask "ghostty"
+cask "wezterm@nightly"
+cask "vimr"
+cask "font-fira-code-nerd-font"
+
 # Vim
 brew "vim"
 brew "neovim"
@@ -40,16 +48,23 @@ brew "uv"
 brew "xh"
 brew "yazi"
 
+########################### DESKTOP ###########################
+
+# Desktop Workflow
+tap "koekeishiya/formulae"
+brew "yabai"
+tap "jackielii/tap"
+brew "skhd-zig"
+
 # Desktop App
 cask "ente-auth"
 cask "firefox"
-cask "flashspace"
-cask "ghostty"
 cask "iina"
 cask "localsend"
 cask "slack"
-cask "wezterm@nightly"
 cask "zoom"
+
+########################### DEVELOPMENT ###########################
 
 # Dev Tools
 brew "postgresql@16"
@@ -86,8 +101,3 @@ brew "awscli"
 brew "aws-sam-cli"
 cask "session-manager-plugin"
 brew "granted"
-
-tap "koekeishiya/formulae"
-brew "yabai"
-tap "jackielii/tap"
-brew "skhd-zig"
