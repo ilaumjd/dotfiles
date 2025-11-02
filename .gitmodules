@@ -7,3 +7,15 @@
 [submodule "common/.config/zsh/zsh-abbr"]
 	path = common/.config/zsh/zsh-abbr
 	url = https://github.com/olets/zsh-abbr
+[submodule "common/.config/tmux/plugins/tmux-sensible"]
+	path = common/.config/tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible.git
+[submodule "common/.config/tmux/plugins/tmux-nova"]
+	path = common/.config/tmux/plugins/tmux-nova
+	url = https://github.com/o0th/tmux-nova.git
+[submodule "common/.config/tmux/plugins/tmux-session-wizard"]
+	path = common/.config/tmux/plugins/tmux-session-wizard
+	url = https://github.com/27medkamal/tmux-session-wizard.git
+[submodule "common/.config/tmux/plugins/vim-tmux-navigator"]
+	path = common/.config/tmux/plugins/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
