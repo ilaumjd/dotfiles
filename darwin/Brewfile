@@ -86,3 +86,8 @@ brew "awscli"
 brew "aws-sam-cli"
 cask "session-manager-plugin"
 brew "granted"
+
+tap "koekeishiya/formulae"
+brew "yabai"
+tap "jackielii/tap"
+brew "skhd-zig"
