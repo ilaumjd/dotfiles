@@ -1,6 +1,8 @@
 adjust-cell-height = 20%
 auto-update = off
 background-opacity = 1.000000
+background = #1a1d23
+foreground = #9b9fa9
 copy-on-select = false
 cursor-style = block
 cursor-style-blink = false
