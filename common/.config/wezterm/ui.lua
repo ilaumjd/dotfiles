@@ -7,7 +7,7 @@ function M.setup(config)
 
 	-- Font settings
 	config.default_cursor_style = "BlinkingUnderline"
-	config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
+	config.font = wezterm.font("FiraCode Nerd Font")
 	config.font_size = 14.0
 	config.line_height = 1.2
 
