@@ -5,16 +5,4 @@ sudo yabai --load-sa
 
 yabai -m config focus_follows_mouse autofocus
 
-# Load app-to-space mapping
-mapfile -t lines < ~/.config/yabai/app_map.conf
-
-# Apply rules based on mapping
-for line in "${lines[@]}"; do
-  [[ "$line" =~ ^#|^$ ]] && continue  # skip comments/empty lines
-  app="${line%%=*}"
-  space="${line#*=}"
-  yabai -m rule --add app="^$app$" space="$space" manage=on
-done
-
-# Auto-focus on the correct space when app opens
-yabai -m signal --add event=window_created action="~/.config/yabai/app_focus.sh"
+yabai -m signal --add event=window_created action="~/.config/yabai/window_created.sh"

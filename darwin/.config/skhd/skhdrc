@@ -20,8 +20,3 @@ ctrl + shift - 6 : yabai -m window --space 6 --focus
 ctrl + shift - 7 : yabai -m window --space 7 --focus
 ctrl + shift - 8 : yabai -m window --space 8 --focus
 ctrl + shift - 0 : yabai -m window --space 10 --focus
-
-# Optional: navigate left/right between spaces
-cmd - h : yabai -m space --focus prev || yabai -m space --focus last
-cmd - l : yabai -m space --focus next || yabai -m space --focus first
-

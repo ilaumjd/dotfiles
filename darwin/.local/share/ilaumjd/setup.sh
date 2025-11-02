@@ -28,7 +28,8 @@ defaults write com.apple.controlcenter "Sound" -int 18
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0.0
 defaults write com.apple.dock autohide-time-modifier -float 0.2
-defaults write com.apple.dock expose-animation-duration -float 0.2
+defaults write com.apple.dock click-to-show-desktop -int 1
+defaults write com.apple.dock expose-animation-duration -float 0.0
 defaults write com.apple.dock launchanim -bool false
 defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock orientation -string "right"
@@ -36,8 +37,10 @@ defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock show-process-indicators -bool true
 defaults write com.apple.dock static-only -bool true
 defaults write com.apple.dock tilesize -int 48
+defaults write com.apple.dock workspaces-auto-swoosh -bool true
 defaults write com.apple.dock wvous-br-corner -int 1
 defaults write com.apple.dock wvous-br-modifier -int 0
+defaults write com.apple.spaces spans-displays -bool false
 
 # Finder
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -62,6 +65,7 @@ killall cfprefsd 2>/dev/null || true
 killall ControlCenter 2>/dev/null || true
 killall Dock 2>/dev/null || true
 killall Finder 2>/dev/null || true
+killall SystemUIServer 2>/dev/null || true
 
 # Misc
 touch ~/.shrc
