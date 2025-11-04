@@ -51,10 +51,8 @@ brew "yazi"
 ########################### DESKTOP ###########################
 
 # Desktop Workflow
-tap "koekeishiya/formulae"
-brew "yabai"
-tap "jackielii/tap"
-brew "skhd-zig"
+brew "koekeishiya/formulae/yabai"
+brew "jackielii/tap/skhd-zig"
 
 # Desktop App
 cask "ente-auth"
@@ -79,8 +77,7 @@ cask "zed"
 # AI
 cask "claude-code"
 brew "gemini-cli"
-tap "sst/tap"
-brew "opencode"
+brew "sst/tap/opencode"
 
 # Xcode
 brew "cocoapods"
