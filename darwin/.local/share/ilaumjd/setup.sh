@@ -40,6 +40,7 @@ defaults write com.apple.dock tilesize -int 48
 defaults write com.apple.dock workspaces-auto-swoosh -bool true
 defaults write com.apple.dock wvous-br-corner -int 1
 defaults write com.apple.dock wvous-br-modifier -int 0
+defaults write com.apple.dock showAppExposeGestureEnabled -bool false
 defaults write com.apple.spaces spans-displays -bool false
 
 # Finder
