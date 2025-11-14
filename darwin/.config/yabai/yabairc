@@ -3,6 +3,14 @@
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
+yabai -m signal --add event=window_created action="~/.config/yabai/window_created.sh"
+
 yabai -m config focus_follows_mouse autofocus
 
-yabai -m signal --add event=window_created action="~/.config/yabai/window_created.sh"
+yabai -m config layout stack
+
+yabai -m config top_padding 6
+yabai -m config bottom_padding 6
+yabai -m config left_padding 6
+yabai -m config right_padding 6
+yabai -m config window_gap 6
