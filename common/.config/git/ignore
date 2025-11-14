@@ -1,2 +1,4 @@
 .envrc
 .direnv
+
+**/.claude/settings.local.json
