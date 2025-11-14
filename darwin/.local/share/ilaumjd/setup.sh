@@ -60,6 +60,8 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -float 2.0
 defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
 
 # Restart
 killall cfprefsd 2>/dev/null || true
