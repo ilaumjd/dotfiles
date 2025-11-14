@@ -53,8 +53,10 @@ brew "yazi"
 # Desktop Workflow
 tap "koekeishiya/formulae"
 brew "koekeishiya/formulae/yabai"
-tap "jackielii/tap"
-brew "jackielii/tap/skhd-zig"
+brew "koekeishiya/formulae/skhd"
+tap "FelixKratz/formulae"
+brew "FelixKratz/formulae/borders"
+brew "FelixKratz/formulae/sketchybar"
 
 # Desktop App
 cask "ente-auth"
