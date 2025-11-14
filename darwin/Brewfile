@@ -51,7 +51,9 @@ brew "yazi"
 ########################### DESKTOP ###########################
 
 # Desktop Workflow
+tap "koekeishiya/formulae"
 brew "koekeishiya/formulae/yabai"
+tap "jackielii/tap"
 brew "jackielii/tap/skhd-zig"
 
 # Desktop App
@@ -60,6 +62,7 @@ cask "firefox"
 cask "iina"
 cask "localsend"
 cask "slack"
+cask "tailscale-app"
 cask "zoom"
 
 ########################### DEVELOPMENT ###########################
@@ -77,6 +80,7 @@ cask "zed"
 # AI
 cask "claude-code"
 brew "gemini-cli"
+tap "sst/tap"
 brew "sst/tap/opencode"
 
 # Xcode
