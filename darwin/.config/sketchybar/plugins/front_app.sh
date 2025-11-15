@@ -6,5 +6,30 @@
 # https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
 
 if [ "$SENDER" = "front_app_switched" ]; then
-  sketchybar --set "$NAME" label="$INFO"
+  # Map app names to Nerd Font icons
+  case "$INFO" in
+    "Ghostty")
+      ICON="󰆍"
+      ;;
+    "WezTerm")
+      ICON=""
+      ;;
+    "Firefox")
+      ICON="󰈹"
+      ;;
+    "Xcode")
+      ICON="󰛐"
+      ;;
+    "zoom.us")
+      ICON="󰍩"
+      ;;
+    "Slack")
+      ICON="󰒱"
+      ;;
+    *)
+      ICON="󰣆"
+      ;;
+  esac
+
+  sketchybar --set "$NAME" icon="$ICON" label="$INFO"
 fi
