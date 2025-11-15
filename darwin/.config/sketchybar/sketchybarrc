@@ -7,7 +7,7 @@ source ~/.config/_vars/colors.conf
 
 ##### Bar Appearance #####
 sketchybar --bar position=top \
-  color="$BAR_COLOR" \
+  color="$BACKGROUND_COLOR" \
   position=top \
   height=20 \
   notch_display_height=37.5 \

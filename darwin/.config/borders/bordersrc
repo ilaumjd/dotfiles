@@ -7,8 +7,8 @@ options=(
 	style=round
 	width=6.0
 	hidpi=off
-	active_color="$ACCENT_BLUE"
-	inactive_color="$TEXT_MUTED"
+	active_color="$ACCENT_PRIMARY"
+	inactive_color="$TEXT_INACTIVE"
 )
 
 borders "${options[@]}"

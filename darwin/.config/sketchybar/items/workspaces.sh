@@ -8,7 +8,7 @@ for i in "${!WORKSPACE_ICONS[@]}"; do
     icon="${WORKSPACE_ICONS[i]}"
     icon.padding_left=0
     icon.padding_right=0
-    icon.color="$TEXT_MUTED"
+    icon.color="$TEXT_INACTIVE"
     icon.highlight_color="$ACCENT_PRIMARY"
     background.drawing=off
     label.drawing=off
