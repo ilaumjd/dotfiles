@@ -1,11 +1,11 @@
 #!/bin/bash
 
-SPACE_ICONS=("󰲠" "󰲢" "󰲤" "󰲦" "󰲨" "󰲪")
-for i in "${!SPACE_ICONS[@]}"; do
+WORKSPACE_ICONS=("󰲠" "󰲢" "󰲤" "󰲦" "󰲨" "󰲪")
+for i in "${!WORKSPACE_ICONS[@]}"; do
   sid="$((i + 1))"
-  space=(
+  workspace=(
     space="$sid"
-    icon="${SPACE_ICONS[i]}"
+    icon="${WORKSPACE_ICONS[i]}"
     icon.padding_left=0
     icon.padding_right=0
     icon.color="$TEXT_MUTED"
@@ -14,5 +14,5 @@ for i in "${!SPACE_ICONS[@]}"; do
     label.drawing=off
     click_script="yabai -m space --focus $sid"
   )
-  sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
+  sketchybar --add space workspace."$sid" left --set workspace."$sid" "${workspace[@]}"
 done
