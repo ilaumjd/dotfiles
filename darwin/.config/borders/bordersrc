@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Source unified color palette
+source ~/.config/_vars/colors.conf
+
 options=(
 	style=round
 	width=6.0
 	hidpi=off
-	active_color=0xffe2e2e3
-	inactive_color=0xff414550
+	active_color="$ACCENT_BLUE"
+	inactive_color="$TEXT_MUTED"
 )
 
 borders "${options[@]}"

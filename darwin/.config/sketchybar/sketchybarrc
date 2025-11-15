@@ -3,7 +3,7 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 # Source colors
-source "$CONFIG_DIR/colors.sh"
+source ~/.config/_vars/colors.conf
 
 ##### Bar Appearance #####
 sketchybar --bar position=top \
