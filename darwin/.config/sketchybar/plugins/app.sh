@@ -7,7 +7,7 @@
 
 if [ "$SENDER" = "front_app_switched" ]; then
   # Read app icons from config file
-  ICON="󰣆"  # default icon
+  ICON=""  # default icon
   while IFS=',' read -r app_name icon space; do
     [[ "$app_name" =~ ^#|^$ ]] && continue
     if [ "$app_name" = "$INFO" ]; then
