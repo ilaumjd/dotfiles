@@ -16,8 +16,8 @@ sketchybar --bar position=top \
   corner_radius=0 \
   border_width=0 \
   blur_radius=0 \
-  padding_left=0 \
-  padding_right=0 \
+  padding_left=10 \
+  padding_right=10 \
   notch_width=200 \
   notch_offset=0 \
   display=all \
@@ -31,8 +31,12 @@ sketchybar --bar position=top \
 default=(
   padding_left=5
   padding_right=5
-  icon.font="FiraCode Nerd Font:Bold:16.0"
-  label.font="FiraCode Nerd Font:Bold:13.0"
+  icon.font.family="FiraCode Nerd Font"
+  icon.font.style=SemiBold
+  icon.font.size=18.0
+  label.font.family="SF Pro Text"
+  label.font.style=SemiBold
+  label.font.size=14.0
   icon.color="$TEXT_PRIMARY"
   label.color="$TEXT_PRIMARY"
   icon.padding_left=6
@@ -54,7 +58,6 @@ for i in "${!SPACE_ICONS[@]}"; do
     icon.padding_right=0
     icon.color="$TEXT_MUTED"
     icon.highlight_color="$ACCENT_PRIMARY"
-    icon.font="FiraCode Nerd Font:Bold:18.0"
     background.drawing=off
     label.drawing=off
     script="$PLUGIN_DIR/space.sh"
@@ -67,7 +70,6 @@ done
 sketchybar --add item separator_left left \
   --set separator_left icon="|" \
   icon.color="$TEXT_MUTED" \
-  icon.font="FiraCode Nerd Font:Regular:12.0" \
   padding_left=5 \
   padding_right=5 \
   label.drawing=off
@@ -75,7 +77,6 @@ sketchybar --add item separator_left left \
 sketchybar --add item chevron left \
   --set chevron icon=󰘍 \
   icon.color="$ACCENT_PRIMARY" \
-  icon.font="FiraCode Nerd Font:Bold:18.0" \
   label.drawing=off \
   padding_left=5 \
   padding_right=5 \
@@ -86,10 +87,30 @@ sketchybar --add item front_app left \
   icon.color="$ACCENT_BLUE" \
   script="$PLUGIN_DIR/front_app.sh" \
   label.color="$TEXT_PRIMARY" \
-  label.font="FiraCode Nerd Font:Bold:13.0" \
   --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
+sketchybar --add item clock right \
+  --set clock update_freq=1 \
+  icon=󰥔 \
+  icon.color="$ACCENT_PURPLE" \
+  script="$PLUGIN_DIR/clock.sh" \
+  label.color="$TEXT_PRIMARY"
+
+sketchybar --add item separator_right right \
+  --set separator_right icon="|" \
+  icon.color="$TEXT_MUTED" \
+  padding_left=5 \
+  padding_right=5 \
+  label.drawing=off
+
+sketchybar --add item wifi right \
+  --set wifi script="$PLUGIN_DIR/wifi.sh" \
+  icon.color="$ACCENT_BLUE" \
+  label.color="$TEXT_PRIMARY" \
+  update_freq=10 \
+  --subscribe wifi wifi_change
+
 sketchybar --add item battery right \
   --set battery update_freq=120 \
   script="$PLUGIN_DIR/battery.sh" \
@@ -102,22 +123,6 @@ sketchybar --add item volume right \
   icon.color="$ACCENT_CYAN" \
   label.color="$TEXT_PRIMARY" \
   --subscribe volume volume_change
-
-sketchybar --add item separator_right right \
-  --set separator_right icon="|" \
-  icon.color="$TEXT_MUTED" \
-  icon.font="FiraCode Nerd Font:Regular:12.0" \
-  padding_left=5 \
-  padding_right=5 \
-  label.drawing=off
-
-sketchybar --add item clock right \
-  --set clock update_freq=1 \
-  icon=󰥔 \
-  icon.color="$ACCENT_PURPLE" \
-  icon.font="FiraCode Nerd Font:Bold:16.0" \
-  script="$PLUGIN_DIR/clock.sh" \
-  label.color="$TEXT_PRIMARY"
 
 ##### Force all scripts to run the first time #####
 sketchybar --update
