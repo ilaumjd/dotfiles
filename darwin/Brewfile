@@ -1,10 +1,21 @@
+########################### TAPS ###########################
+
+tap "koekeishiya/formulae"
+tap "felixkratz/formulae"
+tap "sst/tap"
+
+########################### FONTS ###########################
+
+cask "font-fira-code-nerd-font"
+cask "font-sf-pro"
+cask "sf-symbols"
+
 ########################### TERMINAL ###########################
 
 # Terminal App
 cask "ghostty"
 cask "wezterm@nightly"
 cask "vimr"
-cask "font-fira-code-nerd-font"
 
 # Vim
 brew "vim"
@@ -48,15 +59,14 @@ brew "uv"
 brew "xh"
 brew "yazi"
 
+
 ########################### DESKTOP ###########################
 
 # Desktop Workflow
-tap "koekeishiya/formulae"
-brew "koekeishiya/formulae/yabai"
-brew "koekeishiya/formulae/skhd"
-tap "FelixKratz/formulae"
-brew "FelixKratz/formulae/borders"
-brew "FelixKratz/formulae/sketchybar"
+brew "yabai"
+brew "skhd"
+brew "borders"
+brew "sketchybar"
 
 # Desktop App
 cask "ente-auth"
@@ -82,8 +92,7 @@ cask "zed"
 # AI
 cask "claude-code"
 brew "gemini-cli"
-tap "sst/tap"
-brew "sst/tap/opencode"
+brew "opencode"
 
 # Xcode
 brew "cocoapods"
