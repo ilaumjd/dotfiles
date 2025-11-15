@@ -44,16 +44,17 @@ default=(
 sketchybar --default "${default[@]}"
 
 ##### Adding Mission Control Space Indicators #####
-SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+SPACE_ICONS=("󰲠" "󰲢" "󰲤" "󰲦" "󰲨" "󰲪")
 for i in "${!SPACE_ICONS[@]}"; do
   sid="$((i + 1))"
   space=(
     space="$sid"
     icon="${SPACE_ICONS[i]}"
-    icon.padding_left=12
-    icon.padding_right=12
+    icon.padding_left=0
+    icon.padding_right=0
     icon.color="$TEXT_MUTED"
     icon.highlight_color="$ACCENT_PRIMARY"
+    icon.font="FiraCode Nerd Font:Bold:18.0"
     background.drawing=off
     label.drawing=off
     script="$PLUGIN_DIR/space.sh"
@@ -63,28 +64,38 @@ for i in "${!SPACE_ICONS[@]}"; do
 done
 
 ##### Adding Left Items #####
+sketchybar --add item separator_left left \
+  --set separator_left icon="|" \
+  icon.color="$TEXT_MUTED" \
+  icon.font="FiraCode Nerd Font:Regular:12.0" \
+  padding_left=5 \
+  padding_right=5 \
+  label.drawing=off
+
 sketchybar --add item chevron left \
-  --set chevron icon= \
+  --set chevron icon=󰘍 \
   icon.color="$ACCENT_PRIMARY" \
-  icon.font="FiraCode Nerd Font:Bold:20.0" \
+  icon.font="FiraCode Nerd Font:Bold:18.0" \
   label.drawing=off \
+  padding_left=5 \
+  padding_right=5 \
   click_script="yabai -m space --focus recent"
 
 sketchybar --add item front_app left \
-  --set front_app icon.drawing=off \
+  --set front_app icon=󰣆 \
+  icon.color="$ACCENT_BLUE" \
   script="$PLUGIN_DIR/front_app.sh" \
-  label.color="$ACCENT_BLUE" \
-  label.font="FiraCode Nerd Font:Bold:14.0" \
+  label.color="$TEXT_PRIMARY" \
+  label.font="FiraCode Nerd Font:Bold:13.0" \
   --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
-sketchybar --add item clock right \
-  --set clock update_freq=10 \
-  icon= \
-  icon.color="$ACCENT_PURPLE" \
-  icon.font="FiraCode Nerd Font:Bold:18.0" \
-  script="$PLUGIN_DIR/clock.sh" \
-  label.color="$TEXT_PRIMARY"
+sketchybar --add item battery right \
+  --set battery update_freq=120 \
+  script="$PLUGIN_DIR/battery.sh" \
+  icon.color="$ACCENT_GREEN" \
+  label.color="$TEXT_PRIMARY" \
+  --subscribe battery system_woke power_source_change
 
 sketchybar --add item volume right \
   --set volume script="$PLUGIN_DIR/volume.sh" \
@@ -92,12 +103,21 @@ sketchybar --add item volume right \
   label.color="$TEXT_PRIMARY" \
   --subscribe volume volume_change
 
-sketchybar --add item battery right \
-  --set battery update_freq=120 \
-  script="$PLUGIN_DIR/battery.sh" \
-  icon.color="$ACCENT_GREEN" \
-  label.color="$TEXT_PRIMARY" \
-  --subscribe battery system_woke power_source_change
+sketchybar --add item separator_right right \
+  --set separator_right icon="|" \
+  icon.color="$TEXT_MUTED" \
+  icon.font="FiraCode Nerd Font:Regular:12.0" \
+  padding_left=5 \
+  padding_right=5 \
+  label.drawing=off
+
+sketchybar --add item clock right \
+  --set clock update_freq=1 \
+  icon=󰥔 \
+  icon.color="$ACCENT_PURPLE" \
+  icon.font="FiraCode Nerd Font:Bold:16.0" \
+  script="$PLUGIN_DIR/clock.sh" \
+  label.color="$TEXT_PRIMARY"
 
 ##### Force all scripts to run the first time #####
 sketchybar --update
