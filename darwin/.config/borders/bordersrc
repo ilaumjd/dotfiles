@@ -5,10 +5,12 @@ source ~/.config/_vars/colors.conf
 
 options=(
 	style=round
-	width=6.0
-	hidpi=off
 	active_color="$ACCENT_PRIMARY"
 	inactive_color="$TEXT_INACTIVE"
+	width=6.0
+	hidpi=off
+	ax_focus=on
+	blacklist="Simulator"
 )
 
 borders "${options[@]}"
