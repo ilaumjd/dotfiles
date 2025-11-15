@@ -103,13 +103,6 @@ sketchybar --add item separator_right right \
   padding_right=5 \
   label.drawing=off
 
-sketchybar --add item wifi right \
-  --set wifi script="$PLUGIN_DIR/wifi.sh" \
-  icon.color="$ACCENT_BLUE" \
-  label.color="$TEXT_PRIMARY" \
-  update_freq=10 \
-  --subscribe wifi wifi_change
-
 sketchybar --add item battery right \
   --set battery update_freq=120 \
   script="$PLUGIN_DIR/battery.sh" \
