@@ -33,10 +33,10 @@ default=(
   padding_right=5
   icon.font.family="FiraCode Nerd Font"
   icon.font.style=SemiBold
-  icon.font.size=18.0
+  icon.font.size=17.0
   label.font.family="SF Pro Text"
   label.font.style=SemiBold
-  label.font.size=14.0
+  label.font.size=13.0
   icon.color="$TEXT_PRIMARY"
   label.color="$TEXT_PRIMARY"
   icon.padding_left=6
@@ -55,6 +55,7 @@ source "$ITEM_DIR/app.sh"
 source "$ITEM_DIR/clock.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/layout.sh"
 
 ##### Force all scripts to run the first time #####
 sketchybar --update
