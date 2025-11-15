@@ -3,7 +3,7 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 # Source colors
-source "$PLUGIN_DIR/colors.sh"
+source "$CONFIG_DIR/colors.sh"
 
 ##### Bar Appearance #####
 sketchybar --bar position=top \
@@ -60,7 +60,6 @@ for i in "${!SPACE_ICONS[@]}"; do
     icon.highlight_color="$ACCENT_PRIMARY"
     background.drawing=off
     label.drawing=off
-    script="$PLUGIN_DIR/space.sh"
     click_script="yabai -m space --focus $sid"
   )
   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
