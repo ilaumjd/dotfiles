@@ -14,3 +14,5 @@ yabai -m config bottom_padding 6
 yabai -m config left_padding 6
 yabai -m config right_padding 6
 yabai -m config window_gap 6
+
+yabai -m config external_bar main:38:0

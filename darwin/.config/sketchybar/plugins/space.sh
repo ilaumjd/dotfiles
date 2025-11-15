@@ -8,7 +8,7 @@
 source "$CONFIG_DIR/plugins/colors.sh"
 
 if [ "$SELECTED" = "true" ]; then
-  sketchybar --set "$NAME" icon.color=$ACCENT_PRIMARY
+  sketchybar --set "$NAME" icon.color="$ACCENT_PRIMARY"
 else
-  sketchybar --set "$NAME" icon.color=$TEXT_MUTED
+  sketchybar --set "$NAME" icon.color="$TEXT_MUTED"
 fi
