@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Source hardware config
+source ~/.config/_vars/hardware.sh
+
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
@@ -20,4 +23,4 @@ yabai -m config bottom_padding 10
 yabai -m config left_padding 10
 yabai -m config right_padding 10
 yabai -m config window_gap 8
-yabai -m config external_bar main:38:0
+yabai -m config external_bar main:"$BAR_HEIGHT":0

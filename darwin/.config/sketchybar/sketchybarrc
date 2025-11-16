@@ -2,15 +2,15 @@
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
-# Source colors
+# Source colors and hardware config
 source ~/.config/_vars/colors.conf
+source ~/.config/_vars/hardware.sh
 
 ##### Bar Appearance #####
 sketchybar --bar position=top \
   color="$BACKGROUND_COLOR" \
   position=top \
-  height=20 \
-  notch_display_height=37.5 \
+  height="$BAR_HEIGHT" \
   margin=0 \
   y_offset=0 \
   corner_radius=0 \
@@ -33,10 +33,10 @@ default=(
   padding_right=5
   icon.font.family="FiraCode Nerd Font"
   icon.font.style=SemiBold
-  icon.font.size=17.0
+  icon.font.size=15.0
   label.font.family="SF Pro Text"
   label.font.style=SemiBold
-  label.font.size=13.0
+  label.font.size=12.0
   icon.color="$TEXT_PRIMARY"
   label.color="$TEXT_PRIMARY"
   icon.padding_left=6
