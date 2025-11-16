@@ -3,7 +3,7 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 # Source colors and hardware config
-source ~/.config/_vars/colors.conf
+source ~/.config/_vars/colors.sh
 source ~/.config/_vars/hardware.sh
 
 ##### Bar Appearance #####
