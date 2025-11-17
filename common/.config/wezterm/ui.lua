@@ -12,7 +12,7 @@ function M.setup(config)
 	config.line_height = 1.2
 
 	-- Window settings
-	config.window_decorations = "TITLE|RESIZE|MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR"
+	config.window_decorations = "RESIZE"
 	config.window_background_opacity = 1.0
 	config.window_padding = {
 		left = 0,
