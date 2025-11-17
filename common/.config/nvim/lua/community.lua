@@ -19,7 +19,6 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.prettier" },
-  { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.sql" },
   { import = "astrocommunity.pack.swift" },
   { import = "astrocommunity.pack.terraform" },
