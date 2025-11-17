@@ -12,5 +12,5 @@ else
 fi
 
 # Update the sketchybar item immediately
-sleep 1  # Give Tailscale a moment to change state
+sleep 1 # Give Tailscale a moment to change state
 sketchybar --trigger forced_update --update

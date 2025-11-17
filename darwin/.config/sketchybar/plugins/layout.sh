@@ -7,20 +7,16 @@ LAYOUT=$(yabai -m query --spaces --space | jq -r '.type')
 case "$LAYOUT" in
 "bsp")
   ICON="󰕰"
-  LABEL="BSP"
   ;;
 "stack")
   ICON=""
-  LABEL="STACK"
   ;;
 "float")
   ICON="󰖲"
-  LABEL="FLOAT"
   ;;
 *)
   ICON="󰕰"
-  LABEL="?"
   ;;
 esac
 
-sketchybar --set "$NAME" icon="$ICON" label="$LABEL"
+sketchybar --set "$NAME" icon="$ICON"

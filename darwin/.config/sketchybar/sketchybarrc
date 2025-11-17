@@ -29,14 +29,14 @@ sketchybar --bar position=top \
 
 ##### Changing Defaults #####
 default=(
-  padding_left=5
-  padding_right=5
+  padding_left=1
+  padding_right=1
+  icon.align=center
   icon.font.family="FiraCode Nerd Font"
   icon.font.style=SemiBold
   icon.font.size="$ICON_FONT_SIZE"
   icon.color="$ACCENT_PRIMARY"
-  icon.padding_left=6
-  icon.padding_right=6
+  label.align=center
   label.font.family="SF Pro Text"
   label.font.style=SemiBold
   label.font.size="$LABEL_FONT_SIZE"

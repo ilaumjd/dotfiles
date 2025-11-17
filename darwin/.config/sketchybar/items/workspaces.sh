@@ -6,8 +6,8 @@ for i in "${!WORKSPACE_ICONS[@]}"; do
   workspace=(
     space="$sid"
     icon="${WORKSPACE_ICONS[i]}"
-    icon.padding_left=0
-    icon.padding_right=0
+    icon.padding_left=2
+    icon.padding_right=2
     icon.color="$TEXT_INACTIVE"
     icon.highlight_color="$ACCENT_PRIMARY"
     background.drawing=off

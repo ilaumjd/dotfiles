@@ -2,9 +2,7 @@
 
 sketchybar --add item layout right \
   --set layout update_freq=5 \
-  icon.color="$ACCENT_PRIMARY" \
-  label.color="$TEXT_PRIMARY" \
-  label.width=48 \
+  icon.width=16 \
   script="$PLUGIN_DIR/layout.sh" \
   click_script="$PLUGIN_DIR/layout_click.sh" \
   --subscribe layout space_change
