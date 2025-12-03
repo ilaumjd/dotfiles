@@ -98,6 +98,7 @@ brew "opencode"
 brew "cocoapods"
 brew "xcode-build-server"
 brew "xcbeautify"
+brew "xcp"
 
 # Docker
 brew "colima"
