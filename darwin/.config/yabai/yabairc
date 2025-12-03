@@ -19,9 +19,9 @@ yabai -m config layout stack
 
 # GAPS
 yabai -m config top_padding 6
-yabai -m config bottom_padding 10
-yabai -m config left_padding 10
-yabai -m config right_padding 10
+yabai -m config bottom_padding 6
+yabai -m config left_padding 6
+yabai -m config right_padding 6
 yabai -m config window_gap 8
 yabai -m config external_bar main:"$BAR_HEIGHT":0
 
