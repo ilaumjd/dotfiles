@@ -22,3 +22,5 @@ abbr tls='tmux list-sessions'
 abbr rm=trash
 
 abbr cd=z
+
+abbr b='buku --suggest'
