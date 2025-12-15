@@ -3,6 +3,7 @@
 tap "koekeishiya/formulae"
 tap "felixkratz/formulae"
 tap "sst/tap"
+tap "sadiksaifi/mac-menu", "https://github.com/sadiksaifi/mac-menu"
 
 ########################### FONTS ###########################
 
@@ -68,7 +69,7 @@ brew "yabai"
 brew "skhd"
 brew "borders"
 brew "sketchybar"
-brew "choose-gui"
+brew "mac-menu"
 
 # Desktop App
 cask "ente-auth"
