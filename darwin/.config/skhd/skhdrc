@@ -31,4 +31,4 @@ ctrl + shift - 0 : yabai -m window --space 10 --focus
 
 cmd - 0x2A : ~/.config/skhd/toggle-menubar.sh
 
-cmd + shift - b : ~/.config/skhd/choose-buku.sh
+cmd + shift - b : ~/.config/skhd/buku-picker.sh

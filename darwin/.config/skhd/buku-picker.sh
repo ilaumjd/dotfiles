@@ -11,7 +11,7 @@ menu=$(
     '
 )
 
-selection=$(printf "%s\n" "$menu" | choose)
+selection=$(printf "%s\n" "$menu" | mac-menu)
 [ -z "$selection" ] && exit 0
 
 uri="${selection##* | }"
