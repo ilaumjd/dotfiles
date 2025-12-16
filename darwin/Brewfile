@@ -16,7 +16,6 @@ cask "sf-symbols"
 # Terminal App
 cask "ghostty"
 cask "wezterm@nightly"
-cask "vimr"
 
 # Vim
 brew "vim"
@@ -55,6 +54,7 @@ brew "ffmpeg"
 brew "htop"
 brew "imagemagick"
 brew "jwt-cli"
+brew "mdbook"
 brew "mise"
 brew "wget"
 brew "uv"
