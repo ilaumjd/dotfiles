@@ -1,6 +1,6 @@
 ########################### TAPS ###########################
 
-tap "koekeishiya/formulae"
+tap "asmvik/formulae"
 tap "felixkratz/formulae"
 tap "sst/tap"
 tap "sadiksaifi/mac-menu", "https://github.com/sadiksaifi/mac-menu"
