@@ -61,6 +61,7 @@ return {
         linebreak = true,
         scrolloff = 5,
         sidescrolloff = 8,
+        winborder = "none",
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)

@@ -15,5 +15,8 @@ return {
         scope_incremental = false,
       },
     }
+    opts.ignore_install = {
+      "swift",
+    }
   end,
 }
