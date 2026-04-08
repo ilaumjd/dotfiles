@@ -17,6 +17,8 @@ return {
       notifications = true,
     },
     treesitter = {
+      highlight = true,
+      ensure_installed = { "vim", "lua" },
       auto_install = true,
     },
     diagnostics = {
