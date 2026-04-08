@@ -92,6 +92,14 @@ return {
           end,
           desc = "Toggle macro recording",
         },
+
+        ["<Enter>"] = {
+          function()
+            vim.cmd "normal v"
+            vim.lsp.buf.selection_range(vim.v.count1)
+          end,
+          desc = "Start visual and expand treesitter selection",
+        },
       },
 
       x = {
@@ -99,6 +107,15 @@ return {
         ["J"] = { ":move '>+1<CR>gv-gv", desc = "Move selected text down" },
         ["K"] = { ":move '<-2<CR>gv-gv", desc = "Move selected text up" },
         ["L"] = { ">gv", desc = "Increase indent tab" },
+
+        ["<Enter>"] = {
+          function() vim.lsp.buf.selection_range(vim.v.count1) end,
+          desc = "Treesitter expand selection",
+        },
+        ["<Backspace>"] = {
+          function() vim.lsp.buf.selection_range(-vim.v.count1) end,
+          desc = "Treesitter shrink selection",
+        },
       },
     },
   },
