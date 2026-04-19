@@ -2,8 +2,8 @@
 
 tap "asmvik/formulae"
 tap "felixkratz/formulae"
-tap "sst/tap"
-tap "sadiksaifi/mac-menu", "https://github.com/sadiksaifi/mac-menu"
+tap "anomalyco/tap"
+tap "sadiksaifi/tap"
 
 ########################### FONTS ###########################
 
@@ -66,7 +66,7 @@ brew "yazi"
 ########################### DESKTOP ###########################
 
 # Desktop Workflow
-brew "yabai"
+brew "local/yabai/yabai"
 brew "skhd"
 brew "borders"
 brew "sketchybar"
@@ -95,8 +95,9 @@ cask "zed"
 
 # AI
 cask "claude-code"
-brew "gemini-cli"
 brew "opencode"
+cask "opencode-desktop"
+brew "pi-coding-agent"
 
 # Xcode
 brew "cocoapods"
