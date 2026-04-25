@@ -69,8 +69,8 @@
     "syntaxPunctuation": "text_inactive",
     "thinkingOff": "comment",
     "thinkingMinimal": "accent_blue",
-    "thinkingLow": "syntax_blue",
-    "thinkingMedium": "syntax_cyan",
+    "thinkingLow": "syntax_cyan",
+    "thinkingMedium": "syntax_yellow",
     "thinkingHigh": "syntax_purple",
     "thinkingXhigh": "syntax_red",
     "bashMode": "syntax_orange"
