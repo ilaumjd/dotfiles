@@ -76,12 +76,12 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		const modelShort = shortModelName(modelId);
 		const provider = (ctx.model as any)?.provider;
 
-		let modelStr = provider ? `${modelShort} (${provider})` : modelShort;
+		let modelStr = provider ? `󰚩 ${modelShort} (${provider})` : `󰚩 ${modelShort}`;
 
 		// Thinking level (if model supports reasoning)
 		const thinkingLevel = pi.getThinkingLevel();
 		if (thinkingLevel && thinkingLevel !== "off") {
-			modelStr += ` • ${thinkingLevel}`;
+			modelStr += `  ${thinkingLevel}`;
 		}
 
 		// Git branch
@@ -90,7 +90,7 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		// --- LEFT: identity ---
 		const leftParts: string[] = [];
 		if (modeBadge) leftParts.push(modeBadge);
-		if (branch) leftParts.push(`(${branch})`);
+		if (branch) leftParts.push(` ${branch}`);
 		leftParts.push(modelStr);
 
 		const leftStr = leftParts.join("  ");
@@ -98,11 +98,11 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		// --- RIGHT: stats + other statuses ---
 		const rightParts: string[] = [];
 
-		// Token stats
-		if (totalInput > 0) rightParts.push(`↑${fmtTok(totalInput)}`);
-		if (totalOutput > 0) rightParts.push(`↓${fmtTok(totalOutput)}`);
-		if (totalCacheRead > 0) rightParts.push(`R${fmtTok(totalCacheRead)}`);
-		if (totalCost > 0) rightParts.push(`$${totalCost.toFixed(3)}`);
+		// Token stats with icons
+		if (totalInput > 0) rightParts.push(` ${fmtTok(totalInput)}`);
+		if (totalOutput > 0) rightParts.push(` ${fmtTok(totalOutput)}`);
+		if (totalCacheRead > 0) rightParts.push(`󰃨 ${fmtTok(totalCacheRead)}`);
+		if (totalCost > 0) rightParts.push(` ${totalCost.toFixed(3)}`);
 
 		// Other extension statuses (plannotator, etc.)
 		if (otherStatuses) {
