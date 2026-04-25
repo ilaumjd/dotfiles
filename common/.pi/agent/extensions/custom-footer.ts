@@ -111,29 +111,34 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 			rightParts.push(otherStatuses);
 		}
 
-		const rightStr = rightParts.join("  ");
+		const rightStr = rightParts.join(" ");
 
-		// Assemble with right-align
+		// Margins
+		const margin = 2;
+		const contentWidth = Math.max(0, width - margin * 2);
+
+		// Assemble with right-align (within content width)
 		const leftW = visibleWidth(leftStr);
 		const rightW = visibleWidth(rightStr);
 		const minPad = 2;
 
 		let line: string;
-		if (leftW + minPad + rightW <= width) {
-			const pad = " ".repeat(width - leftW - rightW);
+		if (leftW + minPad + rightW <= contentWidth) {
+			const pad = " ".repeat(contentWidth - leftW - rightW);
 			line = leftStr + pad + theme.fg("dim", rightStr);
-		} else if (rightW + minPad < width) {
+		} else if (rightW + minPad < contentWidth) {
 			// Truncate left to fit right side
-			const maxLeft = width - rightW - minPad;
+			const maxLeft = contentWidth - rightW - minPad;
 			const leftTrunc = truncateToWidth(leftStr, maxLeft, "");
-			const pad = " ".repeat(width - visibleWidth(leftTrunc) - rightW);
+			const pad = " ".repeat(contentWidth - visibleWidth(leftTrunc) - rightW);
 			line = leftTrunc + pad + theme.fg("dim", rightStr);
 		} else {
 			// Not enough room for right side, just left
-			line = truncateToWidth(leftStr, width, "");
+			line = truncateToWidth(leftStr, contentWidth, "");
 		}
 
-		return [truncateToWidth(line, width)];
+		const finalLine = " ".repeat(margin) + line + " ".repeat(margin);
+		return [truncateToWidth(finalLine, width)];
 	}
 
 	pi.registerCommand("footer", {
