@@ -1,5 +1,8 @@
 import type { AssistantMessage } from "@mariozechner/pi-ai";
-import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-agent";
+import type {
+	ExtensionAPI,
+	ExtensionContext,
+} from "@mariozechner/pi-coding-agent";
 import { truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
 
 /**
@@ -30,7 +33,7 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 
 			return {
 				dispose: unsubBranch,
-				invalidate() {},
+				invalidate() { },
 				render(width: number): string[] {
 					return renderFooter(ctx, theme, footerData, width);
 				},
@@ -76,14 +79,6 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		const modelShort = shortModelName(modelId);
 		const provider = (ctx.model as any)?.provider;
 
-		let modelStr = provider ? `󰚩 ${modelShort} (${provider})` : `󰚩 ${modelShort}`;
-
-		// Thinking level (if model supports reasoning)
-		const thinkingLevel = pi.getThinkingLevel();
-		if (thinkingLevel && thinkingLevel !== "off") {
-			modelStr += `  ${thinkingLevel}`;
-		}
-
 		// Git branch
 		const branch = footerData.getGitBranch();
 
@@ -91,7 +86,14 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		const leftParts: string[] = [];
 		if (modeBadge) leftParts.push(modeBadge);
 		if (branch) leftParts.push(` ${branch}`);
-		leftParts.push(modelStr);
+		leftParts.push(`󰚩 ${modelShort}`);
+		if (provider) leftParts.push(`󰊗 ${provider}`);
+
+		// Thinking level (if model supports reasoning)
+		const thinkingLevel = pi.getThinkingLevel();
+		if (thinkingLevel && thinkingLevel !== "off") {
+			leftParts.push(` ${thinkingLevel}`);
+		}
 
 		const leftStr = leftParts.join("  ");
 

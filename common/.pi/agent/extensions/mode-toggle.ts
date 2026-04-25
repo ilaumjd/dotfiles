@@ -158,9 +158,9 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 
 	function updateStatus(ctx: ExtensionContext): void {
 		if (readModeEnabled) {
-			ctx.ui.setStatus("mode", ctx.ui.theme.fg("warning", " READ "));
+			ctx.ui.setStatus("mode", ctx.ui.theme.fg("warning", "READ"));
 		} else {
-			ctx.ui.setStatus("mode", ctx.ui.theme.fg("success", " WRITE "));
+			ctx.ui.setStatus("mode", ctx.ui.theme.fg("success", "WRITE"));
 		}
 	}
 
