@@ -185,16 +185,18 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 	});
 
 	// Block non-safe bash commands in read mode
-	pi.on("tool_call", async (event) => {
+	pi.on("tool_call", async (event, ctx) => {
 		if (!readModeEnabled || event.toolName !== "bash") return;
 
 		const cmd = (event.input as { command?: string }).command || "";
 
 		if (!isSafeCommand(cmd)) {
+			const warning = ctx.ui.theme.fg("warning", "[WARNING]");
+			ctx.ui.notify("Command blocked: read mode is active", "warning");
 			return {
 				block: true,
 				reason:
-					"Read mode: command blocked (not allowlisted). Hit tab for write mode.",
+					`${warning} Read mode: command blocked (not allowlisted). Hit tab for write mode.`,
 			};
 		}
 	});
