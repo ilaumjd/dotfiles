@@ -1,0 +1,21 @@
+{
+  "defaultPlacement": "belowEditor",
+  "commands": {
+    "file": {
+      "list": "fd",
+      "action": "{{selected}}",
+      "shortcut": "ctrl+f",
+      "hideHeader": true,
+      "multiSelect": true
+    },
+    "file-preview": {
+      "list": "fd",
+      "action": "{{selected}}",
+      "shortcut": "ctrl+shift+f",
+      "hideHeader": true,
+      "multiSelect": true,
+      "preview": "bat --style=numbers --color=always {{selected}} 2>/dev/null || cat {{selected}}",
+      "placement": "overlay"
+    }
+  }
+}
