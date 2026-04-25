@@ -64,76 +64,12 @@ const SAFE_PATTERNS = [
 	/^\s*eza\b/,
 ];
 
-// Always blocked — no exceptions (not even in /tmp)
-const ALWAYS_BLOCKED = [
-	/[;&`\n]/, // shell metacharacters
-	/>{1,2}/, // redirects
-	/\brm\b/i,
-	/\brmdir\b/i,
-	/\bchmod\b/i,
-	/\bchown\b/i,
-	/\bchgrp\b/i,
-	/\btee\b/i,
-	/\btruncate\b/i,
-	/\bdd\b/i,
-	/\bshred\b/i,
-	/\bsudo\b/i,
-	/\bsu\b/i,
-	/\bkill\b/i,
-	/\bpkill\b/i,
-	/\bkillall\b/i,
-	/\breboot\b/i,
-	/\bshutdown\b/i,
-	/\bsystemctl\s+(start|stop|restart|enable|disable)/i,
-	/\bservice\s+\S+\s+(start|stop|restart)/i,
-	/\b(vim?|nano|emacs|code|subl)\b/i,
-];
-
-// Allowed in /tmp without AI review
-const TMP_ALLOWED = [
-	/\bcp\b/i,
-	/\bmkdir\b/i,
-	/\btouch\b/i,
-	/\bln\b/i,
-	/\bgit\s+clone\b/i,
-	/\bgit\s+init\b/i,
-	/\bnpm\s+(install|ci)\b/i,
-	/\byarn\s+(install|add)\b/i,
-	/\bpnpm\s+(install|add)\b/i,
-	/\bpip\s+install\b/i,
-	/\bcurl\b/i,
-	/\bwget\b/i,
-	/\bapt(-get)?\s+(install|update)\b/i,
-	/\bbrew\s+(install|upgrade)\b/i,
-];
-
-function isOperatingInTmp(command: string): boolean {
-	return /\b(\/tmp|\/var\/tmp|\$TMPDIR)\b/.test(command);
-}
-
-function isBlocked(command: string): { blocked: boolean; reason?: string } {
-	for (const pattern of ALWAYS_BLOCKED) {
-		if (pattern.test(command)) {
-			return {
-				blocked: true,
-				reason: "Destructive construct blocked in read mode",
-			};
-		}
-	}
-	return { blocked: false };
-}
-
 function isWhitelisted(command: string): boolean {
 	const trimmed = command
 		.trim()
 		.replace(/\\\n\s*/g, "")
 		.replace(/\n\s*/g, " ");
 	return SAFE_PATTERNS.some((p) => p.test(trimmed));
-}
-
-function isTmpAllowed(command: string): boolean {
-	if (!isOperatingInTmp(command)) return false;
-	return TMP_ALLOWED.some((p) => p.test(command));
 }
 
 function getBashOverride(entries: any[], command: string): boolean {
@@ -304,20 +240,10 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 			const entries = ctx.sessionManager.getEntries();
 			if (getBashOverride(entries, cmd)) return;
 
-			// Always-blocked constructs (redirects, rm, sudo, editors)
-			const blocked = isBlocked(cmd);
-			if (blocked.blocked) {
-				ctx.ui.notify("Command blocked: read mode is active", "warning");
-				return { block: true, reason: blocked.reason };
-			}
-
-			// Whitelisted safe commands
+			// Whitelisted safe commands — allow immediately
 			if (isWhitelisted(cmd)) return;
 
-			// /tmp exception
-			if (isTmpAllowed(cmd)) return;
-
-			// AI review for unknown commands
+			// Everything else goes through AI review
 			const review = await reviewWithAI(cmd, ctx);
 			if (review.allow) return;
 
