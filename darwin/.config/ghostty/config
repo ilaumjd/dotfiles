@@ -7,7 +7,7 @@ copy-on-select = false
 cursor-style = block
 cursor-style-blink = false
 focus-follows-mouse = true
-font-family = Fira Code Nerd Font
+font-family = Fira Code Nerd Font Mono
 font-size = 14
 gtk-titlebar = false
 keybind = cmd+s>r=reload_config
