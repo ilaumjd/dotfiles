@@ -22,7 +22,21 @@ function shortModelName(id: string): string {
 }
 
 export default function customFooterExtension(pi: ExtensionAPI): void {
-	let enabled = false;
+	let enabled = true;
+
+	function setCustomFooter(ctx: ExtensionContext): void {
+		ctx.ui.setFooter((tui, theme, footerData) => {
+			const unsubBranch = footerData.onBranchChange(() => tui.requestRender());
+
+			return {
+				dispose: unsubBranch,
+				invalidate() {},
+				render(width: number): string[] {
+					return renderFooter(ctx, theme, footerData, width);
+				},
+			};
+		});
+	}
 
 	function renderFooter(
 		ctx: ExtensionContext,
@@ -114,22 +128,19 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 			enabled = !enabled;
 
 			if (enabled) {
-				ctx.ui.setFooter((tui, theme, footerData) => {
-					const unsubBranch = footerData.onBranchChange(() => tui.requestRender());
-
-					return {
-						dispose: unsubBranch,
-						invalidate() {},
-						render(width: number): string[] {
-							return renderFooter(ctx, theme, footerData, width);
-						},
-					};
-				});
+				setCustomFooter(ctx);
 				ctx.ui.notify("Custom footer enabled", "success");
 			} else {
 				ctx.ui.setFooter(undefined);
 				ctx.ui.notify("Default footer restored", "info");
 			}
 		},
+	});
+
+	// Auto-enable on session start
+	pi.on("session_start", async (_event, ctx) => {
+		if (enabled) {
+			setCustomFooter(ctx);
+		}
 	});
 }
