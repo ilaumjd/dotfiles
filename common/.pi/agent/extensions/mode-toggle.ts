@@ -4,10 +4,10 @@ import type {
 } from "@mariozechner/pi-coding-agent";
 
 // Tools available in each mode
-const PLAN_TOOLS = ["read", "bash", "grep", "find", "ls"];
-const BUILD_TOOLS = ["read", "bash", "edit", "write", "grep", "find", "ls"];
+const READ_TOOLS = ["read", "bash", "grep", "find", "ls"];
+const WRITE_TOOLS = ["read", "bash", "edit", "write", "grep", "find", "ls"];
 
-// Destructive bash commands blocked in plan mode
+// Destructive bash commands blocked in read mode
 const DESTRUCTIVE_PATTERNS = [
 	/\brm\b/i,
 	/\brmdir\b/i,
@@ -44,7 +44,7 @@ const DESTRUCTIVE_PATTERNS = [
 	/\b(vim?|nano|emacs|code|subl)\b/i,
 ];
 
-// Safe read-only bash commands allowed in plan mode
+// Safe read-only bash commands allowed in read mode
 const SAFE_PATTERNS = [
 	/^\s*cat\b/,
 	/^\s*head\b/,
@@ -105,10 +105,10 @@ function isSafeCommand(command: string): boolean {
 }
 
 // System reminder messages injected into session history
-const PLAN_ENTER_MESSAGE = `<system-reminder>
-# Plan Mode
+const READ_ENTER_MESSAGE = `<system-reminder>
+# Read Mode
 
-CRITICAL: Plan mode ON. Read-only.
+CRITICAL: Read mode ON. Read-only.
 
 FORBIDDEN:
 - edit, write tools = removed
@@ -126,19 +126,19 @@ ALLOWED bash:
 ## Rules
 
 1. Blocked command = STOP. NO retry. NO "let me try again". NO thinking about workarounds.
-2. User say "yes"/"ok"/"do it" = NOT auto-switch. Plan mode stay ON.
-3. Need edits? Tell user: "Plan mode on. Hit tab for build mode." Then stop.
+2. User say "yes"/"ok"/"do it" = NOT auto-switch. Read mode stay ON.
+3. Need edits? Tell user: "Read mode on. Hit tab for write mode." Then stop.
 4. No exceptions. No assumptions.
 
 Task: Think. Read. Search. Plan. Ask questions. No execute.
 </system-reminder>`;
 
-const PLAN_EXIT_MESSAGE = `<system-reminder>
-Plan mode OFF. Build mode ON. Edit files. Run commands. Use all tools.
+const WRITE_ENTER_MESSAGE = `<system-reminder>
+Read mode OFF. Write mode ON. Edit files. Run commands. Use all tools.
 </system-reminder>`;
 
-export default function planModeToggleExtension(pi: ExtensionAPI): void {
-	let planModeEnabled = false;
+export default function modeToggleExtension(pi: ExtensionAPI): void {
+	let readModeEnabled = false;
 	let lastMessagedState: boolean | null = null;
 
 	function getLastMessagedStateFromSession(
@@ -149,30 +149,30 @@ export default function planModeToggleExtension(pi: ExtensionAPI): void {
 			const entry = entries[i];
 			if (entry.type === "custom_message") {
 				const customEntry = entry as { customType?: string };
-				if (customEntry.customType === "plan-mode-enter") return true;
-				if (customEntry.customType === "plan-mode-exit") return false;
+				if (customEntry.customType === "mode-enter:read") return true;
+				if (customEntry.customType === "mode-enter:write") return false;
 			}
 		}
 		return null;
 	}
 
 	function updateStatus(ctx: ExtensionContext): void {
-		if (planModeEnabled) {
-			ctx.ui.setStatus("plan-mode", ctx.ui.theme.fg("warning", "⏸ plan"));
+		if (readModeEnabled) {
+			ctx.ui.setStatus("mode", ctx.ui.theme.bg("toolPendingBg", " READ "));
 		} else {
-			ctx.ui.setStatus("plan-mode", ctx.ui.theme.fg("success", "🔨 build"));
+			ctx.ui.setStatus("mode", ctx.ui.theme.bg("toolSuccessBg", " WRITE "));
 		}
 	}
 
-	function togglePlanMode(ctx: ExtensionContext): void {
-		planModeEnabled = !planModeEnabled;
+	function toggleReadWriteMode(ctx: ExtensionContext): void {
+		readModeEnabled = !readModeEnabled;
 
-		if (planModeEnabled) {
-			pi.setActiveTools(PLAN_TOOLS);
-			ctx.ui.notify("Plan mode enabled. Read-only.", "warning");
+		if (readModeEnabled) {
+			pi.setActiveTools(READ_TOOLS);
+			ctx.ui.notify("Read mode enabled. Read-only.", "warning");
 		} else {
-			pi.setActiveTools(BUILD_TOOLS);
-			ctx.ui.notify("Build mode enabled. Full access.", "success");
+			pi.setActiveTools(WRITE_TOOLS);
+			ctx.ui.notify("Write mode enabled. Full access.", "success");
 		}
 
 		updateStatus(ctx);
@@ -180,15 +180,15 @@ export default function planModeToggleExtension(pi: ExtensionAPI): void {
 
 	// Register tab shortcut
 	pi.registerShortcut("tab", {
-		description: "Toggle plan/build mode",
+		description: "Toggle read/write mode",
 		handler: async (ctx) => {
-			togglePlanMode(ctx);
+			toggleReadWriteMode(ctx);
 		},
 	});
 
-	// Block non-safe bash commands in plan mode
+	// Block non-safe bash commands in read mode
 	pi.on("tool_call", async (event) => {
-		if (!planModeEnabled || event.toolName !== "bash") return;
+		if (!readModeEnabled || event.toolName !== "bash") return;
 
 		const cmd = (event.input as { command?: string }).command || "";
 
@@ -196,30 +196,30 @@ export default function planModeToggleExtension(pi: ExtensionAPI): void {
 			return {
 				block: true,
 				reason:
-					"Plan mode: command blocked (not allowlisted). Hit tab for build mode.",
+					"Read mode: command blocked (not allowlisted). Hit tab for write mode.",
 			};
 		}
 	});
 
-	// Inject plan mode messages into LLM context when state changes
+	// Inject read mode messages into LLM context when state changes
 	pi.on("before_agent_start", async () => {
-		if (planModeEnabled && lastMessagedState !== true) {
+		if (readModeEnabled && lastMessagedState !== true) {
 			lastMessagedState = true;
 			return {
 				message: {
-					customType: "plan-mode-enter",
-					content: PLAN_ENTER_MESSAGE,
+					customType: "mode-enter:read",
+					content: READ_ENTER_MESSAGE,
 					display: false,
 				},
 			};
 		}
 
-		if (!planModeEnabled && lastMessagedState === true) {
+		if (!readModeEnabled && lastMessagedState === true) {
 			lastMessagedState = false;
 			return {
 				message: {
-					customType: "plan-mode-exit",
-					content: PLAN_EXIT_MESSAGE,
+					customType: "mode-enter:write",
+					content: WRITE_ENTER_MESSAGE,
 					display: false,
 				},
 			};
@@ -230,11 +230,11 @@ export default function planModeToggleExtension(pi: ExtensionAPI): void {
 	pi.on("session_start", async (_event, ctx) => {
 		lastMessagedState = getLastMessagedStateFromSession(ctx);
 		if (lastMessagedState === true) {
-			planModeEnabled = true;
-			pi.setActiveTools(PLAN_TOOLS);
+			readModeEnabled = true;
+			pi.setActiveTools(READ_TOOLS);
 		} else {
-			planModeEnabled = false;
-			pi.setActiveTools(BUILD_TOOLS);
+			readModeEnabled = false;
+			pi.setActiveTools(WRITE_TOOLS);
 		}
 		updateStatus(ctx);
 	});
@@ -243,11 +243,11 @@ export default function planModeToggleExtension(pi: ExtensionAPI): void {
 	pi.on("session_switch", async (_event, ctx) => {
 		lastMessagedState = getLastMessagedStateFromSession(ctx);
 		if (lastMessagedState === true) {
-			planModeEnabled = true;
-			pi.setActiveTools(PLAN_TOOLS);
+			readModeEnabled = true;
+			pi.setActiveTools(READ_TOOLS);
 		} else {
-			planModeEnabled = false;
-			pi.setActiveTools(BUILD_TOOLS);
+			readModeEnabled = false;
+			pi.setActiveTools(WRITE_TOOLS);
 		}
 		updateStatus(ctx);
 	});
