@@ -8,3 +8,10 @@ foo.*
 data
 lazy-lock.json
 .DS_Store
+
+# Pi coding agent — local only
+common/.pi/agent/auth.json
+common/.pi/agent/settings.json
+common/.pi/agent/sessions/
+common/.pi/agent/sessions/**
+common/.pi/web-search.json
