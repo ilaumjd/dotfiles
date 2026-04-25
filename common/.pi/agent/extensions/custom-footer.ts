@@ -60,17 +60,22 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 			}
 		}
 
-		// Mode badge from extension statuses (e.g. mode-toggle.ts)
+		// ALL extension statuses (mode-toggle, plannotator, etc.)
 		const statuses = footerData.getExtensionStatuses();
 		const modeBadge = statuses.get("mode") || "";
+
+		// Other statuses (plannotator, etc.) — sorted alphabetically like pi's built-in
+		const otherStatuses = Array.from(statuses.entries())
+			.filter(([key]) => key !== "mode")
+			.sort(([a], [b]) => a.localeCompare(b))
+			.map(([, text]) => text)
+			.join("  ");
 
 		// Model info with provider (matches pi's format)
 		const modelId = ctx.model?.id || "no-model";
 		const modelShort = shortModelName(modelId);
 		const provider = (ctx.model as any)?.provider;
 
-		// Pi shows provider in parens before model when multiple providers available
-		// For simplicity, always show: model (provider)
 		let modelStr = provider ? `${modelShort} (${provider})` : modelShort;
 
 		// Thinking level (if model supports reasoning)
@@ -90,32 +95,39 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 
 		const leftStr = leftParts.join("  ");
 
-		// --- RIGHT: stats (same format as pi default) ---
-		const statParts: string[] = [];
-		if (totalInput > 0) statParts.push(`↑${fmtTok(totalInput)}`);
-		if (totalOutput > 0) statParts.push(`↓${fmtTok(totalOutput)}`);
-		if (totalCacheRead > 0) statParts.push(`R${fmtTok(totalCacheRead)}`);
-		if (totalCost > 0) statParts.push(`$${totalCost.toFixed(3)}`);
+		// --- RIGHT: stats + other statuses ---
+		const rightParts: string[] = [];
 
-		const statsStr = statParts.join(" ");
+		// Token stats
+		if (totalInput > 0) rightParts.push(`↑${fmtTok(totalInput)}`);
+		if (totalOutput > 0) rightParts.push(`↓${fmtTok(totalOutput)}`);
+		if (totalCacheRead > 0) rightParts.push(`R${fmtTok(totalCacheRead)}`);
+		if (totalCost > 0) rightParts.push(`$${totalCost.toFixed(3)}`);
+
+		// Other extension statuses (plannotator, etc.)
+		if (otherStatuses) {
+			rightParts.push(otherStatuses);
+		}
+
+		const rightStr = rightParts.join("  ");
 
 		// Assemble with right-align
 		const leftW = visibleWidth(leftStr);
-		const statsW = visibleWidth(statsStr);
+		const rightW = visibleWidth(rightStr);
 		const minPad = 2;
 
 		let line: string;
-		if (leftW + minPad + statsW <= width) {
-			const pad = " ".repeat(width - leftW - statsW);
-			line = leftStr + pad + theme.fg("dim", statsStr);
-		} else if (statsW + minPad < width) {
-			// Truncate left to fit stats
-			const maxLeft = width - statsW - minPad;
+		if (leftW + minPad + rightW <= width) {
+			const pad = " ".repeat(width - leftW - rightW);
+			line = leftStr + pad + theme.fg("dim", rightStr);
+		} else if (rightW + minPad < width) {
+			// Truncate left to fit right side
+			const maxLeft = width - rightW - minPad;
 			const leftTrunc = truncateToWidth(leftStr, maxLeft, "");
-			const pad = " ".repeat(width - visibleWidth(leftTrunc) - statsW);
-			line = leftTrunc + pad + theme.fg("dim", statsStr);
+			const pad = " ".repeat(width - visibleWidth(leftTrunc) - rightW);
+			line = leftTrunc + pad + theme.fg("dim", rightStr);
 		} else {
-			// No room for stats, just left
+			// Not enough room for right side, just left
 			line = truncateToWidth(leftStr, width, "");
 		}
 
