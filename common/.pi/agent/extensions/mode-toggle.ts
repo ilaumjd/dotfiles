@@ -140,7 +140,7 @@ Read mode OFF. Write mode ON. Edit files. Run commands. Use all tools.
 </system-reminder>`;
 
 export default function modeToggleExtension(pi: ExtensionAPI): void {
-	let readModeEnabled = false;
+	let readModeEnabled = true;
 	let lastMessagedState: boolean | null = null;
 
 	function getLastMessagedStateFromSession(
@@ -239,9 +239,14 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 		if (lastMessagedState === true) {
 			readModeEnabled = true;
 			pi.setActiveTools(READ_TOOLS);
-		} else {
+		} else if (lastMessagedState === false) {
 			readModeEnabled = false;
 			pi.setActiveTools(WRITE_TOOLS);
+		} else {
+			// null = new session, default to READ mode
+			readModeEnabled = true;
+			pi.setActiveTools(READ_TOOLS);
+			lastMessagedState = true;
 		}
 		updateStatus(ctx);
 	});
@@ -252,9 +257,14 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 		if (lastMessagedState === true) {
 			readModeEnabled = true;
 			pi.setActiveTools(READ_TOOLS);
-		} else {
+		} else if (lastMessagedState === false) {
 			readModeEnabled = false;
 			pi.setActiveTools(WRITE_TOOLS);
+		} else {
+			// null = new session, default to READ mode
+			readModeEnabled = true;
+			pi.setActiveTools(READ_TOOLS);
+			lastMessagedState = true;
 		}
 		updateStatus(ctx);
 	});
