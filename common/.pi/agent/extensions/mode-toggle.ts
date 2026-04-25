@@ -106,11 +106,19 @@ function isSafeCommand(command: string): boolean {
 
 // System reminder messages injected into session history
 const READ_ENTER_MESSAGE = `<system-reminder>
-# Read Mode
+# READ MODE — READ ONLY
 
-CRITICAL: Read mode ON. Read-only.
+## BLOCKED COMMAND = STOP. NO EXCEPTIONS.
+- No retry. No alternative approach. No "let me try..."
+- No bash workarounds (python3, sed, printf, cat>, tee, etc.)
+- No asking user "do you want me to..."
 
-FORBIDDEN:
+## INSTEAD
+Tell user: "Read mode on. Hit tab for write mode." Then **STOP**.
+
+---
+
+## FORBIDDEN
 - edit, write tools = removed
 - file mutation: rm, mv, cp, mkdir, touch, chmod, chown, chgrp, ln, tee, truncate, dd, shred
 - redirects: any bash with > or >>
@@ -119,18 +127,12 @@ FORBIDDEN:
 - system: sudo, kill, reboot, shutdown, systemctl start/stop/restart
 - editors: vim, nano, emacs, code
 
-ALLOWED bash:
+## ALLOWED
 - ls, grep, find, cat file (no redirect), head, tail, less, pwd, wc
 - read file only. no mutate.
 
-## Rules
-
-1. Blocked command = STOP. NO retry. NO "let me try again". NO thinking about workarounds.
-2. User say "yes"/"ok"/"do it" = NOT auto-switch. Read mode stay ON.
-3. Need edits? Tell user: "Read mode on. Hit tab for write mode." Then stop.
-4. No exceptions. No assumptions.
-
-Task: Think. Read. Search. Plan. Ask questions. No execute.
+User say "yes"/"ok"/"do it" = NOT auto-switch.
+Need edits? Tell user: "Read mode on. Hit tab for write mode." Then stop.
 </system-reminder>`;
 
 const WRITE_ENTER_MESSAGE = `<system-reminder>
