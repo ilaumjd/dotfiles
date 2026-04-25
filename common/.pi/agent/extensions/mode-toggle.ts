@@ -158,9 +158,9 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 
 	function updateStatus(ctx: ExtensionContext): void {
 		if (readModeEnabled) {
-			ctx.ui.setStatus("mode", ctx.ui.theme.bg("toolPendingBg", " READ "));
+			ctx.ui.setStatus("mode", ctx.ui.theme.fg("warning", " READ "));
 		} else {
-			ctx.ui.setStatus("mode", ctx.ui.theme.bg("toolSuccessBg", " WRITE "));
+			ctx.ui.setStatus("mode", ctx.ui.theme.fg("success", " WRITE "));
 		}
 	}
 
@@ -169,10 +169,8 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 
 		if (readModeEnabled) {
 			pi.setActiveTools(READ_TOOLS);
-			ctx.ui.notify("Read mode enabled. Read-only.", "warning");
 		} else {
 			pi.setActiveTools(WRITE_TOOLS);
-			ctx.ui.notify("Write mode enabled. Full access.", "success");
 		}
 
 		updateStatus(ctx);
