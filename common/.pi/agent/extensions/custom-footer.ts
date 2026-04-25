@@ -16,14 +16,6 @@ function fmtTok(n: number): string {
 	return `${Math.round(n / 1000000)}M`;
 }
 
-function shortModelName(id: string): string {
-	return id
-		.replace(/^(claude-3-|gpt-4-|gpt-3\.5-)/, "")
-		.replace(/-\d{8}$/, "")
-		.replace(/-latest$/, "")
-		.replace(/-\d{4}$/, "");
-}
-
 export default function customFooterExtension(pi: ExtensionAPI): void {
 	let enabled = true;
 
@@ -72,22 +64,20 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 			.filter(([key]) => key !== "mode")
 			.sort(([a], [b]) => a.localeCompare(b))
 			.map(([, text]) => text)
-			.join("  ");
+			.join(" ");
 
 		// Model info with provider (matches pi's format)
 		const modelId = ctx.model?.id || "no-model";
-		const modelShort = shortModelName(modelId);
+		const modelName = modelId;
 		const provider = (ctx.model as any)?.provider;
 
 		// Git branch
 		const branch = footerData.getGitBranch();
-
-		// --- LEFT: identity ---
 		const leftParts: string[] = [];
 		if (modeBadge) leftParts.push(modeBadge);
-		if (branch) leftParts.push(` ${branch}`);
-		leftParts.push(`󰚩 ${modelShort}`);
-		if (provider) leftParts.push(`󰊗 ${provider}`);
+		if (branch) leftParts.push(`󰘬 ${branch}`);
+		leftParts.push(` ${modelName}`);
+		if (provider) leftParts.push(` ${provider}`);
 
 		// Thinking level (if model supports reasoning)
 		const thinkingLevel = pi.getThinkingLevel();
@@ -103,7 +93,7 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		// Token stats with icons
 		if (totalInput > 0) rightParts.push(` ${fmtTok(totalInput)}`);
 		if (totalOutput > 0) rightParts.push(` ${fmtTok(totalOutput)}`);
-		if (totalCacheRead > 0) rightParts.push(`󰃨 ${fmtTok(totalCacheRead)}`);
+		if (totalCacheRead > 0) rightParts.push(` ${fmtTok(totalCacheRead)}`);
 		if (totalCost > 0) rightParts.push(` ${totalCost.toFixed(3)}`);
 
 		// Other extension statuses (plannotator, etc.)
@@ -111,7 +101,7 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 			rightParts.push(otherStatuses);
 		}
 
-		const rightStr = rightParts.join(" ");
+		const rightStr = rightParts.join("  ");
 
 		// Margins
 		const margin = 2;
