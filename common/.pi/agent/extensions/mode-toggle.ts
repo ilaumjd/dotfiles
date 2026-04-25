@@ -186,20 +186,25 @@ export default function modeToggleExtension(pi: ExtensionAPI): void {
 		},
 	});
 
-	// Block non-safe bash commands in read mode
+	const BLOCK_REASON =
+		"BLOCKED — read mode active. STOP. Do not retry with a different command. Do not try edit, write, bash, or any other tool to modify files. ALL modifications are disabled. Tell user: \"Read mode is on. Press tab for write mode.\" Then STOP. No further tool calls.";
+
+	// Block write tools and non-safe bash commands in read mode
 	pi.on("tool_call", async (event, ctx) => {
-		if (!readModeEnabled || event.toolName !== "bash") return;
+		if (!readModeEnabled) return;
 
-		const cmd = (event.input as { command?: string }).command || "";
-
-		if (!isSafeCommand(cmd)) {
-			const warning = ctx.ui.theme.fg("warning", "[WARNING]");
+		// Block edit/write even if LLM hallucinates them
+		if (event.toolName === "edit" || event.toolName === "write") {
 			ctx.ui.notify("Command blocked: read mode is active", "warning");
-			return {
-				block: true,
-				reason:
-					`${warning} Read mode: command blocked (not allowlisted). Hit tab for write mode.`,
-			};
+			return { block: true, reason: BLOCK_REASON };
+		}
+
+		if (event.toolName === "bash") {
+			const cmd = (event.input as { command?: string }).command || "";
+			if (!isSafeCommand(cmd)) {
+				ctx.ui.notify("Command blocked: read mode is active", "warning");
+				return { block: true, reason: BLOCK_REASON };
+			}
 		}
 	});
 
