@@ -55,13 +55,9 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 			}
 		}
 
-		// ALL extension statuses (mode-toggle, plannotator, etc.)
+		// ALL extension statuses
 		const statuses = footerData.getExtensionStatuses();
-		const modeBadge = statuses.get("mode") || "";
-
-		// Other statuses (plannotator, etc.) — sorted alphabetically like pi's built-in
-		const otherStatuses = Array.from(statuses.entries())
-			.filter(([key]) => key !== "mode")
+		const allStatuses = Array.from(statuses.entries())
 			.sort(([a], [b]) => a.localeCompare(b))
 			.map(([, text]) => text)
 			.join(" ");
@@ -74,7 +70,6 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		// Git branch
 		const branch = footerData.getGitBranch();
 		const leftParts: string[] = [];
-		if (modeBadge) leftParts.push(modeBadge);
 		if (branch) leftParts.push(`󰘬 ${branch}`);
 		leftParts.push(` ${modelName}`);
 		if (provider) leftParts.push(` ${provider}`);
@@ -96,9 +91,9 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		if (totalCacheRead > 0) rightParts.push(` ${fmtTok(totalCacheRead)}`);
 		if (totalCost > 0) rightParts.push(` ${totalCost.toFixed(3)}`);
 
-		// Other extension statuses (plannotator, etc.)
-		if (otherStatuses) {
-			rightParts.push(otherStatuses);
+		// Extension statuses
+		if (allStatuses) {
+			rightParts.push(allStatuses);
 		}
 
 		const rightStr = rightParts.join("  ");
