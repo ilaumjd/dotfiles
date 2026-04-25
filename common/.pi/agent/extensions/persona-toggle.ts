@@ -106,7 +106,9 @@ export default function personaToggleExtension(pi: ExtensionAPI): void {
 
 	function restorePersona(name: string | null, ctx: ExtensionContext): void {
 		if (!name) {
-			activatePersona(0, ctx);
+			// Default to "plan" persona on new sessions
+			const planIdx = personas.findIndex((p) => p.name.toLowerCase() === "plan");
+			activatePersona(planIdx >= 0 ? planIdx : 0, ctx);
 			return;
 		}
 		const idx = personas.findIndex((p) => p.name.toLowerCase() === name.toLowerCase());
