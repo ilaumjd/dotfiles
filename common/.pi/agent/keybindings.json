@@ -1,69 +1,10 @@
 {
-  "app.exit": [
-    "ctrl+d",
-    "ctrl+q"
-  ],
-  "app.editor.external": "alt+e",
-  "app.session.new": "ctrl+n",
-  "app.session.resume": "ctrl+l",
-  "app.session.tree": "ctrl+g",
-  "app.session.fork": [],
-  "app.session.rename": [],
-  "app.session.toggleNamedFilter": [],
-  "app.session.deleteNoninvasive": [],
-  "app.model.select": "alt+m",
-  "app.model.cycleForward": "f2",
-  "app.model.cycleBackward": "shift+f2",
-  "app.thinking.toggle": [],
-  "app.message.followUp": "shift+enter",
-  "app.tree.foldOrUp": [
-    "ctrl+left",
-    "alt+left",
-    "left"
-  ],
-  "app.tree.unfoldOrDown": [
-    "ctrl+right",
-    "alt+right",
-    "right"
-  ],
-  "app.tree.filter.labeledOnly": [],
-  "tui.editor.pageUp": [
-    "pageUp",
-    "ctrl+alt+b"
-  ],
-  "tui.editor.pageDown": [
-    "pageDown",
-    "ctrl+alt+f"
-  ],
-  "tui.editor.deleteCharBackward": [
-    "backspace",
-    "shift+backspace"
-  ],
-  "tui.editor.deleteCharForward": [
-    "ctrl+d",
-    "delete",
-    "shift+delete"
-  ],
-  "tui.editor.deleteWordBackward": [
-    "ctrl+w",
-    "ctrl+backspace",
-    "alt+backspace"
-  ],
-  "tui.editor.deleteWordForward": [
-    "alt+d",
-    "alt+delete",
-    "ctrl+delete"
-  ],
-  "tui.editor.yank": [],
-  "tui.editor.undo": [
-    "ctrl+-",
-    "super+z"
-  ],
+  "app.message.followUp": "ctrl+enter",
+  "tui.editor.cursorLeft": "left",
+  "tui.editor.cursorRight": "right",
   "tui.input.newLine": [
-    "ctrl+enter",
-    "alt+enter",
-    "ctrl+j"
+    "shift+enter",
+    "alt+enter"
   ],
-  "tui.input.copy": "ctrl+y",
   "tui.input.tab": "alt+tab"
 }
