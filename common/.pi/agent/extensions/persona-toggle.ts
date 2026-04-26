@@ -31,7 +31,10 @@ function parsePersonaFile(filePath: string): Persona | null {
 		return {
 			name: frontmatter.name,
 			description: frontmatter.description || "",
-			tools: frontmatter.tools ? frontmatter.tools.split(",").map((t) => t.trim()) : [],
+			tools: [
+				...(frontmatter.tools ? frontmatter.tools.split(",").map((t) => t.trim()) : []),
+				...(frontmatter.external_tools ? frontmatter.external_tools.split(",").map((t) => t.trim()) : []),
+			],
 			systemPrompt: match[2].trim(),
 			file: filePath,
 		};
