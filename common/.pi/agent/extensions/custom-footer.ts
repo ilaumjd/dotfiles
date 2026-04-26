@@ -1,13 +1,11 @@
 import type { AssistantMessage } from "@mariozechner/pi-ai";
-import type {
-	ExtensionAPI,
-	ExtensionContext,
-} from "@mariozechner/pi-coding-agent";
+import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-agent";
 import { truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
 
-/**
- * Format token counts matching pi's built-in footer style
- */
+// -------------------------------------------------------------------------
+// Token formatting
+// -------------------------------------------------------------------------
+
 function fmtTok(n: number): string {
 	if (n < 1000) return n.toString();
 	if (n < 10000) return `${(n / 1000).toFixed(1)}k`;
@@ -16,123 +14,162 @@ function fmtTok(n: number): string {
 	return `${Math.round(n / 1000000)}M`;
 }
 
+// -------------------------------------------------------------------------
+// Stats aggregation
+// -------------------------------------------------------------------------
+
+interface TokenStats {
+	input: number;
+	output: number;
+	cacheRead: number;
+	cost: number;
+}
+
+function collectTokenStats(ctx: ExtensionContext): TokenStats {
+	let input = 0;
+	let output = 0;
+	let cacheRead = 0;
+	let cost = 0;
+
+	for (const e of ctx.sessionManager.getEntries()) {
+		if (e.type === "message" && e.message.role === "assistant") {
+			const m = e.message as AssistantMessage;
+			input += m.usage.input;
+			output += m.usage.output;
+			cacheRead += m.usage.cacheRead || 0;
+			cost += m.usage.cost.total;
+		}
+	}
+
+	return { input, output, cacheRead, cost };
+}
+
+// -------------------------------------------------------------------------
+// Footer segments
+// -------------------------------------------------------------------------
+
+function buildLeftSegment(
+	ctx: ExtensionContext,
+	pi: ExtensionAPI,
+	footerData: any,
+): string {
+	const parts: string[] = [];
+
+	const branch = footerData.getGitBranch();
+	if (branch) parts.push(`󰘬 ${branch}`);
+
+	const modelId = ctx.model?.id || "no-model";
+	parts.push(` ${modelId}`);
+
+	const provider = (ctx.model as any)?.provider;
+	if (provider) parts.push(` ${provider}`);
+
+	const thinkingLevel = pi.getThinkingLevel();
+	if (thinkingLevel && thinkingLevel !== "off") {
+		parts.push(` ${thinkingLevel}`);
+	}
+
+	return parts.join("  ");
+}
+
+function buildRightSegment(
+	stats: TokenStats,
+	footerData: any,
+): string {
+	const parts: string[] = [];
+
+	if (stats.input > 0) parts.push(` ${fmtTok(stats.input)}`);
+	if (stats.output > 0) parts.push(` ${fmtTok(stats.output)}`);
+	if (stats.cacheRead > 0) parts.push(` ${fmtTok(stats.cacheRead)}`);
+	if (stats.cost > 0) parts.push(` ${stats.cost.toFixed(3)}`);
+
+	const statuses = footerData.getExtensionStatuses();
+	const allStatuses = Array.from(statuses.entries())
+		.sort(([a], [b]) => a.localeCompare(b))
+		.map(([, text]) => text)
+		.join(" ");
+
+	if (allStatuses) parts.push(allStatuses);
+
+	return parts.join("  ");
+}
+
+// -------------------------------------------------------------------------
+// Layout
+// -------------------------------------------------------------------------
+
+function layoutLine(
+	left: string,
+	right: string,
+	width: number,
+	theme: any,
+): string {
+	const margin = 2;
+	const contentWidth = Math.max(0, width - margin * 2);
+	const minPad = 2;
+
+	const leftW = visibleWidth(left);
+	const rightW = visibleWidth(right);
+
+	let line: string;
+	if (leftW + minPad + rightW <= contentWidth) {
+		const pad = " ".repeat(contentWidth - leftW - rightW);
+		line = left + pad + theme.fg("dim", right);
+	} else if (rightW + minPad < contentWidth) {
+		const maxLeft = contentWidth - rightW - minPad;
+		const leftTrunc = truncateToWidth(left, maxLeft, "");
+		const pad = " ".repeat(contentWidth - visibleWidth(leftTrunc) - rightW);
+		line = leftTrunc + pad + theme.fg("dim", right);
+	} else {
+		line = truncateToWidth(left, contentWidth, "");
+	}
+
+	const finalLine = " ".repeat(margin) + line + " ".repeat(margin);
+	return truncateToWidth(finalLine, width);
+}
+
+// -------------------------------------------------------------------------
+// Footer renderer factory
+// -------------------------------------------------------------------------
+
+function createFooterRenderer(
+	ctx: ExtensionContext,
+	pi: ExtensionAPI,
+) {
+	return (tui: any, theme: any, footerData: any) => {
+		const unsubBranch = footerData.onBranchChange(() => tui.requestRender());
+
+		return {
+			dispose: unsubBranch,
+			invalidate() {},
+			render(width: number): string[] {
+				const stats = collectTokenStats(ctx);
+				const left = buildLeftSegment(ctx, pi, footerData);
+				const right = buildRightSegment(stats, footerData);
+				const line = layoutLine(left, right, width, theme);
+				return [line];
+			},
+		};
+	};
+}
+
+// -------------------------------------------------------------------------
+// Extension entry point
+// -------------------------------------------------------------------------
+
 export default function customFooterExtension(pi: ExtensionAPI): void {
 	let enabled = true;
 
-	function setCustomFooter(ctx: ExtensionContext): void {
-		ctx.ui.setFooter((tui, theme, footerData) => {
-			const unsubBranch = footerData.onBranchChange(() => tui.requestRender());
-
-			return {
-				dispose: unsubBranch,
-				invalidate() { },
-				render(width: number): string[] {
-					return renderFooter(ctx, theme, footerData, width);
-				},
-			};
-		});
-	}
-
-	function renderFooter(
-		ctx: ExtensionContext,
-		theme: any,
-		footerData: any,
-		width: number,
-	): string[] {
-		// Cumulative token stats from ALL session entries (matches built-in footer)
-		let totalInput = 0;
-		let totalOutput = 0;
-		let totalCacheRead = 0;
-		let totalCost = 0;
-
-		for (const e of ctx.sessionManager.getEntries()) {
-			if (e.type === "message" && e.message.role === "assistant") {
-				const m = e.message as AssistantMessage;
-				totalInput += m.usage.input;
-				totalOutput += m.usage.output;
-				totalCacheRead += m.usage.cacheRead || 0;
-				totalCost += m.usage.cost.total;
-			}
-		}
-
-		// ALL extension statuses
-		const statuses = footerData.getExtensionStatuses();
-		const allStatuses = Array.from(statuses.entries())
-			.sort(([a], [b]) => a.localeCompare(b))
-			.map(([, text]) => text)
-			.join(" ");
-
-		// Model info with provider (matches pi's format)
-		const modelId = ctx.model?.id || "no-model";
-		const modelName = modelId;
-		const provider = (ctx.model as any)?.provider;
-
-		// Git branch
-		const branch = footerData.getGitBranch();
-		const leftParts: string[] = [];
-		if (branch) leftParts.push(`󰘬 ${branch}`);
-		leftParts.push(` ${modelName}`);
-		if (provider) leftParts.push(` ${provider}`);
-
-		// Thinking level (if model supports reasoning)
-		const thinkingLevel = pi.getThinkingLevel();
-		if (thinkingLevel && thinkingLevel !== "off") {
-			leftParts.push(` ${thinkingLevel}`);
-		}
-
-		const leftStr = leftParts.join("  ");
-
-		// --- RIGHT: stats + other statuses ---
-		const rightParts: string[] = [];
-
-		// Token stats with icons
-		if (totalInput > 0) rightParts.push(` ${fmtTok(totalInput)}`);
-		if (totalOutput > 0) rightParts.push(` ${fmtTok(totalOutput)}`);
-		if (totalCacheRead > 0) rightParts.push(` ${fmtTok(totalCacheRead)}`);
-		if (totalCost > 0) rightParts.push(` ${totalCost.toFixed(3)}`);
-
-		// Extension statuses
-		if (allStatuses) {
-			rightParts.push(allStatuses);
-		}
-
-		const rightStr = rightParts.join("  ");
-
-		// Margins
-		const margin = 2;
-		const contentWidth = Math.max(0, width - margin * 2);
-
-		// Assemble with right-align (within content width)
-		const leftW = visibleWidth(leftStr);
-		const rightW = visibleWidth(rightStr);
-		const minPad = 2;
-
-		let line: string;
-		if (leftW + minPad + rightW <= contentWidth) {
-			const pad = " ".repeat(contentWidth - leftW - rightW);
-			line = leftStr + pad + theme.fg("dim", rightStr);
-		} else if (rightW + minPad < contentWidth) {
-			// Truncate left to fit right side
-			const maxLeft = contentWidth - rightW - minPad;
-			const leftTrunc = truncateToWidth(leftStr, maxLeft, "");
-			const pad = " ".repeat(contentWidth - visibleWidth(leftTrunc) - rightW);
-			line = leftTrunc + pad + theme.fg("dim", rightStr);
-		} else {
-			// Not enough room for right side, just left
-			line = truncateToWidth(leftStr, contentWidth, "");
-		}
-
-		const finalLine = " ".repeat(margin) + line + " ".repeat(margin);
-		return [truncateToWidth(finalLine, width)];
+	function attachFooter(ctx: ExtensionContext): void {
+		ctx.ui.setFooter(createFooterRenderer(ctx, pi));
 	}
 
 	pi.registerCommand("footer", {
 		description: "Toggle custom compact footer",
 		handler: async (_args, ctx) => {
 			enabled = !enabled;
-
 			if (enabled) {
-				setCustomFooter(ctx);
+				attachFooter(ctx);
 				ctx.ui.notify("Custom footer enabled", "success");
 			} else {
 				ctx.ui.setFooter(undefined);
@@ -141,10 +178,7 @@ export default function customFooterExtension(pi: ExtensionAPI): void {
 		},
 	});
 
-	// Auto-enable on session start
 	pi.on("session_start", async (_event, ctx) => {
-		if (enabled) {
-			setCustomFooter(ctx);
-		}
+		if (enabled) attachFooter(ctx);
 	});
 }
