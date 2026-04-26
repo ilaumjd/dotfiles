@@ -2,8 +2,6 @@ import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-age
 import { readFileSync, readdirSync, existsSync } from "fs";
 import { join } from "path";
 
-const ALL_TOOLS = ["read", "write", "edit", "bash", "grep", "find", "ls"];
-
 interface Persona {
 	name: string;
 	description: string;
@@ -103,11 +101,7 @@ export default function personaToggleExtension(pi: ExtensionAPI): void {
 	let activeIndex = 0;
 
 	function getAvailableTools(): string[] {
-		try {
-			return pi.getAllTools().map((t) => t.name);
-		} catch {
-			return ALL_TOOLS;
-		}
+		return pi.getAllTools().map((t) => t.name);
 	}
 
 	function resolveActiveTools(persona: Persona, available: string[]): string[] {
@@ -170,6 +164,15 @@ export default function personaToggleExtension(pi: ExtensionAPI): void {
 		const idx = personas.findIndex((p) => p.name.toLowerCase() === name.toLowerCase());
 		activatePersona(idx >= 0 ? idx : 0, ctx);
 	}
+
+	// Debug: list all available tools
+	pi.registerCommand("tools", {
+		description: "List all available tools",
+		handler: async (_args, ctx) => {
+			const tools = pi.getAllTools().map((t) => t.name);
+			ctx.ui.notify(tools.join(", "), "info");
+		},
+	});
 
 	// Tab cycles personas
 	pi.registerShortcut("tab", {
