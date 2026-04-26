@@ -8,6 +8,7 @@ interface Persona {
 	name: string;
 	description: string;
 	tools: string[];
+	blocklist: string[];
 	systemPrompt: string;
 	file: string;
 }
@@ -35,6 +36,9 @@ function parsePersonaFile(filePath: string): Persona | null {
 				...(frontmatter.tools ? frontmatter.tools.split(",").map((t) => t.trim()) : []),
 				...(frontmatter.external_tools ? frontmatter.external_tools.split(",").map((t) => t.trim()) : []),
 			],
+			blocklist: frontmatter.blocklist
+				? frontmatter.blocklist.split(",").map((t) => t.trim())
+				: [],
 			systemPrompt: match[2].trim(),
 			file: filePath,
 		};
@@ -65,7 +69,8 @@ function getDefaultPersonas(): Persona[] {
 		{
 			name: "default",
 			description: "General-purpose coding assistant",
-			tools: ALL_TOOLS,
+			tools: [],
+			blocklist: [],
 			systemPrompt: "You are a helpful coding assistant. Follow the user's instructions precisely.",
 			file: "(built-in)",
 		},
@@ -90,14 +95,62 @@ export default function personaToggleExtension(pi: ExtensionAPI): void {
 		personas = getDefaultPersonas();
 	}
 
+	const availableTools = getAvailableTools();
+	for (const persona of personas) {
+		validatePersona(persona, availableTools);
+	}
+
 	let activeIndex = 0;
+
+	function getAvailableTools(): string[] {
+		try {
+			return pi.getAllTools().map((t) => t.name);
+		} catch {
+			return ALL_TOOLS;
+		}
+	}
+
+	function resolveActiveTools(persona: Persona, available: string[]): string[] {
+		// 1. Legacy explicit allowlist
+		if (persona.tools.length > 0) {
+			return persona.tools;
+		}
+		// 2. Blocklist mode
+		if (persona.blocklist.length > 0) {
+			const blocked = new Set(persona.blocklist.map((t) => t.toLowerCase()));
+			return available.filter((t) => !blocked.has(t.toLowerCase()));
+		}
+		// 3. Default to everything available
+		return available;
+	}
+
+	function validatePersona(persona: Persona, available: string[]): void {
+		const availableSet = new Set(available.map((t) => t.toLowerCase()));
+		for (const tool of persona.blocklist) {
+			if (!availableSet.has(tool.toLowerCase())) {
+				console.warn(
+					`[persona-toggle] "${persona.name}" blocklists unknown tool: "${tool}"`,
+				);
+			}
+		}
+		for (const tool of persona.tools) {
+			if (!availableSet.has(tool.toLowerCase())) {
+				console.warn(
+					`[persona-toggle] "${persona.name}" allows unknown tool: "${tool}"`,
+				);
+			}
+		}
+	}
 
 	function activatePersona(index: number, ctx: ExtensionContext): void {
 		activeIndex = index;
 		const persona = personas[activeIndex];
 		if (!persona) return;
 
-		pi.setActiveTools(persona.tools.length > 0 ? persona.tools : ALL_TOOLS);
+		const availableTools = getAvailableTools();
+		const activeTools = resolveActiveTools(persona, availableTools);
+
+		pi.setActiveTools(activeTools);
 		ctx.ui.setStatus("persona", ctx.ui.theme.fg("accent", persona.name.toUpperCase()));
 		pi.appendEntry("persona-active", { name: persona.name });
 	}
