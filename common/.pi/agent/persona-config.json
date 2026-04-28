@@ -1,0 +1,7 @@
+{
+  "defaultPersona": "plan",
+  "mainPersonas": [
+    "plan",
+    "build"
+  ]
+}

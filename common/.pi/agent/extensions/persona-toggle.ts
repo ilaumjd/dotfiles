@@ -15,6 +15,11 @@ interface Persona {
 	file: string;
 }
 
+interface PersonaConfig {
+	defaultPersona: string;
+	mainPersonas: string[];
+}
+
 // -------------------------------------------------------------------------
 // Pure helpers (no side effects, testable)
 // -------------------------------------------------------------------------
@@ -102,6 +107,19 @@ function getDefaultPersonas(): Persona[] {
 	];
 }
 
+function loadPersonaConfig(configPath: string): PersonaConfig {
+	try {
+		const raw = readFileSync(configPath, "utf-8");
+		const parsed = JSON.parse(raw);
+		return {
+			defaultPersona: typeof parsed.defaultPersona === "string" ? parsed.defaultPersona : "plan",
+			mainPersonas: Array.isArray(parsed.mainPersonas) ? parsed.mainPersonas.filter((s: unknown) => typeof s === "string") : [],
+		};
+	} catch {
+		return { defaultPersona: "plan", mainPersonas: [] };
+	}
+}
+
 function getLastPersonaFromSession(ctx: ExtensionContext): string | null {
 	const entries = ctx.sessionManager.getEntries();
 	for (let i = entries.length - 1; i >= 0; i--) {
@@ -151,35 +169,70 @@ function validatePersona(persona: Persona, available: string[]): void {
 // -------------------------------------------------------------------------
 
 export default function personaToggleExtension(pi: ExtensionAPI): void {
-	const personasDir = join(
+	const baseDir = join(
 		process.env.HOME || process.env.USERPROFILE || ".",
 		".pi",
 		"agent",
-		"personas",
 	);
+	const personasDir = join(baseDir, "personas");
+	const configPath = join(baseDir, "persona-config.json");
 
-	let personas = scanPersonas(personasDir);
-	if (personas.length === 0) {
-		personas = getDefaultPersonas();
+	const config = loadPersonaConfig(configPath);
+
+	let allPersonas = scanPersonas(personasDir);
+	if (allPersonas.length === 0) {
+		allPersonas = getDefaultPersonas();
+	}
+
+	let mainPersonas: Persona[];
+	if (config.mainPersonas.length > 0) {
+		mainPersonas = [];
+		for (const name of config.mainPersonas) {
+			const p = allPersonas.find(
+				(p) => p.name.toLowerCase() === name.toLowerCase(),
+			);
+			if (p) {
+				mainPersonas.push(p);
+			} else {
+				console.warn(
+					`[persona-toggle] mainPersonas entry "${name}" not found`,
+				);
+			}
+		}
+		if (mainPersonas.length === 0) {
+			mainPersonas = [...allPersonas];
+		}
+	} else {
+		mainPersonas = [...allPersonas];
 	}
 
 	let activeIndex = 0;
+	let mainIndex = 0;
 	let validated = false;
 
 	function getAvailableTools(): string[] {
 		return pi.getAllTools().map((t) => t.name);
 	}
 
+	function syncMainIndex(): void {
+		const persona = allPersonas[activeIndex];
+		if (!persona) return;
+		const idx = mainPersonas.findIndex(
+			(p) => p.name.toLowerCase() === persona.name.toLowerCase(),
+		);
+		if (idx >= 0) mainIndex = idx;
+	}
+
 	function activatePersona(index: number, ctx: ExtensionContext): void {
 		activeIndex = index;
-		const persona = personas[activeIndex];
+		const persona = allPersonas[activeIndex];
 		if (!persona) return;
 
 		const available = getAvailableTools();
 
 		// Best-effort validation on first activation (can't call during load)
 		if (!validated) {
-			for (const p of personas) {
+			for (const p of allPersonas) {
 				validatePersona(p, available);
 			}
 			validated = true;
@@ -190,37 +243,73 @@ export default function personaToggleExtension(pi: ExtensionAPI): void {
 		pi.setActiveTools(activeTools);
 		ctx.ui.setStatus("persona", ctx.ui.theme.fg("accent", persona.name.toUpperCase()));
 		pi.appendEntry("persona-active", { name: persona.name });
+		syncMainIndex();
 	}
 
 	function cyclePersona(ctx: ExtensionContext): void {
-		const next = (activeIndex + 1) % personas.length;
-		activatePersona(next, ctx);
+		if (mainPersonas.length === 0) return;
+		mainIndex = (mainIndex + 1) % mainPersonas.length;
+		const target = mainPersonas[mainIndex];
+		const idx = allPersonas.findIndex(
+			(p) => p.name.toLowerCase() === target.name.toLowerCase(),
+		);
+		activatePersona(idx >= 0 ? idx : 0, ctx);
 	}
 
 	function restorePersona(name: string | null, ctx: ExtensionContext): void {
 		if (!name) {
-			// Default to "plan" persona on new sessions
-			const planIdx = personas.findIndex(
-				(p) => p.name.toLowerCase() === "plan",
+			const defaultIdx = allPersonas.findIndex(
+				(p) => p.name.toLowerCase() === config.defaultPersona.toLowerCase(),
 			);
-			activatePersona(planIdx >= 0 ? planIdx : 0, ctx);
+			activatePersona(defaultIdx >= 0 ? defaultIdx : 0, ctx);
 			return;
 		}
-		const idx = personas.findIndex(
+		const idx = allPersonas.findIndex(
 			(p) => p.name.toLowerCase() === name.toLowerCase(),
 		);
 		activatePersona(idx >= 0 ? idx : 0, ctx);
 	}
 
-	// --- Tab cycles personas ---
+	// --- Tab cycles main personas ---
 	pi.registerShortcut("tab", {
-		description: "Cycle to next persona",
+		description: "Cycle to next main persona",
 		handler: async (ctx) => cyclePersona(ctx),
+	});
+
+	// --- /personas selects from all personas ---
+	pi.registerCommand("personas", {
+		description: "Select a persona",
+		handler: async (rawArgs, ctx) => {
+			const args = (
+				Array.isArray(rawArgs)
+					? rawArgs.map(String)
+					: typeof rawArgs === "string"
+						? rawArgs.trim().split(/\s+/)
+						: []
+			).filter((s) => s.length > 0);
+
+			if (args.length > 0) {
+				const name = args.join(" ");
+				const idx = allPersonas.findIndex(
+					(p) => p.name.toLowerCase() === name.toLowerCase(),
+				);
+				if (idx >= 0) {
+					activatePersona(idx, ctx);
+					ctx.ui.notify(`Switched to ${allPersonas[idx].name}`, "success");
+				} else {
+					ctx.ui.notify(`Persona "${name}" not found`, "error");
+				}
+				return;
+			}
+
+			const list = allPersonas.map((p, i) => `${i + 1}. ${p.name}`).join("\n");
+			ctx.ui.notify(`Personas:\n${list}`, "info");
+		},
 	});
 
 	// --- Inject system prompt every turn ---
 	pi.on("before_agent_start", async () => {
-		const persona = personas[activeIndex];
+		const persona = allPersonas[activeIndex];
 		if (!persona) return;
 		return { systemPrompt: persona.systemPrompt };
 	});
