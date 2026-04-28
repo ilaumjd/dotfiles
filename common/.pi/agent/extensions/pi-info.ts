@@ -159,10 +159,7 @@ function buildFullItems(pi: ExtensionAPI, ctx: ExtensionCommandContext): string[
 		byProvider.set(model.provider, list);
 	}
 	for (const [provider, models] of [...byProvider.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
-		items.push(`${theme.fg("accent", provider)} (${models.length})`);
-		for (const model of models) {
-			items.push(`  ${model.id}`);
-		}
+		items.push(`${theme.fg("accent", provider)} (${models.length}): ${models.sort((a, b) => a.id.localeCompare(b.id)).map(m => m.id).join(", ")}`);
 	}
 	items.push("");
 
@@ -212,10 +209,7 @@ function buildModelsItems(ctx: ExtensionCommandContext): string[] {
 		return items;
 	}
 	for (const [provider, models] of [...byProvider.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
-		items.push(`${provider} (${models.length})`);
-		for (const model of models) {
-			items.push(`  ${model.id}`);
-		}
+		items.push(`${provider} (${models.length}): ${models.sort((a, b) => a.id.localeCompare(b.id)).map(m => m.id).join(", ")}`);
 		items.push("");
 	}
 	return items;
