@@ -57,7 +57,7 @@ async function main() {
       const json = await fetchJson(`${baseUrl}/models`, apiKey);
       const models = (json.data || [])
         .filter((m) => m.id && !EXCLUDE_RE.test(m.id))
-        .map((m) => ({ id: m.id }));
+        .map((m) => ({ id: m.id, reasoning: true }));
 
       providers[name] = {
         baseUrl,
