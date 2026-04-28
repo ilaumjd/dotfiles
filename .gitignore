@@ -16,3 +16,4 @@ common/.pi/agent/sessions/
 common/.pi/agent/sessions/**
 common/.pi/web-search.json
 /common/.pi/agent/models.json
+/common/.pi/scripts/providers.json
