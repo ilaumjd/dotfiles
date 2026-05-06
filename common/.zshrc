@@ -48,6 +48,9 @@ source "$HOME/.shrc"
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/personal-scripts
 
+# local bin
+export PATH=$PATH:$HOME/.local/bin
+
 # mason
 export PATH=$PATH:$HOME/.local/share/nvim/mason/bin
 
@@ -64,9 +67,6 @@ export PATH=$PATH:/opt/homebrew/opt/postgresql@16/bin
 
 # rust
 export PATH=$PATH:$HOME/.cargo/bin
-
-# claude
-export PATH=$PATH:$HOME/.local/bin
 
 # ====================================== 3rd party ======================================
 
