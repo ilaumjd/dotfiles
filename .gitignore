@@ -17,3 +17,5 @@ common/.pi/agent/sessions/**
 common/.pi/web-search.json
 /common/.pi/agent/models.json
 /common/.pi/scripts/providers.json
+/common/.pi/agent/extensions/app_data
+/common/.pi/agent/run-history.jsonl
