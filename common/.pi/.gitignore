@@ -7,13 +7,10 @@
 # Whitelist agent directory and specific files
 !agent/
 !agent/keybindings.json
-!agent/persona-config.json
 !agent/mcp.json
 
 # Whitelist subdirectories we want (without recursive **)
-!agent/git/
 !agent/themes/
-!agent/personas/
 !agent/extensions/
 
 # Whitelist scripts directory and specific files
