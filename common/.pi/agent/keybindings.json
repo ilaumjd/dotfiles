@@ -5,6 +5,5 @@
   "tui.input.newLine": [
     "shift+enter",
     "alt+enter"
-  ],
-  "tui.input.tab": "alt+tab"
+  ]
 }
