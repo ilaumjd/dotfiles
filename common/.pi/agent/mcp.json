@@ -1,8 +1,9 @@
 {
   "mcpServers": {
-    "local-server": {
+    "browseros": {
       "url": "http://127.0.0.1:9000/mcp",
-      "lifecycle": "lazy"
+      "lifecycle": "lazy",
+      "directTools": true
     }
   }
 }
