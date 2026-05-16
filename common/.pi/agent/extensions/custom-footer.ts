@@ -1,5 +1,8 @@
 import type { AssistantMessage } from "@mariozechner/pi-ai";
-import type { ExtensionAPI, ExtensionContext } from "@mariozechner/pi-coding-agent";
+import type {
+	ExtensionAPI,
+	ExtensionContext,
+} from "@mariozechner/pi-coding-agent";
 import { truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
 
 // -------------------------------------------------------------------------
@@ -72,24 +75,13 @@ function buildLeftSegment(
 	return parts.join("  ");
 }
 
-function buildRightSegment(
-	stats: TokenStats,
-	footerData: any,
-): string {
+function buildRightSegment(stats: TokenStats): string {
 	const parts: string[] = [];
 
 	if (stats.input > 0) parts.push(` ${fmtTok(stats.input)}`);
 	if (stats.output > 0) parts.push(` ${fmtTok(stats.output)}`);
 	if (stats.cacheRead > 0) parts.push(` ${fmtTok(stats.cacheRead)}`);
 	if (stats.cost > 0) parts.push(` ${stats.cost.toFixed(3)}`);
-
-	const statuses = footerData.getExtensionStatuses();
-	const allStatuses = Array.from(statuses.entries())
-		.sort(([a], [b]) => a.localeCompare(b))
-		.map(([, text]) => text)
-		.join(" ");
-
-	if (allStatuses) parts.push(allStatuses);
 
 	return parts.join("  ");
 }
@@ -103,8 +95,8 @@ function layoutLine(
 	right: string,
 	width: number,
 	theme: any,
+	margin = 2,
 ): string {
-	const margin = 2;
 	const contentWidth = Math.max(0, width - margin * 2);
 	const minPad = 2;
 
@@ -132,22 +124,37 @@ function layoutLine(
 // Footer renderer factory
 // -------------------------------------------------------------------------
 
-function createFooterRenderer(
-	ctx: ExtensionContext,
-	pi: ExtensionAPI,
-) {
+function createFooterRenderer(ctx: ExtensionContext, pi: ExtensionAPI) {
 	return (tui: any, theme: any, footerData: any) => {
 		const unsubBranch = footerData.onBranchChange(() => tui.requestRender());
 
-		return {
-			dispose: unsubBranch,
-			invalidate() {},
-			render(width: number): string[] {
+		// Widget above editor: compact info (branch, model, tokens)
+		ctx.ui.setWidget("compact-info", () => ({
+			render(w: number): string[] {
 				const stats = collectTokenStats(ctx);
 				const left = buildLeftSegment(ctx, pi, footerData);
-				const right = buildRightSegment(stats, footerData);
-				const line = layoutLine(left, right, width, theme);
-				return [line];
+				const right = buildRightSegment(stats);
+				return [layoutLine(left, right, w, theme, 1)];
+			},
+			invalidate() { },
+		}));
+
+		return {
+			dispose: () => {
+				unsubBranch();
+				ctx.ui.setWidget("compact-info", undefined);
+			},
+			invalidate() { },
+			render(width: number): string[] {
+				const statuses: Map<string, string> = footerData.getExtensionStatuses();
+				if (statuses.size === 0) return [];
+
+				const parts = Array.from(statuses.entries())
+					.sort((a, b) => a[0].localeCompare(b[0]))
+					.map(([, text]) => text);
+
+				const statusText = theme.fg("dim", parts.join(" "));
+				return [truncateToWidth(" " + statusText, width)];
 			},
 		};
 	};
