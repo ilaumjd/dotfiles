@@ -6,6 +6,7 @@ return {
 
       opts.picker = {
         hidden = true,
+        git_ignored = true,
       }
 
       opts.dashboard = {
