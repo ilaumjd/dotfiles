@@ -51,9 +51,6 @@ export PATH=$PATH:$HOME/personal-scripts
 # local bin
 export PATH=$PATH:$HOME/.local/bin
 
-# mason
-export PATH=$PATH:$HOME/.local/share/nvim/mason/bin
-
 # android
 export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
 export PATH=$PATH:$JAVA_HOME/bin
