@@ -17,31 +17,15 @@ cask "sf-symbols"
 cask "ghostty"
 cask "wezterm@nightly"
 
-# Vim
-brew "vim"
-brew "neovim"
-
 # Terminal Workflow
-brew "atuin"
-brew "bat-extras"
-brew "buku"
-brew "carapace"
 brew "git-delta"
-brew "git-lfs"
-brew "oh-my-posh"
-brew "scmpuff"
 brew "stow"
 brew "tealdeer"
 brew "trash-cli"
 
-# TUI
-brew "tmux"
-
 # CLI
 brew "aria2"
-brew "ffmpeg"
 brew "htop"
-brew "imagemagick"
 brew "mise"
 brew "wget"
 
@@ -53,7 +37,6 @@ brew "local/yabai/yabai"
 brew "skhd"
 brew "borders"
 brew "sketchybar"
-brew "mac-menu"
 
 # Desktop App
 cask "ente-auth"
@@ -77,19 +60,14 @@ cask "zed"
 
 # AI
 cask "claude-code"
-brew "opencode"
 cask "opencode-desktop"
 brew "pi-coding-agent"
 
 # Xcode
-brew "cocoapods"
 brew "xcode-build-server"
-brew "xcbeautify"
 brew "xcp"
 
 # Docker
-brew "colima"
-brew "docker"
 brew "docker-credential-helper"
 
 # Rails
@@ -97,9 +75,8 @@ brew "libpq"
 brew "libyaml"
 
 # AWS
-brew "aws-sam-cli"
-cask "session-manager-plugin"
 brew "granted"
+cask "session-manager-plugin"
 
 # LSP
 brew "selene"

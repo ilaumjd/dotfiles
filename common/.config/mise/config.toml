@@ -5,10 +5,17 @@ node = "24"
 python = "3.13"
 ruby = "3.1.1"
 
+# Editors
+vim = "latest"
+neovim = "latest"
+
 # Package managers
 "npm:pnpm" = "11.0.9"
 yarn = "latest"
 uv = "latest"
+
+# Git
+git-lfs = "latest"
 
 # Formatting & linting
 swiftformat = "latest"
@@ -18,19 +25,30 @@ stylua = "latest"
 # LSP servers
 lua-language-server = "latest"
 
+# Build tools
+cocoapods = "latest"
+xcbeautify = "latest"
+
 # Parser tools
 tree-sitter = "latest"
 
 # Infrastructure
 terraform = "latest"
 awscli = "latest"
+aws-sam-cli = "latest"
 gh = "latest"
 jwt = "latest"
+
+# AI
+opencode = "latest"
 
 # CLI utilities
 ripgrep = "latest"
 fd = "latest"
+atuin = "latest"
 bat = "latest"
+bat-extras = "latest"
+carapace = "latest"
 eza = "latest"
 fzf = "latest"
 zoxide = "latest"
@@ -39,10 +57,18 @@ yazi = "latest"
 mdbook = "latest"
 bottom = "latest"
 fastfetch = "latest"
+ffmpeg = "latest"
+imagemagick = "latest"
+tmux = "latest"
 
-# TUI tools
+# TUI / Prompt
+oh-my-posh = "latest"
 lazygit = "latest"
 lazydocker = "latest"
+
+# Docker
+colima = "latest"
+docker-cli = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
