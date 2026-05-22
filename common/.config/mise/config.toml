@@ -1,0 +1,48 @@
+[tools]
+# Language runtimes
+go = "latest"
+node = "24"
+python = "3.13"
+ruby = "3.1.1"
+
+# Package managers
+"npm:pnpm" = "11.0.9"
+yarn = "latest"
+uv = "latest"
+
+# Formatting & linting
+swiftformat = "latest"
+swiftlint = "latest"
+stylua = "latest"
+
+# LSP servers
+lua-language-server = "latest"
+
+# Parser tools
+tree-sitter = "latest"
+
+# Infrastructure
+terraform = "latest"
+awscli = "latest"
+gh = "latest"
+jwt = "latest"
+
+# CLI utilities
+ripgrep = "latest"
+fd = "latest"
+bat = "latest"
+eza = "latest"
+fzf = "latest"
+zoxide = "latest"
+xh = "latest"
+yazi = "latest"
+mdbook = "latest"
+bottom = "latest"
+fastfetch = "latest"
+
+# TUI tools
+lazygit = "latest"
+lazydocker = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
