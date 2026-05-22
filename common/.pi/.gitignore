@@ -1,9 +1,0 @@
-# Ignore all files and directories by default
-**
-
-# Whitelist this .gitignore file first
-!.gitignore
-
-# Whitelist scripts directory and specific files
-!scripts/
-!scripts/generate-models.js

@@ -100,8 +100,6 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 # export SCMPUFF_GIT_CMD='/usr/bin/git'
 # eval "$(scmpuff init --shell=zsh --aliases=false)"
 
-# pi
-alias -- picode='pi -e npm:pi-lens -e npm:@plannotator/pi-extension -e npm:pi-subagents'
 
 # tmux
 function th() {
