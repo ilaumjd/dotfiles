@@ -4,15 +4,6 @@
 # Whitelist this .gitignore file first
 !.gitignore
 
-# Whitelist agent directory and specific files
-!agent/
-!agent/keybindings.json
-!agent/mcp.json
-
-# Whitelist subdirectories we want (without recursive **)
-!agent/themes/
-!agent/extensions/
-
 # Whitelist scripts directory and specific files
 !scripts/
 !scripts/generate-models.js
