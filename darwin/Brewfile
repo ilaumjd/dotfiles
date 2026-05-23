@@ -18,17 +18,11 @@ cask "ghostty"
 cask "wezterm@nightly"
 
 # Terminal Workflow
-brew "git-delta"
 brew "stow"
-brew "tealdeer"
 brew "trash-cli"
 
 # CLI
-brew "aria2"
-brew "htop"
 brew "mise"
-brew "wget"
-
 
 ########################### DESKTOP ###########################
 
@@ -59,9 +53,7 @@ cask "visual-studio-code"
 cask "zed"
 
 # AI
-cask "claude-code"
 cask "opencode-desktop"
-brew "pi-coding-agent"
 
 # Xcode
 brew "xcode-build-server"
@@ -78,5 +70,3 @@ brew "libyaml"
 brew "granted"
 cask "session-manager-plugin"
 
-# LSP
-brew "selene"
