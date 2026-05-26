@@ -9,12 +9,14 @@ This is a dotfiles repository containing shell scripts and Lua configurations fo
 ```
 dotfiles/
 ├── apply.sh          # Main stow script for linking configs
-├── common/           # Shared configs (zsh, nvim, tmux, wezterm)
+├── common/           # Shared configs (zsh, tmux, wezterm)
 │   └── .config/
-│       ├── nvim/    # Neovim Lua configuration (see nvim/AGENTS.md)
 │       ├── zsh/     # Zsh plugins and configs
 │       └── tmux/   # Tmux config
 ├── darwin/           # macOS-specific configs (yabai, sketchybar, skhd)
+├── legacy/           # Archived configs (nvim-v1, nvim-v2)
+│   ├── nvim-v1/     # Old Neovim config (LazyVim)
+│   └── nvim-v2/     # Previous Neovim config (AstroNvim)
 ├── void/             # Linux/Void-specific configs (hyprland, waybar, etc.)
 └── scripts/          # Utility scripts
 ```
@@ -43,7 +45,7 @@ zsh -n script.zsh
 
 ### Neovim Lua
 
-See [common/.config/nvim/AGENTS.md](common/.config/nvim/AGENTS.md) for Neovim-specific guidelines.
+See [legacy/nvim-v2/AGENTS.md](legacy/nvim-v2/AGENTS.md) for Neovim-specific guidelines.
 
 ## Code Style Guidelines
 
