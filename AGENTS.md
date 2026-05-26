@@ -23,6 +23,8 @@ dotfiles/
 └── scripts/          # Utility scripts
 ```
 
+> Neovim config guidance is at `common/.config/nvim/AGENTS.md`.
+
 ## Build/Lint/Test Commands
 
 ### Shell Scripts (bash/zsh)
@@ -44,46 +46,6 @@ zsh -n script.zsh
 - `shfmt -bn -ci -i 2 -ln bash -s -sr` - Shell script formatting
 - `zsh -n` - Zsh syntax checking
 - `mdformat --check --wrap 120` - Markdown formatting
-
-### Neovim Lua
-
-The current config lives at [common/.config/nvim/](common/.config/nvim/) (kickstart.nvim). Archived configs are in [legacy/.config/](legacy/.config/).
-
-**Format Lua:**
-```bash
-stylua lua/
-```
-
-**Code Style:**
-| Type | Convention | Example |
-|------|------------|---------|
-| Functions/modules | snake_case | `require("my_module")` |
-| Variables | snake_case | `local my_var = 1` |
-| Mappings | camelCase | `["<Leader>key"]` |
-
-**Plugin specs** (`lua/plugins/*.lua`):
-```lua
-return {
-  "author/plugin",
-  opts = {},
-  config = function()
-    -- setup
-  end,
-}
-```
-
-**Mappings** (`lua/keymaps.lua`):
-```lua
--- Use desc for which-key docs
-keymap.set("n", "<Leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
-```
-
-**Options** (`lua/settings.lua`):
-```lua
-vim.opt.number = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-```
 
 ## Code Style Guidelines
 
