@@ -69,4 +69,3 @@ brew "libyaml"
 # AWS
 brew "granted"
 cask "session-manager-plugin"
-

@@ -10,7 +10,7 @@ vim = "latest"
 neovim = "latest"
 
 # Package managers
-"npm:pnpm" = "11.0.9"
+"npm:pnpm" = "latest"
 yarn = "latest"
 uv = "latest"
 
@@ -41,9 +41,6 @@ awscli = "latest"
 aws-sam-cli = "latest"
 gh = "latest"
 jwt = "latest"
-
-# AI
-claude-code = "latest"
 opencode = "latest"
 pi = "latest"
 
@@ -82,6 +79,13 @@ lazydocker = "latest"
 colima = "latest"
 docker-cli = "latest"
 sqlite = "latest"
+"npm:typescript-language-server" = "latest"
+claude = "latest"
+"npm:@fsouza/prettierd" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+"aqua:mvdan/gofumpt" = "latest"
+"aqua:dominikh/go-tools/staticcheck" = "latest"
+"npm:@tanstack/intent" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
