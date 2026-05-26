@@ -1,0 +1,8 @@
+[vim]
+any = true
+
+[_G]
+any = true
+
+[MiniNotify]
+any = true

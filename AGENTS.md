@@ -9,8 +9,9 @@ This is a dotfiles repository containing shell scripts and Lua configurations fo
 ```
 dotfiles/
 ├── apply.sh          # Main stow script for linking configs
-├── common/           # Shared configs (zsh, tmux, wezterm)
+├── common/           # Shared configs (nvim, zsh, tmux, wezterm)
 │   └── .config/
+│       ├── nvim/   # Neovim Lua configuration (kickstart.nvim)
 │       ├── zsh/     # Zsh plugins and configs
 │       └── tmux/   # Tmux config
 ├── darwin/           # macOS-specific configs (yabai, sketchybar, skhd)
@@ -46,7 +47,7 @@ zsh -n script.zsh
 
 ### Neovim Lua
 
-See [legacy/.config/nvim-v2/AGENTS.md](legacy/.config/nvim-v2/AGENTS.md) for Neovim-specific guidelines.
+See [common/.config/nvim/](common/.config/nvim/) for the current Neovim config, or [legacy/.config/nvim-v2/AGENTS.md](legacy/.config/nvim-v2/AGENTS.md) for the previous AstroNvim config.
 
 ## Code Style Guidelines
 
