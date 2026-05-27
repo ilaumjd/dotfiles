@@ -78,6 +78,8 @@ lazydocker = "latest"
 # Docker
 colima = "latest"
 docker-cli = "latest"
+
+####### Unorganized
 sqlite = "latest"
 "npm:typescript-language-server" = "latest"
 claude = "latest"
@@ -86,6 +88,8 @@ claude = "latest"
 "aqua:mvdan/gofumpt" = "latest"
 "aqua:dominikh/go-tools/staticcheck" = "latest"
 "npm:@tanstack/intent" = "latest"
+just = "latest"
+bun = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
