@@ -90,6 +90,7 @@ claude = "latest"
 "npm:@tanstack/intent" = "latest"
 just = "latest"
 bun = "latest"
+"npm:vscode-langservers-extracted" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]

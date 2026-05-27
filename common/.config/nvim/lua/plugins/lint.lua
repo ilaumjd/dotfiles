@@ -22,12 +22,21 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
 			javascriptreact = true,
 			typescriptreact = true,
 		}
+		local json_like = {
+			json = true,
+			jsonc = true,
+		}
 		if ts_like[ft] then
 			local dir = vim.fn.expand("%:p:h")
 			if vim.fn.findfile("biome.json", dir .. ";") ~= "" then
 				require("lint").try_lint("biomejs")
 			else
 				require("lint").try_lint("eslint")
+			end
+		elseif json_like[ft] then
+			local dir = vim.fn.expand("%:p:h")
+			if vim.fn.findfile("biome.json", dir .. ";") ~= "" then
+				require("lint").try_lint("biomejs")
 			end
 		else
 			require("lint").try_lint()

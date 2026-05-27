@@ -22,6 +22,9 @@ require("conform").setup({
 			typescript = true,
 			javascriptreact = true,
 			typescriptreact = true,
+			json = true,
+			jsonc = true,
+			jsonl = true,
 		}
 		if enabled_filetypes[vim.bo[bufnr].filetype] then
 			return { timeout_ms = 500 }
@@ -35,6 +38,9 @@ require("conform").setup({
 		typescript = ts_formatter,
 		javascriptreact = ts_formatter,
 		typescriptreact = ts_formatter,
+		json = ts_formatter,
+		jsonc = ts_formatter,
+		jsonl = ts_formatter,
 	},
 })
 

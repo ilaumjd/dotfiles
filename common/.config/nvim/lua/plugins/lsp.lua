@@ -62,4 +62,17 @@ vim.lsp.enable("ts_ls")
 -- Install: go install golang.org/x/tools/gopls@latest
 vim.lsp.enable("gopls")
 
+-- jsonls — JSON/JSONC language server.
+-- Install: mise use -g npm:vscode-json-languageserver
+vim.lsp.config("jsonls", {
+	cmd = { "vscode-json-language-server", "--stdio" },
+	settings = {
+		json = {
+			validate = { enable = true },
+		},
+	},
+	filetypes = { "json", "jsonc" },
+})
+vim.lsp.enable("jsonls")
+
 -- vim: ts=2 sts=2 sw=2 et
