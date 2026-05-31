@@ -9,88 +9,84 @@ ruby = "3.1.1"
 vim = "latest"
 neovim = "latest"
 
+# Language servers
+lua-language-server = "latest"
+"github:Kampfkarren/selene" = "latest"
+"npm:typescript-language-server" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+
 # Package managers
 "npm:pnpm" = "latest"
 yarn = "latest"
 uv = "latest"
 
-# Git
-git-lfs = "latest"
-delta = "latest"
-
-# Formatting & linting
-swiftformat = "latest"
-swiftlint = "latest"
-stylua = "latest"
-
-# LSP servers
-lua-language-server = "latest"
-"github:Kampfkarren/selene" = "latest"
-
-# Build tools
+# Build & runtime tools
+just = "latest"
+bun = "latest"
 cocoapods = "latest"
 xcbeautify = "latest"
 
+# Code formatters & linters
+stylua = "latest"
+swiftformat = "latest"
+swiftlint = "latest"
+"npm:@fsouza/prettierd" = "latest"
+"aqua:mvdan/gofumpt" = "latest"
+"aqua:dominikh/go-tools/staticcheck" = "latest"
 
-# Parser tools
+# Source control & VCS
+git-lfs = "latest"
+delta = "latest"
+
+# Search & file utilities
+ripgrep = "latest"
+fd = "latest"
+xh = "latest"
 tree-sitter = "latest"
 
-# Infrastructure
+# Shell & navigation
+zoxide = "latest"
+atuin = "latest"
+fzf = "latest"
+carapace = "latest"
+oh-my-posh = "latest"
+
+# File viewers & explorers
+bat = "latest"
+bat-extras = "latest"
+eza = "latest"
+yazi = "latest"
+mdbook = "latest"
+
+# Media & system utilities
+ffmpeg = "latest"
+imagemagick = "latest"
+sqlite = "latest"
+bottom = "latest"
+"github:htop-dev/htop" = "latest"
+fastfetch = "latest"
+"github:tealdeer-rs/tealdeer" = "latest"
+"github:aria2/aria2" = "latest"
+
+# Terminal & multiplexer
+tmux = "latest"
+lazygit = "latest"
+lazydocker = "latest"
+
+# Cloud & infrastructure
 terraform = "latest"
 awscli = "latest"
 aws-sam-cli = "latest"
 gh = "latest"
-jwt = "latest"
-opencode = "latest"
-pi = "latest"
 
-# CLI utilities
-ripgrep = "latest"
-fd = "latest"
-atuin = "latest"
-bat = "latest"
-bat-extras = "latest"
-carapace = "latest"
-eza = "latest"
-fzf = "latest"
-zoxide = "latest"
-xh = "latest"
-yazi = "latest"
-mdbook = "latest"
-bottom = "latest"
-fastfetch = "latest"
-ffmpeg = "latest"
-imagemagick = "latest"
-tmux = "latest"
-
-# System monitors
-"github:htop-dev/htop" = "latest"
-
-# System utilities
-"github:aria2/aria2" = "latest"
-"github:tealdeer-rs/tealdeer" = "latest"
-
-# TUI / Prompt
-oh-my-posh = "latest"
-lazygit = "latest"
-lazydocker = "latest"
-
-# Docker
+# Containers
 colima = "latest"
 docker-cli = "latest"
 
-####### Unorganized
-sqlite = "latest"
-"npm:typescript-language-server" = "latest"
+# Development utilities
 claude = "latest"
-"npm:@fsouza/prettierd" = "latest"
-"go:golang.org/x/tools/gopls" = "latest"
-"aqua:mvdan/gofumpt" = "latest"
-"aqua:dominikh/go-tools/staticcheck" = "latest"
+jwt = "latest"
+opencode = "latest"
+pi = "latest"
 "npm:@tanstack/intent" = "latest"
-just = "latest"
-bun = "latest"
-"npm:vscode-langservers-extracted" = "latest"
-
-[settings]
-idiomatic_version_file_enable_tools = ["ruby"]
