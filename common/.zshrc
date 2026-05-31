@@ -67,6 +67,9 @@ export PATH=$PATH:$HOME/.cargo/bin
 
 # ====================================== 3rd party ======================================
 
+# mise
+eval "$(mise activate zsh)"
+
 # carapace
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
@@ -86,9 +89,6 @@ function assume() {
   source assume "$@"
   unset GRANTED_ALIAS_CONFIGURED
 }
-
-# mise
-eval "$(mise activate zsh)"
 
 # oh-my-posh
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
