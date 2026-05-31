@@ -69,3 +69,6 @@ brew "libyaml"
 # AWS
 brew "granted"
 cask "session-manager-plugin"
+
+cask "modern-csv"
+cask "brave-browser"
