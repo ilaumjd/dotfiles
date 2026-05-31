@@ -19,6 +19,8 @@ cmd - l : yabai -m space --focus next || yabai -m space --focus first
 cmd - j : ~/.config/skhd/focus-window.sh next
 cmd - k : ~/.config/skhd/focus-window.sh prev
 
+cmd - 0x32 : yabai -m space --focus recent
+
 ctrl + shift - 1 : yabai -m window --space 1 --focus
 ctrl + shift - 2 : yabai -m window --space 2 --focus
 ctrl + shift - 3 : yabai -m window --space 3 --focus
