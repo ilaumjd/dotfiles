@@ -1,0 +1,25 @@
+# Rosé Pine — softened for long sessions (matches sketchybar/borders palette)
+# Background = Rosé Pine base #191724 (same as the bar's ROSE_BASE) — dark like before, rosé-tinted.
+# Foreground dimmed from #e0def4 → #bdb9cf to cut white glare; accents kept on-palette.
+background = #191724
+foreground = #bdb9cf
+selection-background = #2a273f
+selection-foreground = #e0def4
+cursor-color = #c4a7e7
+cursor-text = #191724
+palette = 0=#26233a
+palette = 1=#d97a96
+palette = 2=#469b9f
+palette = 3=#e6b482
+palette = 4=#9ccfd8
+palette = 5=#c4a7e7
+palette = 6=#dcb0ad
+palette = 7=#bdb9cf
+palette = 8=#6e6a86
+palette = 9=#eb6f92
+palette = 10=#31748f
+palette = 11=#f6c177
+palette = 12=#9ccfd8
+palette = 13=#c4a7e7
+palette = 14=#ebbcba
+palette = 15=#d6d3e6

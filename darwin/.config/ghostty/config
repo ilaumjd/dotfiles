@@ -1,8 +1,7 @@
 adjust-cell-height = 20%
 auto-update = off
-background-opacity = 1.000000
-background = #1a1d23
-foreground = #9b9fa9
+background-opacity = 0.80
+background-blur = 24
 copy-on-select = false
 cursor-style = block
 cursor-style-blink = false
@@ -45,3 +44,4 @@ shell-integration-features = no-cursor,sudo,no-title
 window-colorspace = display-p3
 window-decoration = true
 window-save-state = always
+theme = rosepine
