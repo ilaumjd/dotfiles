@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
 			local dir = vim.fn.expand("%:p:h")
 			if vim.fn.findfile("biome.json", dir .. ";") ~= "" then
 				require("lint").try_lint("biomejs")
-			else
+			elseif vim.fn.findfile("node_modules/.bin/eslint", dir .. ";") ~= "" or vim.fn.executable("eslint") == 1 then
 				require("lint").try_lint("eslint")
 			end
 		elseif json_like[ft] then
