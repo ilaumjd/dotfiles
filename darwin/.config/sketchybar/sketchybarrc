@@ -6,9 +6,30 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 source ~/.config/_vars/colors.sh
 source ~/.config/_vars/hardware.sh
 
+# ── Rosé Pine theme (sketchybar-local override; leaves colors.sh/borders untouched) ──
+ROSE_BASE=0xff191724    # base background
+ROSE_SURFACE=0xff1f1d2e # surface
+ROSE_OVERLAY=0xff26233a # overlay
+ROSE_MUTED=0xff6e6a86   # muted
+ROSE_SUBTLE=0xff908caa  # subtle
+ROSE_TEXT=0xffe0def4    # text
+ROSE_LOVE=0xffeb6f92    # love (pink/red)
+ROSE_GOLD=0xfff6c177    # gold
+ROSE_ROSE=0xffebbcba    # rose
+ROSE_PINE=0xff31748f    # pine (teal)
+ROSE_FOAM=0xff9ccfd8    # foam (cyan)
+ROSE_IRIS=0xffc4a7e7    # iris (lavender)
+ROSE_HL_MED=0xff403d52  # highlight med (subtle edges)
+
+# Override the semantic colors the bar items consume (swap ACCENT to taste:
+# ROSE_IRIS / ROSE_ROSE / ROSE_FOAM / ROSE_GOLD / ROSE_LOVE / ROSE_PINE)
+ACCENT_PRIMARY=$ROSE_IRIS # icon accent + active workspace (was yellow)
+TEXT_PRIMARY=$ROSE_TEXT   # active labels
+TEXT_INACTIVE=$ROSE_MUTED # inactive workspace icons
+
 # Floating pill colors (local to sketchybar)
-BAR_COLOR=0xff1a1d23  # solid UI_BASE → crisp pills (no bar-wide blur available)
-BAR_BORDER=0x33ffffff # subtle light edge
+BAR_COLOR=$ROSE_BASE     # solid Rosé Pine base → crisp pills
+BAR_BORDER=$ROSE_HL_MED  # subtle Rosé Pine edge
 
 ##### Bar Appearance #####
 # The bar itself is transparent. The visible glass is drawn on the left/right
