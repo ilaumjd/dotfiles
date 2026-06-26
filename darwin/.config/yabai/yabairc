@@ -23,7 +23,7 @@ yabai -m config bottom_padding 6
 yabai -m config left_padding 6
 yabai -m config right_padding 6
 yabai -m config window_gap 8
-yabai -m config external_bar main:"$BAR_HEIGHT":0
+yabai -m config external_bar main:$((BAR_HEIGHT + BAR_Y_OFFSET)):0
 
 # APPEARANCE
 yabai -m config window_shadow off
