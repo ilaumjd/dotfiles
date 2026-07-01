@@ -2,14 +2,28 @@
 -- Colorscheme, picker, dashboard, hints, statusline
 
 -- Colorscheme
-vim.pack.add({ _G.gh("AstroNvim/astrotheme") })
----@diagnostic disable-next-line: missing-fields
-require("astrotheme").setup({
-	style = {
-		italic_comments = false,
+-- rose-pine matches Ghostty's `theme = rosepine`, so the blurred backdrop that
+-- bleeds through the glassy editor shares nvim's palette. Its built-in
+-- `styles.transparent` handles Normal/floats/statusline/line-numbers for us —
+-- no manual background stripping needed.
+vim.pack.add({ _G.gh("rose-pine/neovim") })
+require("rose-pine").setup({
+	variant = "main",
+	styles = {
+		transparency = true,
+		italic = false,
+	},
+	highlight_groups = {
+		-- A bg color renders opaque in the terminal (it can't blur), so
+		-- CursorLine/CursorColumn show up as a jarring solid bar across the
+		-- glassy buffer. Drop them — the bright CursorLineNr still marks the row.
+		CursorLine = { bg = "none" },
+		CursorColumn = { bg = "none" },
+		-- Selection was too dark to read over the blurred backdrop.
+		Visual = { bg = "highlight_high", inherit = false },
 	},
 })
-vim.cmd.colorscheme("astrodark")
+vim.cmd.colorscheme("rose-pine")
 
 -- snacks.nvim — picker, dashboard, indent (replaces mini.pick, mini.starter, mini.indentscope)
 vim.pack.add({ _G.gh("folke/snacks.nvim") })
@@ -24,54 +38,6 @@ statusline.setup({ use_icons = vim.g.have_nerd_font })
 statusline.section_location = function()
 	return "%2l:%-2v"
 end
-
--- Glassy editor: strip the background off ONLY the main buffer so Ghostty's
--- opacity + blur show through on the code area. Panels (statusline, floats,
--- picker, dashboard) deliberately KEEP astrodark's solid backgrounds — their
--- dense text needs the contrast and turns unreadable over the blurred desktop.
--- Re-applied on every colorscheme load.
-local function clear_bg(group)
-	local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-	hl.bg = nil
-	hl.ctermbg = nil
-	vim.api.nvim_set_hl(0, group, hl)
-end
-local buffer_groups = {
-	"Normal",
-	"NormalNC",
-	"SignColumn",
-	"EndOfBuffer",
-	"LineNr",
-	"LineNrAbove",
-	"LineNrBelow",
-	"FoldColumn",
-	"MsgArea",
-	"NonText",
-}
-local function glassify_editor()
-	for _, g in ipairs(buffer_groups) do
-		clear_bg(g)
-	end
-	-- Line numbers use astrodark's darkest gray (#3A3E47), tuned for a solid dark
-	-- background — it vanishes over the glassy backdrop. Brighten to a muted grey
-	-- that stays readable but secondary.
-	for _, g in ipairs({ "LineNr", "LineNrAbove", "LineNrBelow" }) do
-		vim.api.nvim_set_hl(0, g, { fg = "#797D87" })
-	end
-
-	-- astrodark leaves StatusLineNC (and the filename section that links to it)
-	-- with no background — a transparent gap in the middle of the bar. Fill it
-	-- with StatusLine's color so the whole statusline is one solid, readable bar.
-	local sl_bg = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false }).bg
-	if sl_bg then
-		local hl = vim.api.nvim_get_hl(0, { name = "StatusLineNC", link = false })
-		hl.bg = sl_bg
-		hl.ctermbg = nil
-		vim.api.nvim_set_hl(0, "StatusLineNC", hl)
-	end
-end
-vim.api.nvim_create_autocmd("ColorScheme", { callback = glassify_editor })
-glassify_editor()
 
 -- Key hints (mini — snacks has no which-key equivalent)
 require("mini.clue").setup({

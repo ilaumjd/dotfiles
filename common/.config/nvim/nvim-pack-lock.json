@@ -5,10 +5,6 @@
       "src": "https://github.com/L3MON4D3/LuaSnip",
       "version": "2.0.0 - 3.0.0"
     },
-    "astrotheme": {
-      "rev": "95c046b763266a4873bdf0cbf6a1824c929dec3a",
-      "src": "https://github.com/AstroNvim/astrotheme"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -53,6 +49,10 @@
     "mini.nvim": {
       "rev": "6791615e48801cbf5b2baefadcea77a7760de3f4",
       "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "neovim": {
+      "rev": "ff483051a47e27d84bdef47703538df1ed9f4a47",
+      "src": "https://github.com/rose-pine/neovim"
     },
     "nvim-lint": {
       "rev": "d48f3a76189d03b2239f6df1b2f7e3fa8353743b",
