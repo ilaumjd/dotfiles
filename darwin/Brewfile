@@ -2,8 +2,6 @@
 
 tap "asmvik/formulae"
 tap "felixkratz/formulae"
-tap "anomalyco/tap"
-tap "sadiksaifi/tap"
 
 ########################### FONTS ###########################
 
@@ -23,6 +21,7 @@ brew "trash-cli"
 
 # CLI
 brew "mise"
+brew "aria2"
 
 ########################### DESKTOP ###########################
 
@@ -33,10 +32,12 @@ brew "borders"
 brew "sketchybar"
 
 # Desktop App
+cask "brave-browser"
 cask "ente-auth"
 cask "firefox"
 cask "iina"
 cask "localsend"
+cask "modern-csv"
 cask "slack"
 cask "tailscale-app"
 cask "zoom"
@@ -47,19 +48,16 @@ cask "zoom"
 brew "postgresql@16"
 cask "bruno"
 cask "dbeaver-community"
-cask "ngrok"
 cask "postman"
 cask "visual-studio-code"
 cask "zed"
-
-# AI
-cask "opencode-desktop"
 
 # Xcode
 brew "xcode-build-server"
 brew "xcp"
 
 # Docker
+brew "docker-compose"
 brew "docker-credential-helper"
 
 # Rails
@@ -69,6 +67,3 @@ brew "libyaml"
 # AWS
 brew "granted"
 cask "session-manager-plugin"
-
-cask "modern-csv"
-cask "brave-browser"
