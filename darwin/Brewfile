@@ -22,6 +22,7 @@ brew "trash-cli"
 # CLI
 brew "mise"
 brew "aria2"
+brew "luarocks"
 
 ########################### DESKTOP ###########################
 
