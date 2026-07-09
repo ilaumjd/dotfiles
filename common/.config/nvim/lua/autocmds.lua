@@ -4,6 +4,22 @@
 -- Disable macro recording by default (toggle with <leader>uq)
 vim.cmd("map q <Nop>")
 
+-- Treesitter highlighting where a parser is available.
+-- 0.12 bundles parsers + queries for many languages (ts, tsx, json, yaml, bash,
+-- toml, html, ...), but core only auto-starts highlighting for lua/markdown/
+-- vimdoc/query. This turns it on for every buffer whose language has a parser,
+-- and no-ops for filetypes without one (go, ruby, python — install manually).
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "Enable treesitter highlighting where a parser is available",
+	group = vim.api.nvim_create_augroup("treesitter-highlight", { clear = true }),
+	callback = function(ev)
+		local lang = vim.treesitter.language.get_lang(ev.match)
+		if lang and pcall(vim.treesitter.language.add, lang) then
+			pcall(vim.treesitter.start, ev.buf, lang)
+		end
+	end,
+})
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking",
