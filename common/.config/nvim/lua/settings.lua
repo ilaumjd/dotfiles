@@ -52,6 +52,43 @@ vim.o.updatetime = 250
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- Treesitter parsers (luarocks) ───────────────────────────────────────────────
+-- Neovim loads parsers from `parser/{lang}.so` on the runtimepath but never
+-- builds them. luarocks installs each parser (compiled .so + queries) into a
+-- nested rock dir that isn't on the rtp by default. A parser .so is plain C (no
+-- Lua linkage), so the rocks-<ver> tree is glob'd version-agnostically — install
+-- with the plain luarocks VM, no --lua-version. Prereq: `brew install luarocks`.
+local ts_site = vim.fn.stdpath("data") .. "/site"
+
+-- Parsers to keep installed. Missing ones are fetched via luarocks in the
+-- background on startup; the parser lights up on the next launch (the install
+-- finishes after the rtp loop below has already run). Add a language here
+-- instead of running luarocks by hand.
+local ts_ensure = { "go", "ruby" }
+if vim.fn.executable("luarocks") == 1 then
+	for _, lang in ipairs(ts_ensure) do
+		if vim.fn.glob(ts_site .. "/lib/luarocks/rocks-*/tree-sitter-" .. lang .. "/") == "" then
+			vim.system(
+				{ "luarocks", "--tree=" .. ts_site, "install", "tree-sitter-" .. lang },
+				{},
+				function(o)
+					local msg = o.code == 0 and ("installed tree-sitter-" .. lang .. " — restart nvim")
+						or ("tree-sitter-" .. lang .. " install failed:\n" .. (o.stderr or ""))
+					vim.schedule(function()
+						vim.notify(msg, o.code == 0 and vim.log.levels.INFO or vim.log.levels.ERROR)
+					end)
+				end
+			)
+		end
+	end
+end
+
+-- Put every installed parser (+ its queries) on the runtimepath. The FileType
+-- autocmd in autocmds.lua then starts highlighting for any language found here.
+for _, dir in ipairs(vim.fn.glob(ts_site .. "/lib/luarocks/rocks-*/tree-sitter-*/*/", true, true)) do
+	vim.opt.runtimepath:prepend(dir)
+end
+
 -- Misc ──────────────────────────────────────────────────────────────────────
 
 vim.o.mouse = "a"
