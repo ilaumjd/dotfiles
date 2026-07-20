@@ -94,6 +94,7 @@ source "$ITEM_DIR/app.sh"
 source "$ITEM_DIR/clock.sh"
 sketchybar --add item right_gap right --set right_gap "${gap[@]}"
 source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/wifi.sh"
 source "$ITEM_DIR/volume.sh"
 source "$ITEM_DIR/layout.sh"
 source "$ITEM_DIR/tailscale.sh"
@@ -111,7 +112,7 @@ pill=(
 sketchybar --add bracket workspaces_pill workspace.1 workspace.2 workspace.3 workspace.4 workspace.5 workspace.6 \
   --set workspaces_pill "${pill[@]}"
 sketchybar --add bracket app_pill app --set app_pill "${pill[@]}"
-sketchybar --add bracket status_pill tailscale layout volume battery --set status_pill "${pill[@]}"
+sketchybar --add bracket status_pill tailscale layout volume wifi battery --set status_pill "${pill[@]}"
 sketchybar --add bracket clock_pill clock --set clock_pill "${pill[@]}"
 
 # Inner padding so icons/labels don't touch the pill edges
