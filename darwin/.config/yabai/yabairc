@@ -1,12 +1,21 @@
 #!/usr/bin/env bash
 
-# Source hardware config
-source ~/.config/_vars/hardware.sh
-
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
 yabai -m signal --add event=window_created action="~/.config/yabai/window_created.sh"
+
+# BAR
+# Push events to the native bar (~/dumps/bar) instead of having it poll.
+# It owns `external_bar` too, so the bar height is defined in exactly one
+# place — Theme.Layout in Swift.
+BAR_SOCK=/tmp/bar.sock
+for event in space_changed display_changed mission_control_exit system_woke \
+	window_created window_destroyed; do
+	yabai -m signal --add event=$event \
+		action="echo spaces | /usr/bin/nc -U $BAR_SOCK 2>/dev/null || true"
+done
+echo reload | /usr/bin/nc -U "$BAR_SOCK" 2>/dev/null || true
 
 # MOUSE
 yabai -m config focus_follows_mouse autofocus
@@ -23,7 +32,7 @@ yabai -m config bottom_padding 6
 yabai -m config left_padding 6
 yabai -m config right_padding 6
 yabai -m config window_gap 8
-yabai -m config external_bar main:$((BAR_HEIGHT + BAR_Y_OFFSET)):0
+# external_bar is set by the bar itself — see the BAR section above.
 
 # APPEARANCE
 yabai -m config window_shadow off
