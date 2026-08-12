@@ -1,0 +1,28 @@
+# Rosé Pine — ported from the Ghostty theme (darwin/.config/ghostty/themes/rosepine)
+# Background = Rosé Pine base #191724 (same as the bar's ROSE_BASE) — dark, rosé-tinted.
+# Foreground dimmed from #e0def4 -> #bdb9cf to cut white glare; accents kept on-palette.
+
+[colors]
+background = "#191724"
+foreground = "#bdb9cf"
+selection-background = "#2a273f"
+selection-foreground = "#e0def4"
+cursor = "#c4a7e7"
+
+black = "#26233a"
+red = "#d97a96"
+green = "#469b9f"
+yellow = "#e6b482"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#dcb0ad"
+white = "#bdb9cf"
+
+light-black = "#6e6a86"
+light-red = "#eb6f92"
+light-green = "#31748f"
+light-yellow = "#f6c177"
+light-blue = "#9ccfd8"
+light-magenta = "#c4a7e7"
+light-cyan = "#ebbcba"
+light-white = "#d6d3e6"
