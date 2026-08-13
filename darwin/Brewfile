@@ -13,6 +13,7 @@ cask "sf-symbols"
 
 # Terminal App
 cask "ghostty"
+cask "rio"
 cask "wezterm@nightly"
 
 # Terminal Workflow
@@ -22,7 +23,11 @@ brew "trash-cli"
 # CLI
 brew "mise"
 brew "aria2"
+brew "pv"
+
+# Neovim
 brew "luarocks"
+brew "luajit"
 
 ########################### DESKTOP ###########################
 
@@ -39,6 +44,7 @@ cask "firefox"
 cask "iina"
 cask "localsend"
 cask "modern-csv"
+cask "moonfin"
 cask "slack"
 cask "tailscale-app"
 cask "zoom"
@@ -47,11 +53,15 @@ cask "zoom"
 
 # Dev Tools
 brew "postgresql@16"
+brew "redis"
 cask "bruno"
 cask "dbeaver-community"
 cask "postman"
 cask "visual-studio-code"
 cask "zed"
+
+# AI
+brew "ollama"
 
 # Xcode
 brew "xcode-build-server"
@@ -61,6 +71,10 @@ brew "xcp"
 brew "docker-compose"
 brew "docker-credential-helper"
 
+# Virtualization
+brew "e2fsprogs"
+brew "qemu"
+
 # Rails
 brew "libpq"
 brew "libyaml"
@@ -68,3 +82,7 @@ brew "libyaml"
 # AWS
 brew "granted"
 cask "session-manager-plugin"
+
+# Network
+brew "nmap"
+brew "sshpass"
