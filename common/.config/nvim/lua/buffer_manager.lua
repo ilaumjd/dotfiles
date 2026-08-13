@@ -17,6 +17,8 @@ function M.open()
 		vim.api.nvim_set_current_win(manager_win)
 		return
 	end
+	-- Remember the buffer we're coming from
+	local cur_buf = vim.api.nvim_get_current_buf()
 	-- Collect listed buffers, sorted by number
 	local bufs = {}
 	for _, b in ipairs(vim.api.nvim_list_bufs()) do
@@ -39,11 +41,15 @@ function M.open()
 	local lines = {}
 	---@type BufManagerEntry[]
 	local entries = {}
+	local cur_line = 1
 	for i, b in ipairs(bufs) do
 		local name = vim.api.nvim_buf_get_name(b)
 		local fname = vim.fn.fnamemodify(name, ":.")
 		table.insert(lines, fname)
 		entries[i] = { buf = b, path = name }
+		if b == cur_buf then
+			cur_line = i
+		end
 	end
 
 	-- Floating window
@@ -111,8 +117,8 @@ function M.open()
 		end
 	end, "Open buffer (click)")
 
-	-- Start cursor on the first entry
-	pcall(vim.api.nvim_win_set_cursor, win, { 1, 0 })
+	-- Start cursor on the buffer we came from
+	pcall(vim.api.nvim_win_set_cursor, win, { cur_line, 0 })
 end
 
 return M
