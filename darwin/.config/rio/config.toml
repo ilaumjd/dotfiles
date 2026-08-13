@@ -1,11 +1,7 @@
-# See the full configuration reference: https://rioterm.com/docs/config
-# Ported from darwin/.config/ghostty/config — see notes at the bottom for
-# things Ghostty supports that Rio has no equivalent for.
-
 copy-on-select = false
 hide-mouse-cursor-when-typing = true
-line-height = 1.2 # ghostty: adjust-cell-height = 20%
-option-as-alt = "both" # ghostty: macos-option-as-alt = true
+line-height = 1.2
+option-as-alt = "both"
 theme = "rosepine"
 
 [fonts]
@@ -32,46 +28,35 @@ multiplier = 2.0
 divider = 1.0
 
 [window]
-opacity = 0.80
-blur = true # ghostty had a blur radius (24); Rio only supports on/off
+opacity = 0.6
+blur = true
 decorations = "Enabled"
-macos-use-unified-titlebar = true # closest match to ghostty's macos-titlebar-style = "tabs"
+macos-use-unified-titlebar = true
 macos-use-shadow = true
 
-# Rio has no leader-key/sequence support, so the ghostty "cmd+s > x" chords
-# are flattened to direct super+key chords below.
+# super+ctrl (not super+h/j/k/l/0-9/backslash, and not super+alt) — those are
+# already claimed by skhd and by macOS's built-in "Hide Others" (super+alt+h).
 [bindings]
 keys = [
   { key = "w", with = "super", action = "CloseSplitOrTab" },
   { key = "n", with = "super", action = "CreateWindow" },
   { key = "t", with = "super", action = "CreateTab" },
-  { key = "l", with = "super | shift", action = "SelectNextTab" },
-  { key = "h", with = "super | shift", action = "SelectPrevTab" },
   { key = ",", with = "super", action = "MoveCurrentTabToPrev" },
   { key = ".", with = "super", action = "MoveCurrentTabToNext" },
-  { key = "1", with = "super", action = "SelectTab(0)" },
-  { key = "2", with = "super", action = "SelectTab(1)" },
-  { key = "3", with = "super", action = "SelectTab(2)" },
-  { key = "4", with = "super", action = "SelectTab(3)" },
-  { key = "5", with = "super", action = "SelectTab(4)" },
-  { key = "6", with = "super", action = "SelectTab(5)" },
-  { key = "7", with = "super", action = "SelectTab(6)" },
-  { key = "8", with = "super", action = "SelectTab(7)" },
-  { key = "9", with = "super", action = "SelectTab(8)" },
-  { key = "0", with = "super", action = "SelectLastTab" },
-  { key = "\\", with = "super", action = "SplitRight" },
-  { key = "-", with = "super", action = "SplitDown" },
-  { key = "j", with = "super", action = "SelectNextSplit" },
-  { key = "k", with = "super", action = "SelectPrevSplit" },
+  { key = "l", with = "super | control", action = "SelectNextTab" },
+  { key = "h", with = "super | control", action = "SelectPrevTab" },
+  { key = "j", with = "super | control", action = "SelectNextSplit" },
+  { key = "k", with = "super | control", action = "SelectPrevSplit" },
+  { key = "1", with = "super | control", action = "SelectTab(0)" },
+  { key = "2", with = "super | control", action = "SelectTab(1)" },
+  { key = "3", with = "super | control", action = "SelectTab(2)" },
+  { key = "4", with = "super | control", action = "SelectTab(3)" },
+  { key = "5", with = "super | control", action = "SelectTab(4)" },
+  { key = "6", with = "super | control", action = "SelectTab(5)" },
+  { key = "7", with = "super | control", action = "SelectTab(6)" },
+  { key = "8", with = "super | control", action = "SelectTab(7)" },
+  { key = "9", with = "super | control", action = "SelectTab(8)" },
+  { key = "0", with = "super | control", action = "SelectLastTab" },
+  { key = "\\", with = "super | control", action = "SplitRight" },
+  { key = "-", with = "super | control", action = "SplitDown" },
 ]
-
-# Not ported — Rio has no equivalent:
-#   - keybind reload_config              (no "reload config" action exists)
-#   - keybind toggle_split_zoom          (no zoom action)
-#   - keybind equalize_splits            (no equalize action)
-#   - goto_split:left/right/top/bottom   (Rio only cycles next/prev split,
-#                                          not directional focus, so h/j/k/l
-#                                          above approximate with next/prev)
-#   - focus-follows-mouse                (not configurable in Rio)
-#   - shell-integration-features         (not configurable in Rio)
-#   - window-colorspace / window-save-state / auto-update (ghostty-only)

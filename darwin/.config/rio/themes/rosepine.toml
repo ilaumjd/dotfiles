@@ -9,6 +9,11 @@ selection-background = "#2a273f"
 selection-foreground = "#e0def4"
 cursor = "#c4a7e7"
 
+bar = "#26233a"
+tabs = "#6e6a86"
+tabs-active = "#bdb9cf"
+split = "#6e6a86"
+
 black = "#26233a"
 red = "#d97a96"
 green = "#469b9f"
