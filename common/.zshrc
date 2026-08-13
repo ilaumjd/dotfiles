@@ -39,6 +39,9 @@ bindkey '^[[1;2C' end-of-line
 # environments
 export EDITOR=nvim
 
+# don't require `brew trust` for my own third-party taps
+export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
+
 # custom rc
 source "$HOME/.shrc"
 
