@@ -8,3 +8,7 @@ foo.*
 data
 lazy-lock.json
 .DS_Store
+
+# herdr runtime state (only config.toml should be tracked)
+common/.config/herdr/*
+!common/.config/herdr/config.toml

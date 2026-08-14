@@ -1,0 +1,57 @@
+onboarding = false
+# herdr configuration
+# Mirrors the custom keybindings from ~/.config/tmux/tmux.conf
+
+[keys]
+# tmux.conf rebinds the prefix from ctrl+b to ctrl+s.
+prefix = "ctrl+s"
+
+# tmux.conf: `bind r source-file ~/.config/tmux/tmux.conf`
+# Default resize_mode also lives on prefix+r, so it moves to prefix+shift+r
+# (swapping places with the default reload_config binding).
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# tmux.conf: `bind t new-window` (tmux's own default prefix+c binding is left
+# in place, so both still work here too).
+new_tab = ["prefix+c", "prefix+t"]
+
+# tmux.conf: `bind x confirm-before kill-window` / `bind w confirm-before kill-pane`
+# This swaps herdr's defaults (close_tab was shift+x, close_pane was x).
+close_tab = "prefix+x"
+close_pane = "prefix+w"
+
+# Default workspace_picker was prefix+w; moved to free up prefix+w above.
+workspace_picker = "prefix+a"
+
+# tmux.conf: `bind \\ split-window -h` (side-by-side). herdr's own default
+# prefix+v is kept as an extra alias.
+split_vertical = ["prefix+v", "prefix+backslash"]
+
+# tmux.conf: `bind - split-window -v` (stacked). Already herdr's default.
+split_horizontal = "prefix+minus"
+
+# vim-tmux-navigator gives direct (no-prefix) ctrl+h/j/k/l pane navigation in
+# tmux. herdr has no vim-awareness to forward these through to vim splits,
+# but the plain direct chords are added anyway alongside the prefixed default.
+focus_pane_left = ["prefix+h", "ctrl+h"]
+focus_pane_down = ["prefix+j", "ctrl+j"]
+focus_pane_up = ["prefix+k", "ctrl+k"]
+focus_pane_right = ["prefix+l", "ctrl+l"]
+
+# Default goto was prefix+g; moved to free up prefix+g for the lazygit popup below.
+goto = "prefix+f"
+
+# tmux's stock detach key (not customized in tmux.conf) is prefix+d;
+# herdr defaults to prefix+q.
+detach = "prefix+d"
+
+# tmux.conf: `bind g display-popup -E lazygit` (git-repo check is dropped;
+# lazygit's own error handles running outside a repo).
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "lazygit"
+description = "lazygit"
+width = "100%"
+height = "100%"
