@@ -2,6 +2,7 @@
 
 tap "asmvik/formulae"
 tap "felixkratz/formulae"
+tap "nohajc/anylinuxfs"
 
 ########################### FONTS ###########################
 
@@ -32,10 +33,8 @@ brew "luajit"
 ########################### DESKTOP ###########################
 
 # Desktop Workflow
-brew "local/yabai/yabai"
+brew "asmvik/formulae/yabai"
 brew "skhd"
-brew "borders"
-brew "sketchybar"
 
 # Desktop App
 cask "brave-browser"
@@ -74,6 +73,7 @@ brew "docker-credential-helper"
 # Virtualization
 brew "e2fsprogs"
 brew "qemu"
+brew "nohajc/anylinuxfs/anylinuxfs"
 
 # Rails
 brew "libpq"
@@ -86,3 +86,5 @@ cask "session-manager-plugin"
 # Network
 brew "nmap"
 brew "sshpass"
+
+cask "syncthing"
