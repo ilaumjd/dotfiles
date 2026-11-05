@@ -19,3 +19,6 @@
 [submodule "common/.config/tmux/plugins/vim-tmux-navigator"]
 	path = common/.config/tmux/plugins/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "common/.config/zsh/pure"]
+	path = common/.config/zsh/pure
+	url = https://github.com/sindresorhus/pure.git

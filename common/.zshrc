@@ -93,8 +93,11 @@ function assume() {
   unset GRANTED_ALIAS_CONFIGURED
 }
 
-# oh-my-posh
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
+# Pure
+fpath+=("$HOME/.config/zsh/pure")
+autoload -Uz promptinit
+promptinit
+prompt pure
 
 # scmpuff
 # export SCMPUFF_GIT_CMD='/usr/bin/git'
