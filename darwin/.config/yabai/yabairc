@@ -1,38 +1,32 @@
 #!/usr/bin/env bash
 
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-sudo yabai --load-sa
+YABAI_BIN="$HOME/.local/src/yabai-macos27/bin/yabai"
 
-yabai -m signal --add event=window_created action="~/.config/yabai/window_created.sh"
+"$YABAI_BIN" -m signal --add event=dock_did_restart action="sudo $YABAI_BIN --load-sa"
+sudo "$YABAI_BIN" --load-sa
 
-# BAR
-# Push events to the native bar (~/dumps/bar) instead of having it poll.
-# It owns `external_bar` too, so the bar height is defined in exactly one
-# place — Theme.Layout in Swift.
-BAR_SOCK=/tmp/bar.sock
-for event in space_changed display_changed mission_control_exit system_woke \
-	window_created window_destroyed; do
-	yabai -m signal --add event=$event \
-		action="echo spaces | /usr/bin/nc -U $BAR_SOCK 2>/dev/null || true"
-done
-echo reload | /usr/bin/nc -U "$BAR_SOCK" 2>/dev/null || true
+"$YABAI_BIN" -m signal --add event=window_created action="~/.config/yabai/window_created.sh"
+
+# Keep Zoom meetings on space 5. Use a native rule because Zoom's visible name
+# has changed across releases and its window-created hook is not reliable.
+"$YABAI_BIN" -m rule --add app='^(zoom\.us|Zoom Workplace|Zoom)$' space=5
 
 # MOUSE
-yabai -m config focus_follows_mouse autofocus
-yabai -m config mouse_modifier cmd
-yabai -m config mouse_action1 move
-yabai -m config mouse_action2 resize
+"$YABAI_BIN" -m config focus_follows_mouse autofocus
+"$YABAI_BIN" -m config mouse_modifier cmd
+"$YABAI_BIN" -m config mouse_action1 move
+"$YABAI_BIN" -m config mouse_action2 resize
 
 # LAYOUT
-yabai -m config layout stack
+"$YABAI_BIN" -m config layout stack
 
 # GAPS
-yabai -m config top_padding 6
-yabai -m config bottom_padding 6
-yabai -m config left_padding 6
-yabai -m config right_padding 6
-yabai -m config window_gap 8
-# external_bar is set by the bar itself — see the BAR section above.
+"$YABAI_BIN" -m config top_padding 6
+"$YABAI_BIN" -m config bottom_padding 6
+"$YABAI_BIN" -m config left_padding 6
+"$YABAI_BIN" -m config right_padding 6
+"$YABAI_BIN" -m config window_gap 8
+"$YABAI_BIN" -m config external_bar off:0:0
 
 # APPEARANCE
-yabai -m config window_shadow off
+"$YABAI_BIN" -m config window_shadow off

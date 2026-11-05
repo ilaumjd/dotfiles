@@ -24,7 +24,7 @@ function M.setup(config)
 	config.line_height = 1.2
 
 	-- Window settings
-	config.window_decorations = "RESIZE"
+	-- config.window_decorations = "RESIZE"
 	config.window_background_opacity = 0.80
 	config.macos_window_background_blur = 24
 	config.window_padding = {

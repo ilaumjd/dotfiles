@@ -11,7 +11,6 @@ neovim = "latest"
 
 # Language servers
 lua-language-server = "latest"
-"github:Kampfkarren/selene" = "latest"
 "npm:typescript-language-server" = "latest"
 "go:golang.org/x/tools/gopls" = "latest"
 "npm:vscode-langservers-extracted" = "latest"
@@ -32,8 +31,8 @@ stylua = "latest"
 swiftformat = "latest"
 swiftlint = "latest"
 "npm:@fsouza/prettierd" = "latest"
-"aqua:mvdan/gofumpt" = "latest"
-"aqua:dominikh/go-tools/staticcheck" = "latest"
+"go:mvdan.cc/gofumpt" = "latest"
+"go:honnef.co/go/tools/cmd/staticcheck" = "latest"
 
 # Source control & VCS
 git-lfs = "latest"
@@ -62,12 +61,8 @@ mdbook = "latest"
 # Media & system utilities
 ffmpeg = "latest"
 imagemagick = "latest"
-sqlite = "latest"
 bottom = "latest"
-"github:htop-dev/htop" = "latest"
 fastfetch = "latest"
-"github:tealdeer-rs/tealdeer" = "latest"
-"github:aria2/aria2" = "latest"
 
 # Terminal & multiplexer
 tmux = "latest"
@@ -90,3 +85,10 @@ jwt = "latest"
 opencode = "latest"
 pi = "latest"
 "npm:@tanstack/intent" = "latest"
+rtk = "latest"
+deno = "latest"
+lima = "latest"
+herdr = "latest"
+codex = "latest"
+tealdeer = "latest"
+oh-my-pi = { version = "latest", rename_exe = "omp" }

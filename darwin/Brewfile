@@ -7,6 +7,7 @@ tap "nohajc/anylinuxfs"
 ########################### FONTS ###########################
 
 cask "font-fira-code-nerd-font"
+cask "font-iosevka-nerd-font"
 cask "font-sf-pro"
 cask "sf-symbols"
 
@@ -15,7 +16,6 @@ cask "sf-symbols"
 # Terminal App
 cask "ghostty"
 cask "rio"
-cask "wezterm@nightly"
 
 # Terminal Workflow
 brew "stow"
@@ -33,13 +33,13 @@ brew "luajit"
 ########################### DESKTOP ###########################
 
 # Desktop Workflow
-brew "asmvik/formulae/yabai"
 brew "skhd"
 
 # Desktop App
 cask "brave-browser"
 cask "ente-auth"
 cask "firefox"
+cask "handy"
 cask "iina"
 cask "localsend"
 cask "modern-csv"
@@ -48,19 +48,21 @@ cask "slack"
 cask "tailscale-app"
 cask "zoom"
 
+cask "gridcraft"
+
 ########################### DEVELOPMENT ###########################
 
 # Dev Tools
 brew "postgresql@16"
 brew "redis"
 cask "bruno"
-cask "dbeaver-community"
+cask "dbx"
 cask "postman"
-cask "visual-studio-code"
 cask "zed"
 
 # AI
 brew "ollama"
+cask "herdr-app"
 
 # Xcode
 brew "xcode-build-server"
@@ -86,5 +88,3 @@ cask "session-manager-plugin"
 # Network
 brew "nmap"
 brew "sshpass"
-
-cask "syncthing"

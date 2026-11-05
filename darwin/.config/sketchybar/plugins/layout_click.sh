@@ -1,21 +1,23 @@
 #!/bin/bash
 
+YABAI_BIN="$HOME/.local/src/yabai-macos27/bin/yabai"
+
 # Get current layout mode
-LAYOUT=$(yabai -m query --spaces --space | jq -r '.type')
+LAYOUT=$("$YABAI_BIN" -m query --spaces --space | jq -r '.type')
 
 # Cycle through layouts: stack -> bsp -> float -> stack
 case "$LAYOUT" in
   "stack")
-    yabai -m space --layout bsp
+    "$YABAI_BIN" -m space --layout bsp
     ;;
   "bsp")
-    yabai -m space --layout float
+    "$YABAI_BIN" -m space --layout float
     ;;
   "float")
-    yabai -m space --layout stack
+    "$YABAI_BIN" -m space --layout stack
     ;;
   *)
-    yabai -m space --layout stack
+    "$YABAI_BIN" -m space --layout stack
     ;;
 esac
 
