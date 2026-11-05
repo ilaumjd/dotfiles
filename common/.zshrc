@@ -103,6 +103,7 @@ fpath+=("$HOME/.config/zsh/pure")
 autoload -Uz promptinit
 promptinit
 prompt pure
+source "$HOME/.config/zsh/pure-style.zsh"
 source "$HOME/.config/zsh/pure-compact.zsh"
 
 # tmux
