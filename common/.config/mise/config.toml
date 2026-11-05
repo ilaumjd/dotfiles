@@ -49,7 +49,6 @@ zoxide = "latest"
 atuin = "latest"
 fzf = "latest"
 carapace = "latest"
-oh-my-posh = "latest"
 
 # File viewers & explorers
 bat = "latest"
