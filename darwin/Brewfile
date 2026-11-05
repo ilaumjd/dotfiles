@@ -2,6 +2,7 @@
 
 tap "asmvik/formulae"
 tap "felixkratz/formulae"
+tap "jackielii/tap"
 tap "nohajc/anylinuxfs"
 
 ########################### FONTS ###########################
@@ -33,7 +34,7 @@ brew "luajit"
 ########################### DESKTOP ###########################
 
 # Desktop Workflow
-brew "skhd"
+cask "jackielii/tap/skhd-zig"
 
 # Desktop App
 cask "brave-browser"
