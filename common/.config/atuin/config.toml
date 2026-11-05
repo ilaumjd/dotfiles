@@ -6,3 +6,7 @@ records = true
 [daemon]
 enabled = true
 autostart = true
+
+[keymap.emacs]
+"ctrl-j" = "select-next"
+"ctrl-k" = "select-previous"
