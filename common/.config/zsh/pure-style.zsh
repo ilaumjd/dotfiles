@@ -60,8 +60,8 @@ prompt_pure_theme_layout() {
   local left_plain left_text padding gap
   [[ "$PWD" == "$HOME" ]] && folder='~'
   [[ "$PWD" == / ]] && folder=/
-  left_plain="➜  $folder"
-  left_text='%F{blue}➜  %f%B%F{magenta}%1~%f%b'
+  left_plain="➜ $folder"
+  left_text='%F{blue}➜ %f%B%F{magenta}%1~%f%b'
   if [[ -n "$branch" ]]; then
     if [[ -n "$prompt_pure_git_dirty" ]]; then
       branch_color='red'
@@ -84,7 +84,7 @@ prompt_pure_theme_layout() {
     padding=${(l:$gap:: :)''}
     left_text+="$padding$prompt_pure_right_text"
   fi
-  typeset -g prompt_pure_full_prompt="$left_text"$'\n''%F{green}▶%f  '
+  typeset -g prompt_pure_full_prompt="$left_text"$'\n''%F{green}▶%f '
   PROMPT=$prompt_pure_full_prompt
-  PROMPT2='%F{blue}➜%f  '
+  PROMPT2='%F{blue}➜%f '
 }

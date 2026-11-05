@@ -17,7 +17,7 @@ prompt_pure_preprompt_render() {
 # Collapse the completed prompt while keeping the command in scrollback.
 autoload -Uz add-zle-hook-widget
 prompt_pure_transient_line_finish() {
-  PROMPT='%F{blue}➜%f  '
+  PROMPT='%F{blue}➜%f '
   zle .reset-prompt
 }
 prompt_pure_transient_restore() {
