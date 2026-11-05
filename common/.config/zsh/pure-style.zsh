@@ -1,4 +1,5 @@
-# Recreate the former Oh My Posh theme using Pure's asynchronous Git state.
+# Match the terminal palette while retaining the former Oh My Posh layout.
+# ANSI colors follow Herdr theme changes; Pure supplies asynchronous Git state.
 zmodload zsh/datetime
 typeset -gA prompt_pure_version_cache
 typeset -g prompt_pure_right_text='' prompt_pure_right_plain=''
@@ -11,7 +12,7 @@ prompt_pure_theme_metadata() {
   age=$(command git log -1 --format=%cr 2>/dev/null) || age=''
   [[ -n "$age" ]] || strftime -s age '%H:%M:%S' "$EPOCHSECONDS"
   prompt_pure_right_plain=$age
-  prompt_pure_right_text="%F{#a9b1d6}${age//\%/%%}%f"
+  prompt_pure_right_text="%F{8}${age//\%/%%}%f"
 
   # Recognize projects from the current directory up to the home/root boundary.
   directory=$PWD
@@ -27,9 +28,9 @@ prompt_pure_theme_metadata() {
   done
   [[ -n "$VIRTUAL_ENV" ]] && detected[python]=1
 
-  for tool icon color in go '' '#7dcfff' julia '' '#bb9af7' lua '' '#7aa2f7' \
-    node '' '#9ece6a' php '󰌟' '#7aa2f7' python '' '#e0af68' \
-    ruby '' '#f7768e' rust '' '#ff9e64' swift '' '#ff9e64'; do
+  for tool icon color in go '' 'cyan' julia '' 'magenta' lua '' 'blue' \
+    node '' 'green' php '󰌟' 'blue' python '' 'yellow' \
+    ruby '' 'red' rust '' 'yellow' swift '' 'yellow'; do
     executable=$tool
     [[ "$tool" == rust ]] && executable=rustc
     [[ -n ${detected[$tool]} && -n ${commands[$executable]} ]] || continue
@@ -55,27 +56,27 @@ prompt_pure_theme_metadata() {
 }
 
 prompt_pure_theme_layout() {
-  local folder=${PWD:t} branch=${psvar[14]} branch_color='#7dcfff'
+  local folder=${PWD:t} branch=${psvar[14]} branch_color='cyan'
   local left_plain left_text padding gap
   [[ "$PWD" == "$HOME" ]] && folder='~'
   [[ "$PWD" == / ]] && folder=/
   left_plain="➜  $folder"
-  left_text='%F{#7aa2f7}➜  %f%B%F{#bb9af7}%1~%f%b'
+  left_text='%F{blue}➜  %f%B%F{magenta}%1~%f%b'
   if [[ -n "$branch" ]]; then
     if [[ -n "$prompt_pure_git_dirty" ]]; then
-      branch_color='#f7768e'
+      branch_color='red'
     elif [[ "$prompt_pure_git_arrows" == *⇡* ]]; then
-      branch_color='#7aa2f7'
-      [[ "$prompt_pure_git_arrows" == *⇣* ]] && branch_color='#7dcfff'
+      branch_color='blue'
+      [[ "$prompt_pure_git_arrows" == *⇣* ]] && branch_color='cyan'
     elif [[ "$prompt_pure_git_arrows" == *⇣* ]]; then
-      branch_color='#b4f9f8'
+      branch_color='cyan'
     fi
     left_plain+=" ($branch)"
     left_text+=" %F{$branch_color}(%14v)%f"
   fi
   if (( prompt_pure_last_status )); then
     left_plain+=' ✘'
-    left_text+=' %F{#f7768e}✘%f'
+    left_text+=' %F{red}✘%f'
   fi
 
   gap=$(( COLUMNS - ${#left_plain} - ${#prompt_pure_right_plain} - 1 ))
@@ -83,7 +84,7 @@ prompt_pure_theme_layout() {
     padding=${(l:$gap:: :)''}
     left_text+="$padding$prompt_pure_right_text"
   fi
-  typeset -g prompt_pure_full_prompt="$left_text"$'\n''%F{#9ece6a}▶%f  '
+  typeset -g prompt_pure_full_prompt="$left_text"$'\n''%F{green}▶%f  '
   PROMPT=$prompt_pure_full_prompt
-  PROMPT2='%F{#7aa2f7}➜%f  '
+  PROMPT2='%F{blue}➜%f  '
 }
