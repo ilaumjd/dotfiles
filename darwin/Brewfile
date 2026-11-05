@@ -62,7 +62,6 @@ cask "postman"
 cask "zed"
 
 # AI
-brew "ollama"
 cask "herdr-app"
 
 # Xcode
