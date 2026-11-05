@@ -98,6 +98,7 @@ fpath+=("$HOME/.config/zsh/pure")
 autoload -Uz promptinit
 promptinit
 prompt pure
+source "$HOME/.config/zsh/pure-compact.zsh"
 
 # scmpuff
 # export SCMPUFF_GIT_CMD='/usr/bin/git'
