@@ -11,7 +11,7 @@ typeset -U path cdpath fpath manpath
 autoload -Uz compinit
 compinit
 
-# History options should be set in .zshrc and after oh-my-zsh sourcing.
+# Native shell history complements Atuin's history database.
 HISTSIZE="10000"
 SAVEHIST="10000"
 
@@ -43,7 +43,7 @@ export EDITOR=nvim
 export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 
 # custom rc
-source "$HOME/.shrc"
+[[ -f "$HOME/.shrc" ]] && source "$HOME/.shrc"
 
 # ====================================== paths ======================================
 
@@ -55,12 +55,17 @@ export PATH=$PATH:$HOME/personal-scripts
 export PATH=$PATH:$HOME/.local/bin
 
 # android
-export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
-export PATH=$PATH:$JAVA_HOME/bin
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/build-tools/35.0.0
+if [[ -d '/Applications/Android Studio.app/Contents/jbr/Contents/Home' ]]; then
+  export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
+  path+=("$JAVA_HOME/bin")
+fi
+if [[ -d "$HOME/Library/Android/sdk" ]]; then
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+  for android_dir in "$ANDROID_HOME/emulator" "$ANDROID_HOME/platform-tools" "$ANDROID_HOME/build-tools/35.0.0"; do
+    [[ -d "$android_dir" ]] && path+=("$android_dir")
+  done
+  unset android_dir
+fi
 
 # brew
 export PATH=$PATH:/opt/homebrew/opt/postgresql@16/bin
@@ -100,11 +105,6 @@ promptinit
 prompt pure
 source "$HOME/.config/zsh/pure-compact.zsh"
 
-# scmpuff
-# export SCMPUFF_GIT_CMD='/usr/bin/git'
-# eval "$(scmpuff init --shell=zsh --aliases=false)"
-
-
 # tmux
 function th() {
   local session_name
@@ -126,14 +126,14 @@ function tks() {
 
 # yazi
 function yy() {
-  local tmp
-  tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  local cwd
+  local tmp cwd result=0
+  tmp="$(mktemp -t "yazi-cwd.XXXXX")" || return
+  yazi "$@" --cwd-file="$tmp" || result=$?
   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd" || return
+    builtin cd -- "$cwd" || result=$?
   fi
   rm -f -- "$tmp"
+  return "$result"
 }
 
 # zoxide
