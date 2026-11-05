@@ -1,9 +1,0 @@
-# ────────────────────────────────────────────────────────────
-# pi-lab launchers — runnable from any cwd
-# Source repo: /Users/iam/.pi/pi-lab
-# ────────────────────────────────────────────────────────────
-
-[env]
-PI_LAB_DIR = "/Users/iam/.pi/pi-lab"
-PI_LAB_FRAMEWORK_DIR = "/Users/iam/dumps/pi-lab"
-
